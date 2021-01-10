@@ -1,0 +1,32 @@
+.formList {
+  position: absolute;
+  left: 50%;
+  top: 35%;
+  transform: translate(-50%, 0);
+  width: auto;
+  height: 30%;
+}
+
+input, button {
+  margin-top: 1rem;
+  border: 2px solid black;
+}
+
+input.ng-invalid .ng-touched {
+  border: 2px dashed rgb(255, 40, 40);
+}
+input.ng-touched {
+  border: 2px dashed rgb(255, 40, 40);
+}
+input.ng-valid {
+  border: 2px dashed rgb(25, 190, 3);
+}
+
+small{
+  color: red;
+}
+
+a{
+  text-decoration: underline;
+  color: blue;
+}

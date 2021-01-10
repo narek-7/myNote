@@ -1,0 +1,22 @@
+<div class="formList">
+<form [formGroup]="form" (ngSubmit)="submit()">
+
+  <h2>Registration</h2>
+  <h4>if you have an account, click  <a routerLink="/">here for Log In</a></h4>
+  <div>
+  <input class="form-control" #email type="email" formControlName="email" placeholder="E-MAIL">
+  <div class="validation" *ngIf="form.get('email').invalid && form.get('email').touched">
+    <small>The email is in the wrong format!</small>
+  </div>
+  </div>
+
+  <div>
+  <input class="form-control" #password type="password" formControlName="password" placeholder="PASSWORD">
+  <div class="validation" *ngIf="form.get('password').invalid && form.get('password').touched">
+    <small>The password must contain 6 to 10 numbers!</small>
+  </div>
+</div>
+
+  <button class="btn" type="submit" [disabled]="form.invalid">REGISTRATION</button>
+</form>
+</div>

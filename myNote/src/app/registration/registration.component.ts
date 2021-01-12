@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DatabaseService } from './../database.service';
 
 @Component({
   selector: 'app-registration',
@@ -14,7 +15,8 @@ export class RegistrationComponent implements OnInit {
 
   form: FormGroup;
   constructor(
-    private router: Router
+    private router: Router,
+    private database: DatabaseService,
   ){}
 
   ngOnInit() {
@@ -33,14 +35,14 @@ export class RegistrationComponent implements OnInit {
     });
   }
   submit (){
-
-    this.router.navigate(['myNote']);
     let email = this.form.value.email;
     let password = this.form.value.password;
-    localStorage.setItem('Email', email);
-    localStorage.setItem('Password', password);
-    //this.noteEmail = localStorage.getItem('Email');
-    //this.notePassword = Number(localStorage.getItem('Password'));
-    //Email = this.highScore.toString();
+    try {
+      this.database.register(email, password);
+      this.router.navigate(['myNote']);
+    }
+    catch(e) {
+      console.log(e.message);
+    }
   }
 }

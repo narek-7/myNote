@@ -30,3 +30,7 @@ a{
   text-decoration: underline;
   color: blue;
 }
+
+input{
+  width: 25rem;
+}

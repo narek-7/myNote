@@ -1,6 +1,6 @@
 .formList {
   position: absolute;
-  left: 48%;
+  left: 47%;
   top: 35%;
   transform: translate(-50%, 0);
   width: auto;
@@ -29,4 +29,7 @@ small{
 a{
   text-decoration: underline;
   color: blue;
+}
+input{
+  width: 25rem;
 }

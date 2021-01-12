@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DatabaseService } from './../database.service';
 
 @Component({
   selector: 'app-login',
@@ -8,17 +9,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
   @ViewChild('email') email: ElementRef<any> = null;
   @ViewChild('password') password: ElementRef<any> = null;
 
   form: FormGroup;
   incorrectData: boolean
-  noteEmail = localStorage.getItem('Email');
-  notePassword = localStorage.getItem('Password');
 
   constructor(
     private router: Router,
+    private database: DatabaseService,
   ) {}
 
   ngOnInit() {
@@ -38,11 +37,12 @@ export class LoginComponent implements OnInit {
     });
   }
   submit (){
-    if(this.noteEmail === this.form.value.email && this.notePassword === this.form.value.password){
-      this.router.navigate(['/myNote'])
+    try {
+      this.database.login(this.form.value.email, this.form.value.password);
+      this.router.navigate(['myNote']);
     }
-    else{
-      this.incorrectData = true;
+    catch(e) {
+      console.log(e.message);
     }
   }
 }

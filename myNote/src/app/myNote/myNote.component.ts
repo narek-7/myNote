@@ -8,11 +8,14 @@ import { Router } from '@angular/router';
 })
 export class MyNoteComponent implements OnInit {
 
+  noteEmail: string;
+
   constructor(
     private router: Router
   ) { }
-
+  
   ngOnInit() {
+    this.noteEmail = localStorage.getItem('Email');
   }
 
   logOut(){

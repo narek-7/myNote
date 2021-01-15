@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DatabaseService } from './../database.service';
+import { User } from './../model/user';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,8 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log(localStorage.getItem('users'))
+
     this.incorrectData = false;
     this.form = new FormGroup({
       email: new FormControl('', [

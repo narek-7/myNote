@@ -21,8 +21,10 @@ getAllItems(key): Map<string, User> {
 }
 
 saveAllItems(key: string, users: Map<string, User>) {
-  window.localStorage.setItem("users", JSON.stringify(key));
+  window.localStorage.setItem("users", JSON.stringify(users));
+  console.log(localStorage.getItem('users'))
 }
+
 
 register(email: string, password: string) {
   let users = this.getAllItems("users");
@@ -48,7 +50,7 @@ login(email: string, password: string) {
   this.notes = this.getNotes(email);
 }
 
-getNotes(email: string) {
+    getNotes(email: string) {
   let allNotes = this.getAllItems("notes");
   let userNotes = allNotes[email];
   return userNotes ? userNotes : [];
@@ -63,5 +65,4 @@ saveNotes() {
   allNotes[this.user.email] = this.notes;
   this.saveAllItems("notes", allNotes);
 }
-
 }

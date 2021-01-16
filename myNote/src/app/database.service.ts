@@ -50,9 +50,10 @@ login(email: string, password: string) {
   this.notes = this.getNotes(email);
 }
 
-    getNotes(email: string) {
+getNotes(email: string) {
   let allNotes = this.getAllItems("notes");
   let userNotes = allNotes[email];
+  window.localStorage.setItem("Email", this.user.email)
   return userNotes ? userNotes : [];
 }
 

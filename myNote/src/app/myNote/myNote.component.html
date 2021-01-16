@@ -4,10 +4,16 @@
 
 <a routerLink="/">Log Out</a>
 
-<div class="sidebar">
-  <a href="#"><i class="fa fa-fw fa-home"></i>noteEmail</a>
+<div class="firstSidebar">
+  <a href="#"><i class="fa fa-fw fa-home"></i>{{noteEmail}}</a>
   <a href="#"><i class="fa fa-fw fa-home"></i> Notes</a>
   <a href="#"><i class="fa fa-fw fa-wrench"></i> Shortcuats</a>
   <a href="#"><i class="fa fa-fw fa-user"></i> Tags</a>
   <a href="#"><i class="fa fa-fw fa-envelope"></i> Trash</a>
 </div>
+
+<div class = "secondSidebar" *ngFor="let item of notesList">
+  <h2>{{item.title}}</h2>
+  <p>{{item.text}}</p>
+</div>
+

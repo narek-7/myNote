@@ -3,7 +3,7 @@ a{
   color: blue;
 }
 
-.sidebar {
+.firstSidebar {
   height: 100%;
   width: 180px;
   position: fixed;
@@ -15,7 +15,7 @@ a{
   padding-top: 16px;
 }
 
-.sidebar a {
+.firstSidebar a {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 22px;
@@ -23,7 +23,7 @@ a{
   display: block;
 }
 
-.sidebar a:hover {
+.firstSidebar a:hover {
   color: #ffffff;
 }
 
@@ -33,6 +33,40 @@ a{
 }
 
 @media screen and (max-height: 450px) {
-  .sidebar {padding-top: 15px;}
-  .sidebar a {font-size: 18px;}
+  .firstSidebar {padding-top: 15px;}
+  .firstSidebar a {font-size: 18px;}
+}
+
+.secondSidebar {
+  height: 100%;
+  width: 180px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(42 , 73, 130);
+  overflow-x: hidden;
+  padding-top: 16px;
+}
+
+.secondSidebar a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 22px;
+  color: #dfdbdb;
+  display: block;
+}
+
+.secondSidebar a:hover {
+  color: #ffffff;
+}
+
+.main {
+  margin-left: 180px; /* Same as the width of the sidenav */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .secondSidebar {padding-top: 15px;}
+  .secondSidebar a {font-size: 18px;}
 }

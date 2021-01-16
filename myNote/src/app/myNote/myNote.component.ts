@@ -19,11 +19,10 @@ export class MyNoteComponent implements OnInit {
   ngOnInit() {
     this.noteEmail = localStorage.getItem('Email');
     let notesList = this.database.getNotes(this.noteEmail)
-
   }
 
   logOut(){
-    this.router.navigate(['/'])
+    this.router.navigate(['/']);
   }
 
 }

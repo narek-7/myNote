@@ -5,12 +5,12 @@ a{
 
 .firstSidebar {
   height: 100%;
-  width: 180px;
+  width: 200px;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: rgb(42 , 73, 130);
+  background-color: rgb(38, 55, 88);
   overflow-x: hidden;
   padding-top: 16px;
 }

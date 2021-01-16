@@ -48,12 +48,12 @@ login(email: string, password: string) {
   }
   this.user = user;
   this.notes = this.getNotes(email);
+  window.localStorage.setItem("Email", email)
 }
 
 getNotes(email: string) {
   let allNotes = this.getAllItems("notes");
   let userNotes = allNotes[email];
-  window.localStorage.setItem("Email", this.user.email)
   return userNotes ? userNotes : [];
 }
 

@@ -14,7 +14,8 @@ export class LoginComponent implements OnInit {
   @ViewChild('password') password: ElementRef<any> = null;
 
   form: FormGroup;
-  incorrectData: boolean
+  incorrectData: boolean;
+  errorMassage: string = '';
 
   constructor(
     private router: Router,
@@ -45,7 +46,9 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['myNote']);
     }
     catch(e) {
-      console.log(e.message);
+      this.incorrectData = true;
+      this.errorMassage = e.message;
+      setTimeout(() => {this.incorrectData = false}, 5000)
     }
   }
 }

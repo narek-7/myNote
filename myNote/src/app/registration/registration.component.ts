@@ -12,6 +12,8 @@ export class RegistrationComponent implements OnInit {
 
   @ViewChild('email') email: ElementRef<any> = null;
   @ViewChild('password') password: ElementRef<any> = null;
+  incorrectData: boolean = false;
+  errorMassage: string = '';
 
   form: FormGroup;
   constructor(
@@ -20,6 +22,7 @@ export class RegistrationComponent implements OnInit {
   ){}
 
   ngOnInit() {
+    this.incorrectData = false;
     this.form = new FormGroup({
       email: new FormControl('', [
         Validators.email,
@@ -42,7 +45,11 @@ export class RegistrationComponent implements OnInit {
       this.router.navigate(['myNote']);
     }
     catch(e) {
-      console.log(e.message);
+      this.incorrectData = true;
+      this.errorMassage = e.message;
+      setTimeout(() => {
+        this.incorrectData = false;
+      }, 5000);
     }
   }
 }

@@ -11,30 +11,15 @@ export class DatabaseService {
 
 constructor() { }
 
-getAllItems(key): Map<string, User> {
-
-  let usersStr = window.localStorage.getItem(key);
-   if(usersStr) {
-     return JSON.parse(usersStr);
-   }
-  return new Map<string, User>();
-}
-
-saveAllItems(key: string, users: Map<string, User>) {
-  window.localStorage.setItem("users", JSON.stringify(users));
-  console.log(localStorage.getItem('users'))
-}
-
-
 register(email: string, password: string) {
   let users = this.getAllItems("users");
-  console.log(users)
   if(users[email]) {
     throw new Error('User already exists');
   }
   let user = {email, password};
   users[email] = user;
   this.saveAllItems("users", users);
+  window.localStorage.setItem("Email", email)
 }
 
 login(email: string, password: string) {
@@ -57,13 +42,22 @@ getNotes(email: string) {
   return userNotes ? userNotes : [];
 }
 
-addNote(note: Note) {
-  this.notes.push(note);
+getAllItems(key): Map<string, User> {
+  let usersStr = window.localStorage.getItem(key);
+    if(usersStr) {
+      return JSON.parse(usersStr);
+    }
+  return new Map<string, User>();
 }
 
-saveNotes() {
+saveNotes(email: string, notes: Array<Note>) {
   let allNotes = this.getAllItems("notes");
-  allNotes[this.user.email] = this.notes;
+  allNotes[email] = notes;
   this.saveAllItems("notes", allNotes);
 }
+
+saveAllItems(key: string, items: Map<string, User>) {
+  window.localStorage.setItem(key, JSON.stringify(items));
+}
+
 }

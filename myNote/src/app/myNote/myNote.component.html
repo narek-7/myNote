@@ -1,18 +1,48 @@
-<p>
-  myNote works!
-</p>
-
 <div class="firstSidebar">
-  <a routerLink='/myNote'><i class="fa fa-fw fa-home"></i>{{noteEmail}}</a>
-  <a routerLink=''><i class="fa fa-fw fa-home"></i> Notes</a>
-  <a routerLink=''><i class="fa fa-fw fa-wrench"></i> Shortcuats</a>
-  <a routerLink=''><i class="fa fa-fw fa-user"></i> Tags</a>
-  <a routerLink=''><i class="fa fa-fw fa-envelope"></i> Trash</a>
-  <a routerLink=''>Log Out</a>
+  <a routerLink='/myNote'  style="font-weight: bolder; color: white; font-size: 20px">
+    <i class="fa fa-fw fa-home"></i>{{noteEmail}}</a>
+  <a routerLink='/myNote'><i class="fa fa-fw fa-home"></i> Notes</a>
+  <a routerLink='/myNote'><i class="fa fa-fw fa-wrench"></i> Shortcuts</a>
+  <a routerLink='/myNote'><i class="fa fa-fw fa-user"></i> Tags</a>
+  <a routerLink='/myNote'><i class="fa fa-fw fa-envelope"></i> Trash</a>
+  <a routerLink='/' style="color: whitesmoke">Log Out</a>
 </div>
 
-<!-- <div class = "secondSidebar" *ngFor="let item of notesList">
-  <h2>{{item.title}}</h2>
-  <p>{{item.text}}</p>
-</div> -->
+
+<div class="secondSidebar">
+
+  <label class = "note">All Notes
+    <button type="button" class="btn btn-primary" (click)="canCreateNote=false">
+      + New Note
+    </button>
+  </label>
+
+  <div class="note" *ngFor="let item of noteList; let idx = index"
+  (mouseover) = "showNote(idx)" (mouseout) = "hideNote()" (click) = "modifyNote(idx)">
+      <h3>{{item.title}}</h3>
+      <div style="font-size: 14px; position: absolute; bottom: 10px;">
+        {{item.createdDate | date }}
+      </div>
+  </div>
+
+</div>
+
+<div class="head">
+</div>
+
+<div class = "body">
+  <div *ngIf="!canCreateNote">
+    <input #title type = "text" placeholder="Title" value = "Untitled">
+    <textarea #text placeholder="Start writing ..."></textarea>
+    <button class="btn btn-primary" (click)=saveNote()>Save Note</button>
+    <button class="btn btn-secondary" (click)="canCreateNote=true">Don't Save</button>
+  </div>
+  <div *ngIf="canCreateNote">
+    <button style="font-size: 33px; font-family: Arial, Helvetica, sans-serif; width: 250px;
+    position: relative; left: 120%; top: 15%;" class="btn btn-primary" (click)="canCreateNote=false">+  New Note</button>
+  </div>
+</div>
+
+
+
 

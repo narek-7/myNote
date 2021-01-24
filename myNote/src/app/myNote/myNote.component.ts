@@ -37,32 +37,60 @@ export class MyNoteComponent implements OnInit {
   }
 
   saveNote(){
+    if(this.currentIndex === -1){
     this.note.title = this.title.nativeElement.value
     this.note.text = this.text.nativeElement.value
     this.note.createdDate = new Date();
     this.note.modifiedDate = new Date();
     this.noteList.push(this.note);
     this.database.saveNotes(this.noteEmail, this.noteList);
-    this.noteList = this.database.getNotes(this.noteEmail);
     this.note = new Note();
-    this.canCreateNote=true;
+    this.canCreateNote = true;
+    }
+    else{
+      this.noteList[this.currentIndex].title = this.title.nativeElement.value;
+      this.noteList[this.currentIndex].text = this.text.nativeElement.value;
+      this.noteList[this.currentIndex].modifiedDate = new Date();
+      this.database.saveNotes(this.noteEmail, this.noteList);
+      this.currentIndex = -1;
+      this.canCreateNote = true;
+    }
   }
 
-  showNote(index){
+  mouseOverNote(index){
+    if(this.currentIndex === -1){
     this.canCreateNote = false;
     setTimeout( () => {
     this.title.nativeElement.value = this.noteList[index].title;
     this.text.nativeElement.value = this.noteList[index].text;
     }, 10)
   }
+  }
 
-  hideNote(){
+  mouseOutNote(){
+    if(this.currentIndex === -1){
     this.canCreateNote = true;
+    }
   }
 
-  modifyNote(index){
-    this.title.nativeElement.value = this.noteList[index].title;
-    this.text.nativeElement.value = this.noteList[index].text;
+  modifyNote(i){
+    this.currentIndex = i;
+    this.title.nativeElement.value = this.noteList[i].title;
+    this.text.nativeElement.value = this.noteList[i].text;
   }
+
+  cancelSave(){
+    this.canCreateNote=true;
+    this.currentIndex=-1;
+  }
+  deleteNote(i){
+    this.noteList.splice(i,1);
+    this.database.saveNotes(this.noteEmail, this.noteList);
+    this.canCreateNote = true;
+    this.currentIndex = -1;
+  }
+  
+
+
 
 }

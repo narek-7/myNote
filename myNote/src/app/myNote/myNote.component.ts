@@ -58,7 +58,7 @@ export class MyNoteComponent implements OnInit {
   }
 
   mouseOverNote(index){
-    if(this.currentIndex === -1){
+    if(this.currentIndex === -1){ 
     this.canCreateNote = false;
     setTimeout( () => {
     this.title.nativeElement.value = this.noteList[index].title;
@@ -89,7 +89,7 @@ export class MyNoteComponent implements OnInit {
     this.canCreateNote = true;
     this.currentIndex = -1;
   }
-  
+
 
 
 

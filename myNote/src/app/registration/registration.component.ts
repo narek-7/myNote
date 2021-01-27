@@ -6,28 +6,21 @@ import { DatabaseService } from './../database.service';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css']
+  styleUrls: ['./registration.component.css'],
 })
 export class RegistrationComponent implements OnInit {
-
   @ViewChild('email') email: ElementRef<any> = null;
   @ViewChild('password') password: ElementRef<any> = null;
   incorrectData: boolean = false;
   errorMassage: string = '';
 
   form: FormGroup;
-  constructor(
-    private router: Router,
-    private database: DatabaseService,
-  ){}
+  constructor(private router: Router, private database: DatabaseService) {}
 
   ngOnInit() {
     this.incorrectData = false;
     this.form = new FormGroup({
-      email: new FormControl('', [
-        Validators.email,
-        Validators.required
-      ]),
+      email: new FormControl('', [Validators.email, Validators.required]),
 
       password: new FormControl(null, [
         Validators.minLength(6),
@@ -37,14 +30,13 @@ export class RegistrationComponent implements OnInit {
       ]),
     });
   }
-  submit (){
+  submit() {
     let email = this.form.value.email;
     let password = this.form.value.password;
     try {
       this.database.register(email, password);
       this.router.navigate(['myNote']);
-    }
-    catch(e) {
+    } catch (e) {
       this.incorrectData = true;
       this.errorMassage = e.message;
       setTimeout(() => {

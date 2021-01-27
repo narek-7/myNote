@@ -1,4 +1,4 @@
-a{
+a {
   text-decoration: underline;
   color: blue;
 }
@@ -19,7 +19,7 @@ a{
   padding: 14px 8px 6px 16px;
   text-decoration: none;
   font-size: 18px;
-  color:  rgb(148, 158, 179);
+  color: rgb(148, 158, 179);
   display: block;
 }
 
@@ -33,13 +33,17 @@ a{
 }
 
 @media screen and (max-height: 450px) {
-  .firstSidebar {padding-top: 15px;}
-  .firstSidebar a {font-size: 18px;}
+  .firstSidebar {
+    padding-top: 15px;
+  }
+  .firstSidebar a {
+    font-size: 18px;
+  }
 }
 
 .secondSidebar {
   height: 100%;
-  width:300px;
+  width: 300px;
   position: fixed;
   z-index: 1;
   top: 0px;
@@ -63,14 +67,38 @@ div.note:hover {
   background-color: #fff;
 }
 
+.noteClickStyle {
+  border-right: 1px solid rgb(151, 156, 165);
+  background-color: #fff;
+}
+
 .main {
   margin-left: 180px; /* Same as the width of the sidenav */
   padding: 0px 10px;
 }
 
 @media screen and (max-height: 450px) {
-  .secondSidebar {padding-top: 15px;}
-  .secondSidebar a {font-size: 18px;}
+  .secondSidebar {
+    padding-top: 15px;
+  }
+  .secondSidebar a {
+    font-size: 18px;
+  }
+}
+
+.scrolling-area {
+  overflow: auto;
+  direction: rtl;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(222, 226, 233, 0);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: grey;
 }
 
 .note {
@@ -82,26 +110,16 @@ div.note:hover {
   display: block;
   border-bottom: 1px solid rgb(151, 156, 165);
   height: 120px;
+  direction: ltr;
 }
 
-button{
+button {
   margin-left: 20px;
   border-radius: 2rem;
   width: 120px;
 }
 
-::-webkit-scrollbar {
-  direction: inherit;
-  width: 10px;
-}
-::-webkit-scrollbar-thumb {
-  background:  rgba(222, 226, 233, 0);
-}
-::-webkit-scrollbar-thumb:hover {
-  background: grey;
-}
-
-.head{
+.head {
   display: block;
   height: 136px;
   border-bottom: 1px solid rgb(151, 156, 165);
@@ -114,7 +132,7 @@ button{
   padding: 15px;
 }
 
-.body{
+.body {
   display: block;
   height: 100%;
   width: 100%;
@@ -125,7 +143,7 @@ button{
   padding: 35px;
 }
 
-input{
+input {
   width: 250px;
   height: 40px;
   margin-top: 20px;
@@ -151,20 +169,16 @@ input:active {
   border: 1px dotted rgb(90, 117, 168);
 }
 
-h3{
+h3 {
   font-size: 20px;
   color: rgb(65, 65, 65);
 }
 
-h4{
+h4 {
   color: rgba(219, 0, 0, 0.836);
   margin-bottom: 60px;
 }
 
-.pointer {cursor: pointer;}
-
-
-
-
-
-
+.pointer {
+  cursor: pointer;
+}

@@ -1,2 +1,202 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
+
+a {
+  text-decoration: underline;
+  color: blue;
+}
+
+ul{
+  padding-left: 5px;
+  list-style: none;
+}
+
+li {
+  margin-left: 2px;
+
+}
+
+.firstSidebar {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgba(18, 30, 54, 0.9);
+  overflow-x: hidden;
+  padding-top: 16px;
+}
+
+.firstSidebar a {
+  padding: 14px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 18px;
+  color: rgb(148, 158, 179);
+  display: block;
+}
+
+.firstSidebar a:hover {
+  color: #ffffff;
+}
+
+.main {
+  margin-left: 180px; /* Same as the width of the sidenav */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .firstSidebar {
+    padding-top: 15px;
+  }
+  .firstSidebar a {
+    font-size: 18px;
+  }
+}
+
+.secondSidebar {
+  height: 100%;
+  width: 300px;
+  position: fixed;
+  z-index: 1;
+  top: 0px;
+  left: 200px;
+  background-color: rgba(222, 226, 233, 0.5);
+  overflow-x: hidden;
+  padding-top: 16px;
+}
+
+.secondSidebar a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 18px;
+  color: rgba(38, 55, 88, 0.9);
+  display: block;
+  border-bottom: 1px solid rgb(198, 205, 219);
+  height: 120px;
+}
+
+div.note:hover {
+  background-color: #fff;
+}
+
+.noteClickStyle {
+  border-right: 1px solid rgb(151, 156, 165);
+  background-color: #fff;
+}
+
+.main {
+  margin-left: 180px; /* Same as the width of the sidenav */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .secondSidebar {
+    padding-top: 15px;
+  }
+  .secondSidebar a {
+    font-size: 18px;
+  }
+}
+
+.scrolling-area {
+  overflow: auto;
+  direction: rtl;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(222, 226, 233, 0);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: grey;
+}
+
+.note {
+  position: relative;
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 22px;
+  color: rgba(38, 55, 88, 0.9);
+  display: block;
+  border-bottom: 1px solid rgb(151, 156, 165);
+  height: 120px;
+  direction: ltr;
+}
+
+label.note{
+  margin-bottom: 0px;
+  color: rgba(0, 89, 206, 0.945);
+}
+
+button {
+  margin-left: 20px;
+  border-radius: 2rem;
+  width: 120px;
+}
+
+.head {
+  display: block;
+  height: 136px;
+  border-bottom: 1px solid rgb(151, 156, 165);
+  width: 74%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 500px;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 15px;
+}
+
+.body {
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 136px;
+  left: 500px;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 35px;
+}
+
+input {
+  width: 250px;
+  height: 40px;
+  margin-top: 20px;
+  border: 1px dotted rgb(151, 156, 165);
+  border-radius: 5px;
+  padding-left: 10px;
+  color: rgb(65, 65, 65);
+}
+
+textarea {
+  border: 1px dotted rgb(151, 156, 165);
+  border-radius: 5px;
+  padding-left: 10px;
+  display: block;
+  width: 800px;
+  margin: 100px 0 40px 0;
+  height: 200px;
+  padding: 15px;
+  color: rgb(65, 65, 65);
+}
+
+input:active {
+  border: 1px dotted rgb(90, 117, 168);
+}
+
+h3 {
+  font-size: 20px;
+  color: rgb(65, 65, 65);
+}
+
+h4 {
+  color: rgba(219, 0, 0, 0.836);
+  margin-bottom: 60px;
+}
+
+.pointer {
+  cursor: pointer;
+}

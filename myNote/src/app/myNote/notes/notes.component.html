@@ -1,0 +1,67 @@
+<div class="secondSidebar">
+  <label class="note"
+    >All Notes
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="canCreateNote = false"
+    >
+      + New Note
+    </button>
+    <div
+      style="font-size: 16px; margin-top: 30px; color: rgba(0, 89, 206, 0.945)"
+    >
+      {{ noteList.length }} notes
+    </div>
+  </label>
+  <div>
+    <div
+      class="note"
+      *ngFor="let item of noteList; let idx = index"
+      (mouseover)="mouseOverNote(idx)"
+      (mouseout)="mouseOutNote()"
+      (click)="modifyNote(idx)"
+      [class.noteClickStyle]="currentIndex === idx"
+    >
+      <h3>{{ item.title }}</h3>
+      <div style="font-size: 14px; position: absolute; bottom: 10px">
+        {{ item.createdDate | date }}
+      </div>
+      <div
+        class="pointer"
+        style="position: absolute; right: 15px; bottom: 44px"
+        (click)="deleteNote(idx)"
+      >
+        <img [src]="'../assets/images/delete3.png'" width="15" height="15" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="head"></div>
+
+<div class="body">
+  <h4 *ngIf="currentIndex != -1">Modify Existing Note</h4>
+  <div *ngIf="!canCreateNote">
+    <input #title type="text" placeholder="Title" value="Untitled" />
+    <textarea #text placeholder="Start writing ..."></textarea>
+    <button class="btn btn-primary" (click)="saveNote()">Save Note</button>
+    <button class="btn btn-secondary" (click)="cancelSave()">Don't Save</button>
+  </div>
+  <div *ngIf="canCreateNote">
+    <button
+      style="
+        font-size: 33px;
+        font-family: Arial, Helvetica, sans-serif;
+        width: 250px;
+        position: absolute;
+        left: 25%;
+        top: 15%;
+      "
+      class="btn btn-primary"
+      (click)="canCreateNote = false"
+    >
+      + New Note
+    </button>
+  </div>
+</div>

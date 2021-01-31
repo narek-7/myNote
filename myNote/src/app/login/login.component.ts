@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
   submit (){
     try {
       this.database.login(this.form.value.email, this.form.value.password);
-      this.router.navigate(['myNote']);
+      this.router.navigate(['myNote', 'notes']);
     }
     catch(e) {
       this.incorrectData = true;

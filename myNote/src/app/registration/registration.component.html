@@ -2,7 +2,7 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
 
   <h2>Registration</h2>
-  <h4>if you have an account, click  <a routerLink="/">here for Log In</a></h4>
+  <h5>if you have an account, click  <a routerLink="/">here for Log In</a></h5>
   <div>
   <input class="form-control" #email type="email" formControlName="email" placeholder="E-MAIL">
   <div class="validation" *ngIf="form.get('email').invalid && form.get('email').touched">
@@ -20,6 +20,6 @@
     <a (click) = ngOnInit() style="text-decoration: underline;"> here to try again!</a>
   </small>
 </div>
-  <button type="button" class="btn btn-primary" type="submit" [disabled]="form.invalid">REGISTRATION</button>
+  <button type="button" class="btn btn-primary" type="submit" [disabled]="form.invalid">Registration</button>
 </form>
 </div>

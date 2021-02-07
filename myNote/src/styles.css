@@ -6,14 +6,13 @@ a {
   color: blue;
 }
 
-ul{
+ul {
   padding-left: 5px;
   list-style: none;
 }
 
 li {
   margin-left: 2px;
-
 }
 
 .firstSidebar {
@@ -29,7 +28,7 @@ li {
 }
 
 .firstSidebar a {
-  padding: 14px 8px 6px 16px;
+  padding: 14px 5px 2px 5px;
   text-decoration: none;
   font-size: 18px;
   color: rgb(148, 158, 179);
@@ -126,7 +125,7 @@ div.listCell:hover {
   direction: ltr;
 }
 
-label.listCell{
+label.listCell {
   margin-bottom: 0px;
   color: rgba(0, 89, 206, 0.945);
 }

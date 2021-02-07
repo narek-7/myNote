@@ -33,6 +33,12 @@ export class NotesComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
+  newNote() {
+    this.canCreateNote = false;
+    this.title.nativeElement.value = 'Untitle';
+    this.text.nativeElement.value = '';
+  }
+
   saveNote() {
     if (this.currentIndex === -1) {
       this.note.title = this.title.nativeElement.value;

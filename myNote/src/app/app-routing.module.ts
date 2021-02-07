@@ -18,9 +18,11 @@ const routes: Routes = [
       { path: 'notes', component: NotesComponent },
       { path: 'shortcuts', component: ShortcutsComponent },
       { path: 'tags', component: TagsComponent },
-      { path: 'trash', component: TrashComponent }
+      { path: 'trash', component: TrashComponent },
+      { path: '**', redirectTo: '/myNote/notes' },
     ],
   },
+  { path: '**', redirectTo: '/myNote/notes' },
 ];
 
 @NgModule({

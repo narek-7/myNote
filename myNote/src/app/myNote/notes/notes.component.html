@@ -1,5 +1,5 @@
 <div class="secondSidebar">
-  <label class="note"
+  <label class="listCell"
     >All Notes
     <button
       type="button"
@@ -9,19 +9,19 @@
       + New Note
     </button>
     <div
-      style="font-size: 16px; margin-top: 30px; color: rgba(0, 89, 206, 0.945)"
+      style="font-size: 16px; margin-top: 30px; color: rgba(15, 57, 112, 0.9)"
     >
       {{ noteList.length }} notes
     </div>
   </label>
   <div>
     <div
-      class="note"
+      class="listCell"
       *ngFor="let item of noteList; let idx = index"
       (mouseover)="mouseOverNote(idx)"
       (mouseout)="mouseOutNote()"
       (click)="modifyNote(idx)"
-      [class.noteClickStyle]="currentIndex === idx"
+      [class.cellClickStyle]="currentIndex === idx"
     >
       <h3>{{ item.title }}</h3>
       <div style="font-size: 14px; position: absolute; bottom: 10px">
@@ -42,7 +42,7 @@
 
 <div class="body">
   <h4 *ngIf="currentIndex != -1">Modify Existing Note</h4>
-  <div *ngIf="!canCreateNote">
+  <div [style.display]="canCreateNote ? 'none' : ''">
     <input #title type="text" placeholder="Title" value="Untitled" />
     <textarea #text placeholder="Start writing ..."></textarea>
     <button class="btn btn-primary" (click)="saveNote()">Save Note</button>

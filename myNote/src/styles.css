@@ -76,11 +76,11 @@ li {
   height: 120px;
 }
 
-div.note:hover {
+div.listCell:hover {
   background-color: #fff;
 }
 
-.noteClickStyle {
+.cellClickStyle {
   border-right: 1px solid rgb(151, 156, 165);
   background-color: #fff;
 }
@@ -114,7 +114,7 @@ div.note:hover {
   background: grey;
 }
 
-.note {
+.listCell {
   position: relative;
   padding: 6px 8px 6px 16px;
   text-decoration: none;
@@ -126,7 +126,7 @@ div.note:hover {
   direction: ltr;
 }
 
-label.note{
+label.listCell{
   margin-bottom: 0px;
   color: rgba(0, 89, 206, 0.945);
 }

@@ -9,6 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MyNoteComponent } from './myNote/myNote.component';
 import { NotesComponent } from './myNote/notes/notes.component';
 import { CommonModule } from '@angular/common';
+import { ShortcutsComponent } from './myNote/shortcuts/shortcuts.component';
+import { TagsComponent } from './myNote/tags/tags.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { CommonModule } from '@angular/common';
     LoginComponent,
     MyNoteComponent,
     NotesComponent,
+    ShortcutsComponent,
+    TagsComponent,
   ],
   imports: [
     BrowserModule,

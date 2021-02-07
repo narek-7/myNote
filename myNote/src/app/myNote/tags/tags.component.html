@@ -1,3 +1,61 @@
-<p>
-  tags works!
-</p>
+<div class="secondSidebar">
+  <label class="listCell"
+    >All Tags
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="canCreateTag = false"
+    >
+      + New Tag
+    </button>
+    <div
+      style="font-size: 16px; margin-top: 30px; color: rgba(15, 57, 112, 0.9)"
+    >
+      {{ tagList.length }} tags
+    </div>
+  </label>
+  <div>
+    <div
+      class="listCell"
+      *ngFor="let item of tagList; let idx = index"
+      (click)="modifyTag(idx)"
+      [class.cellClickStyle]="currentIndex === idx"
+    >
+      <div
+        class="pointer"
+        style="position: absolute; right: 15px; bottom: 44px"
+        (click)="deleteTag(idx)"
+      >
+        <img [src]="'../assets/images/delete3.png'" width="15" height="15" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="head"></div>
+
+<div class="body">
+  <h4 *ngIf="currentIndex != -1">Modify Existing Tag</h4>
+  <div *ngIf="!canCreateTag">
+    <input #name type="text" placeholder="Tag Name" />
+    <button class="btn btn-primary" (click)="saveTag()">Save Tag</button>
+    <button class="btn btn-secondary" (click)="cancelSave()">Don't Save</button>
+  </div>
+
+  <div *ngIf="canCreateTag">
+    <button
+      style="
+        font-size: 33px;
+        font-family: Arial, Helvetica, sans-serif;
+        width: 250px;
+        position: absolute;
+        left: 25%;
+        top: 15%;
+      "
+      class="btn btn-primary"
+      (click)="canCreateTag = false"
+    >
+      + New Tag
+    </button>
+  </div>
+</div>

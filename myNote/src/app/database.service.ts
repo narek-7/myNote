@@ -3,7 +3,6 @@ import { User } from './model/user';
 import { Note } from './model/note';
 import { Tag } from './model/tag';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -50,12 +49,12 @@ export class DatabaseService {
     this.saveAllItems('notes', allNotes);
   }
 
-  getAllItems(key): Map<string, User> {               // <string, User>
+  getAllItems(key): Map<string, any> {
     let usersStr = window.localStorage.getItem(key);
     if (usersStr) {
       return JSON.parse(usersStr);
     }
-    return new Map<string, User>();
+    return new Map<string, any>();
   }
 
   saveAllItems(key: string, items: Map<string, User>) {
@@ -72,4 +71,6 @@ export class DatabaseService {
     allTags[email] = tags;
     this.saveAllItems('tags', allTags);
   }
+  
+
 }

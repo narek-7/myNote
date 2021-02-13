@@ -40,6 +40,11 @@
 
 <div class="head"></div>
 
+<app-modal
+[deletedObjectType] = "deletedObjectType"
+[deletedObjectName] = "deletedObjectName"
+></app-modal>
+
 <div class="body">
   <h4 *ngIf="currentIndex != -1">Modify Existing Note</h4>
   <div [style.display]="canCreateNote ? 'none' : ''">

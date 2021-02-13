@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Note } from './../../model/note';
 import { DatabaseService } from './../../database.service';
-import { BrowserModule } from '@angular/platform-browser';
 declare var $: any;
 
 @Component({

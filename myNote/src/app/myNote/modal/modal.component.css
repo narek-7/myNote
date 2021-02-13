@@ -1,0 +1,20 @@
+.modal {
+  position: absolute;
+  top: 10px;
+  right: 50px;
+  bottom: 0;
+  left: 50px;
+  z-index: 10040;
+  overflow: auto;
+  overflow-y: auto;
+}
+
+button
+{
+  width: auto;
+  padding: 5px 25px;
+}
+
+.modal-body{
+  text-shadow: 3px;
+}

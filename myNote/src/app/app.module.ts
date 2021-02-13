@@ -11,6 +11,7 @@ import { NotesComponent } from './myNote/notes/notes.component';
 import { CommonModule } from '@angular/common';
 import { ShortcutsComponent } from './myNote/shortcuts/shortcuts.component';
 import { TagsComponent } from './myNote/tags/tags.component';
+import { ModalComponent } from './myNote/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -21,9 +22,10 @@ import { TagsComponent } from './myNote/tags/tags.component';
     NotesComponent,
     ShortcutsComponent,
     TagsComponent,
+    ModalComponent
   ],
   imports: [
-    BrowserModule,
+  BrowserModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,

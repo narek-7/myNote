@@ -1,8 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Note } from './../../model/note';
 import { DatabaseService } from './../../database.service';
 import { BrowserModule } from '@angular/platform-browser';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Subscription } from 'rxjs';
+declare var $: any;
 
 @Component({
   selector: 'app-notes',
@@ -15,11 +18,18 @@ export class NotesComponent implements OnInit {
   note: Note = new Note();
   canCreateNote: boolean = true;
   currentIndex: number = -1;
+  deletedObjectType: String = 'note';
+  deletedObjectName: String = '';
+  deletedObject = false;
 
   @ViewChild('text') text: ElementRef<any> = null;
   @ViewChild('title') title: ElementRef<any> = null;
 
-  constructor(private router: Router, private database: DatabaseService) {}
+  constructor(
+    private router: Router,
+    private database: DatabaseService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.canCreateNote = true;
@@ -87,10 +97,26 @@ export class NotesComponent implements OnInit {
     this.currentIndex = -1;
   }
 
+  showModal() {
+    $('#myModal').modal('show');
+  }
+
+  hideModal(i) {
+    let param = this.route.snapshot.queryParamMap.get('deletedObject');
+    if (param === 'true') {
+      console.log(param);
+      this.noteList.splice(i, 1);
+      this.database.saveNotes(this.noteEmail, this.noteList);
+    }
+    location.reload();
+  }
+
   deleteNote(i) {
-    this.noteList.splice(i, 1);
-    this.database.saveNotes(this.noteEmail, this.noteList);
-    this.canCreateNote = true;
-    this.currentIndex = -1;
+    this.deletedObjectType = 'note';
+    this.deletedObjectName = this.noteList[i].title;
+    this.showModal();
+    $('#myModal').on('hide.bs.modal', () => {
+      this.hideModal(i);
+    });
   }
 }

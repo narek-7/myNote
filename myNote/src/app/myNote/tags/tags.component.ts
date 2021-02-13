@@ -15,7 +15,7 @@ export class TagsComponent implements OnInit {
   canCreateTag: boolean = true;
   currentIndex: number = -1;
 
-  @ViewChild('text') name: ElementRef<any> = null;
+  @ViewChild('name') name: ElementRef<any> = null;
 
   constructor(private router: Router, private database: DatabaseService) {}
 

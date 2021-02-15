@@ -4,7 +4,7 @@
     <button
       type="button"
       class="btn btn-primary"
-      (click)="canCreateNote = false"
+      (click)="cancelSave(); newNote()"
     >
       + New Note
     </button>
@@ -23,7 +23,7 @@
       (click)="modifyNote(idx)"
       [class.cellClickStyle]="currentIndex === idx"
     >
-      <h3>{{ item.title }}</h3>
+      <h3>{{ modifyTitleName(item.title) }}</h3>
       <div style="font-size: 14px; position: absolute; bottom: 10px">
         {{ item.createdDate | date }}
       </div>

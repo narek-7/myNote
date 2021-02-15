@@ -27,29 +27,39 @@ export class TagsComponent implements OnInit {
   }
 
   saveTag() {
-    let value = this.name.nativeElement.value;
-    if (value != '' && this.currentIndex === -1) {
-      this.tag.name = value;
+    let val = this.name.nativeElement.value;
+    if (val != '' && this.currentIndex === -1) {
+      this.tag.name = val;
       this.tag.createdDate = new Date();
       this.tag.id = this.tag.createdDate.toString();
-      this.tagList.push(this.tag)
-      this.database.saveTags(this.noteEmail, this.tagList)
+      this.tagList.push(this.tag);
+      this.database.saveTags(this.noteEmail, this.tagList);
       this.tag = new Tag();
       this.canCreateTag = true;
-    }
-    else{
-      if(value != '' && this.currentIndex != -1)
-      this.tagList[this.currentIndex].name === this.name.nativeElement.value;
-      this.database.saveTags(this.noteEmail, this.tagList);
-      this.currentIndex = -1;
+    } else {
+      if (val != '' && this.currentIndex != -1) {
+        this.tagList[this.currentIndex].name = val;
+        this.database.saveTags(this.noteEmail, this.tagList);
+        this.currentIndex = -1;
+      }
       this.canCreateTag = true;
     }
-    console.log(this.tagList);
   }
 
-  cancelSave() {}
+  cancelSave() {
+    this.currentIndex = -1;
+    this.canCreateTag = true;
+    this.name.nativeElement.value = '';
+  }
 
-  modifyTag() {}
+  modifyTag(i) {
+    this.currentIndex = i;
+    this.canCreateTag = false;
+    this.name.nativeElement.value = this.tagList[i].name;
+  }
 
-  deleteTag() {}
+  deleteTag(i) {
+    this.tagList.splice(i,1)
+    this.database.saveTags(this.noteEmail, this.tagList);
+  }
 }

@@ -21,7 +21,7 @@
       (click)="modifyTag(idx)"
       [class.cellClickStyle]="currentIndex === idx"
     >
-    {{item.name}}
+      {{ item.name }}
       <div
         class="pointer"
         style="position: absolute; right: 15px; bottom: 44px"
@@ -37,7 +37,7 @@
 
 <div class="body">
   <h4 *ngIf="currentIndex != -1">Modify Existing Tag</h4>
-  <div *ngIf="!canCreateTag">
+  <div [style.display]="canCreateTag ? 'none' : ''">
     <input #name type="text" placeholder="Tag Name" />
     <button class="btn btn-primary" (click)="saveTag()">Save Tag</button>
     <button class="btn btn-secondary" (click)="cancelSave()">Don't Save</button>

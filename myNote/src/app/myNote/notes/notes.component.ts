@@ -46,6 +46,18 @@ export class NotesComponent implements OnInit {
     this.text.nativeElement.value = '';
   }
 
+  cancelSave() {
+    this.canCreateNote = true;
+    this.currentIndex = -1;
+  }
+
+  modifyTitleName(title: string) {
+    if(title.length > 20){
+      return (title.slice(0,15) + '...')
+    }
+    return title;
+  }
+
   saveNote() {
     if (this.currentIndex === -1) {
       this.note.title = this.title.nativeElement.value;
@@ -57,7 +69,8 @@ export class NotesComponent implements OnInit {
       this.database.saveNotes(this.noteEmail, this.noteList);
       this.note = new Note();
       this.canCreateNote = true;
-    } else {
+    }
+    else {
       this.noteList[this.currentIndex].title = this.title.nativeElement.value;
       this.noteList[this.currentIndex].text = this.text.nativeElement.value;
       this.noteList[this.currentIndex].modifiedDate = new Date();
@@ -89,11 +102,6 @@ export class NotesComponent implements OnInit {
     this.text.nativeElement.value = this.noteList[i].text;
   }
 
-  cancelSave() {
-    this.canCreateNote = true;
-    this.currentIndex = -1;
-  }
-
   showModal() {
     $('#myModal').modal('show');
   }
@@ -101,11 +109,12 @@ export class NotesComponent implements OnInit {
   hideModal(i) {
     let param = this.route.snapshot.queryParamMap.get('deletedObject');
     if (param === 'true') {
-      console.log(param);
       this.noteList.splice(i, 1);
       this.database.saveNotes(this.noteEmail, this.noteList);
     }
-    location.reload();
+    setTimeout(() => {
+      location.reload();
+    }, 300);
   }
 
   deleteNote(i) {

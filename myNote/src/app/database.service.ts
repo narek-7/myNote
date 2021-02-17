@@ -57,7 +57,7 @@ export class DatabaseService {
     return new Map<string, any>();
   }
 
-  saveAllItems(key: string, items: Map<string, User>) {
+  saveAllItems(key: string, items: Map<string, any>) {
     window.localStorage.setItem(key, JSON.stringify(items));
   }
 
@@ -72,7 +72,26 @@ export class DatabaseService {
     this.saveAllItems('tags', allTags);
   }
 
-  
+  getNotesInTag(email: string) {
+    //: Array<Note> էսի սխալ է տալիս, ինչու՞
+    let allNotesInTag = this.getAllItems('NotesInTag');
+    return allNotesInTag[email] ? allNotesInTag[email] : new Map<string, any>();
+  }
 
+  saveNotesInTag(email: string, map: Map<string, Array<Note>>) {
+    let allNotesInTag = this.getAllItems('NotesInTag');
+    allNotesInTag[email] = map;
+    this.saveAllItems('NotesInTag', allNotesInTag);
+  }
 
+  getTagsInNote(email: string) {
+    let allTagsInNote = this.getAllItems('TagsInNote');
+    return allTagsInNote[email] ? allTagsInNote[email] : new Map<string, any>();
+  }
+
+  saveTagsInNote(email: string, map: Map<string, Array<Tag>>) {
+    let allTagsInNote = this.getAllItems('TagsInNote');
+    allTagsInNote[email] = map;
+    this.saveAllItems('TagsInNote', allTagsInNote);
+  }
 }

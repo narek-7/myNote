@@ -7,7 +7,7 @@
         >{{ noteEmail }}</a
       >
     </li>
-    <li routerLinkActive="active">
+    <li routerLinkActive="active" >
       <a [routerLink]="['/myNote', 'notes']">Notes</a>
     </li>
     <li routerLinkActive="active">
@@ -20,7 +20,7 @@
       <a [routerLink]="['/myNote', 'trash']">Trash</a>
     </li>
     <li routerLinkActive="active">
-      <a [routerLink]="['/']">Log Out</a>
+      <a [routerLink]="['/']" (click) = "logOut()">Log Out</a>
     </li>
   </ul>
 </div>

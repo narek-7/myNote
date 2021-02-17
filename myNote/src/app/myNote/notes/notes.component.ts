@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Note } from './../../model/note';
 import { DatabaseService } from './../../database.service';
+import { AuthService } from './../../auth.service';
 declare var $: any;
 
 @Component({
@@ -25,7 +26,8 @@ export class NotesComponent implements OnInit {
   constructor(
     private router: Router,
     private database: DatabaseService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private auth: AuthService,
   ) {}
 
   ngOnInit() {
@@ -34,10 +36,6 @@ export class NotesComponent implements OnInit {
     this.noteList = this.database.getNotes(this.noteEmail);
     console.log('NoteList', this.noteList);
     console.log('UserList', localStorage.getItem('users'));
-  }
-
-  logOut() {
-    this.router.navigate(['/']);
   }
 
   newNote() {
@@ -52,8 +50,8 @@ export class NotesComponent implements OnInit {
   }
 
   modifyTitleName(title: string) {
-    if(title.length > 20){
-      return (title.slice(0,15) + '...')
+    if (title.length > 20) {
+      return title.slice(0, 15) + '...';
     }
     return title;
   }
@@ -69,8 +67,7 @@ export class NotesComponent implements OnInit {
       this.database.saveNotes(this.noteEmail, this.noteList);
       this.note = new Note();
       this.canCreateNote = true;
-    }
-    else {
+    } else {
       this.noteList[this.currentIndex].title = this.title.nativeElement.value;
       this.noteList[this.currentIndex].text = this.text.nativeElement.value;
       this.noteList[this.currentIndex].modifiedDate = new Date();

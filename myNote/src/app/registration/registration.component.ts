@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DatabaseService } from './../database.service';
+import { AuthService } from './../auth.service';
 
 @Component({
   selector: 'app-registration',
@@ -9,13 +10,14 @@ import { DatabaseService } from './../database.service';
   styleUrls: ['./registration.component.css'],
 })
 export class RegistrationComponent implements OnInit {
+
   @ViewChild('email') email: ElementRef<any> = null;
   @ViewChild('password') password: ElementRef<any> = null;
   incorrectData: boolean = false;
   errorMassage: string = '';
 
   form: FormGroup;
-  constructor(private router: Router, private database: DatabaseService) {}
+  constructor(private router: Router, private database: DatabaseService, private auth: AuthService) {}
 
   ngOnInit() {
     this.incorrectData = false;
@@ -35,6 +37,7 @@ export class RegistrationComponent implements OnInit {
     let password = this.form.value.password;
     try {
       this.database.register(email, password);
+      this.auth.login();
       this.router.navigate(['myNote']);
     } catch (e) {
       this.incorrectData = true;

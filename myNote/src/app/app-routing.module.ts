@@ -7,19 +7,20 @@ import { NotesComponent } from './myNote/notes/notes.component';
 import { ShortcutsComponent } from './myNote/shortcuts/shortcuts.component';
 import { TagsComponent } from './myNote/tags/tags.component';
 import { TrashComponent } from './myNote/trash/trash.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
   {
     path: 'myNote',
-    component: MyNoteComponent,
+    component: MyNoteComponent,  canActivate: [AuthGuard], 
     children: [
-      { path: 'notes', component: NotesComponent },
-      { path: 'shortcuts', component: ShortcutsComponent },
-      { path: 'tags', component: TagsComponent },
-      { path: 'trash', component: TrashComponent },
-      { path: '**', redirectTo: '/myNote/notes' },
+      { path: 'notes', component: NotesComponent,  canActivate: [AuthGuard]},
+      { path: 'shortcuts', component: ShortcutsComponent,  canActivate: [AuthGuard] },
+      { path: 'tags', component: TagsComponent,  canActivate: [AuthGuard] },
+      { path: 'trash', component: TrashComponent,  canActivate: [AuthGuard] },
+      { path: '**', redirectTo: '/myNote/notes',  canActivate: [AuthGuard]  },
     ],
   },
   { path: '**', redirectTo: '/myNote/notes' },

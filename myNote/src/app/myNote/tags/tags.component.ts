@@ -45,6 +45,11 @@ export class TagsComponent implements OnInit {
       this.canCreateTag = true;
     }
   }
+  createNewTag(){
+    this.currentIndex = -1;
+    this.canCreateTag = false;
+    this.name.nativeElement.value = '';
+  }
 
   cancelSave() {
     this.currentIndex = -1;

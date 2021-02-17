@@ -3,11 +3,12 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DatabaseService } from './../database.service';
 import { User } from './../model/user';
+import { AuthService } from './../auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
   @ViewChild('email') email: ElementRef<any> = null;
@@ -20,17 +21,15 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private database: DatabaseService,
+    private auth: AuthService
   ) {}
 
   ngOnInit() {
-    console.log(localStorage.getItem('users'))
+    console.log(localStorage.getItem('users'));
 
     this.incorrectData = false;
     this.form = new FormGroup({
-      email: new FormControl('', [
-        Validators.email,
-        Validators.required
-      ]),
+      email: new FormControl('', [Validators.email, Validators.required]),
 
       password: new FormControl(null, [
         Validators.minLength(6),
@@ -40,15 +39,17 @@ export class LoginComponent implements OnInit {
       ]),
     });
   }
-  submit (){
+  submit() {
     try {
       this.database.login(this.form.value.email, this.form.value.password);
+      this.auth.login();
       this.router.navigate(['myNote', 'notes']);
-    }
-    catch(e) {
+    } catch (e) {
       this.incorrectData = true;
       this.errorMassage = e.message;
-      setTimeout(() => {this.incorrectData = false}, 5000)
+      setTimeout(() => {
+        this.incorrectData = false;
+      }, 5000);
     }
   }
 }

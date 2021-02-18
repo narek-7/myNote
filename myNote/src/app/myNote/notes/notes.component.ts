@@ -29,14 +29,14 @@ export class NotesComponent implements OnInit {
     private router: Router,
     private database: DatabaseService,
     private route: ActivatedRoute,
-    private auth: AuthService,
+    private auth: AuthService
   ) {}
 
   ngOnInit() {
     this.canCreateNote = true;
     this.noteEmail = window.localStorage.getItem('Email');
     this.noteList = this.database.getNotes(this.noteEmail);
-    this.tagList = this.database.getTags(this.noteEmail)
+    this.tagList = this.database.getTags(this.noteEmail);
 
     console.log('NoteList', this.noteList);
     console.log('UserList', localStorage.getItem('users'));
@@ -62,23 +62,39 @@ export class NotesComponent implements OnInit {
 
   saveNote() {
     if (this.currentIndex === -1) {
-      this.note.title = this.title.nativeElement.value;
-      this.note.text = this.text.nativeElement.value;
-      this.note.createdDate = new Date();
-      this.note.modifiedDate = new Date();
-      this.note.id = this.note.createdDate.toString();
-      this.noteList.push(this.note);
-      this.database.saveNotes(this.noteEmail, this.noteList);
-      this.note = new Note();
-      this.canCreateNote = true;
+      this.cretaeNote();
     } else {
-      this.noteList[this.currentIndex].title = this.title.nativeElement.value;
-      this.noteList[this.currentIndex].text = this.text.nativeElement.value;
-      this.noteList[this.currentIndex].modifiedDate = new Date();
-      this.database.saveNotes(this.noteEmail, this.noteList);
-      this.currentIndex = -1;
-      this.canCreateNote = true;
+      this.changeExistingNote();
     }
+    this.canCreateNote = true;
+  }
+
+  addTagsInNote(noteId) {
+    let map = this.database.getTagsInNote(this.noteEmail);
+    map[noteId] = [];
+    this.database.saveTagsInNote(this.noteEmail, map);
+    let a = window.localStorage.getItem('TagsInNote');
+    console.log(a);
+  }
+
+  changeExistingNote() {
+    this.noteList[this.currentIndex].title = this.title.nativeElement.value;
+    this.noteList[this.currentIndex].text = this.text.nativeElement.value;
+    this.noteList[this.currentIndex].modifiedDate = new Date();
+    this.database.saveNotes(this.noteEmail, this.noteList);
+    this.currentIndex = -1;
+  }
+
+  cretaeNote() {
+    this.note.title = this.title.nativeElement.value;
+    this.note.text = this.text.nativeElement.value;
+    this.note.createdDate = new Date();
+    this.note.modifiedDate = new Date();
+    this.note.id = this.note.createdDate.toString();
+    this.noteList.push(this.note);
+    this.addTagsInNote(this.note.id);
+    this.database.saveNotes(this.noteEmail, this.noteList);
+    this.note = new Note();
   }
 
   mouseOverNote(index) {
@@ -127,8 +143,10 @@ export class NotesComponent implements OnInit {
     });
   }
 
-  addTagToNote(i){
-    
+  connectTagToNote(idx) {
+    let currentNoteId = this.noteList[this.currentIndex].id;
+    let map = this.database.getTagsInNote(this.noteEmail);
+    map[currentNoteId].push(this.tagList[idx].id);
+    this.database.saveTagsInNote(this.noteEmail, map);
   }
-
 }

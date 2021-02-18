@@ -83,7 +83,7 @@
         <div
           class="dropdown-item"
           *ngFor="let item of tagList; let idx = index"
-          (click)="addTagToNote(idx)"
+          (click)="connectTagToNote(idx)"
         >
           {{ item.name }}
         </div>

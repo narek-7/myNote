@@ -49,18 +49,6 @@ export class DatabaseService {
     this.saveAllItems('notes', allNotes);
   }
 
-  getAllItems(key): Map<string, any> {
-    let usersStr = window.localStorage.getItem(key);
-    if (usersStr) {
-      return JSON.parse(usersStr);
-    }
-    return new Map<string, any>();
-  }
-
-  saveAllItems(key: string, items: Map<string, any>) {
-    window.localStorage.setItem(key, JSON.stringify(items));
-  }
-
   getTags(email: string) {
     let allTags = this.getAllItems('tags');
     return allTags[email] ? allTags[email] : [];
@@ -93,5 +81,17 @@ export class DatabaseService {
     let allTagsInNote = this.getAllItems('TagsInNote');
     allTagsInNote[email] = map;
     this.saveAllItems('TagsInNote', allTagsInNote);
+  }
+  
+  getAllItems(key): Map<string, any> {
+    let usersStr = window.localStorage.getItem(key);
+    if (usersStr) {
+      return JSON.parse(usersStr);
+    }
+    return new Map<string, any>();
+  }
+
+  saveAllItems(key: string, items: Map<string, any>) {
+    window.localStorage.setItem(key, JSON.stringify(items));
   }
 }

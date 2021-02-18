@@ -118,7 +118,7 @@ div.listCell:hover {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 22px;
-  color: rgba(38, 55, 88, 0.9);
+  color: rgba(106, 106, 106, 0.905);
   display: block;
   border-bottom: 1px solid rgb(151, 156, 165);
   height: 120px;
@@ -129,13 +129,14 @@ label.listCell {
   margin-bottom: 0px;
   color: rgba(221, 4, 15, 0.809);
   font-style: italic;
-  font-size: 25px;
+  font-size: 24px;
 }
 
 button {
-  margin-left: 20px;
-  border-radius: 2rem;
+  margin-left: 50px;
+  border: 2px groove;
   width: 120px;
+  font-size: 20px;
 }
 
 .head {
@@ -190,11 +191,13 @@ input:active {
 
 h3 {
   font-size: 20px;
-  color: rgb(65, 65, 65);
+  color: rgba(36, 0, 0, 0.844);
+  font-weight: 400;
+  font-style: italic;
 }
 
 h4 {
-  color: rgba(219, 0, 0, 0.836);
+  color: rgba(220, 0, 0, 0.9);
   margin-bottom: 60px;
 }
 

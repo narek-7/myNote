@@ -3,13 +3,22 @@
     >All Notes
     <button
       type="button"
-      class="btn btn-primary"
+      class="btn btn-outline-primary"
       (click)="cancelSave(); newNote()"
+      style="
+      border-style: inset;
+      border-width: 1px;
+      border-radius: 15px;
+      font-weight: 600;
+      padding: 3px 3px 3px 0px;
+      width: 7rem;
+      font-style: italic;
+    "
     >
       + New Note
     </button>
     <div
-      style="font-size: 16px; margin-top: 30px; color: rgba(15, 57, 112, 0.9)"
+      style="font-size: 16px; margin-top: 30px; color: rgba(0, 96, 221, 0.9); font-weight: 600;"
     >
       {{ noteList.length }} notes
     </div>
@@ -56,14 +65,16 @@
   <div *ngIf="canCreateNote">
     <button
       style="
-        font-size: 33px;
+        font-size: 30px;
         font-family: Arial, Helvetica, sans-serif;
-        width: 250px;
+        width: 200px;
         position: absolute;
         left: 25%;
         top: 15%;
+        border-style: inset;
+        border-width: 1px;
       "
-      class="btn btn-primary"
+      class="btn btn-outline-primary"
       (click)="newNote()"
     >
       + New Note

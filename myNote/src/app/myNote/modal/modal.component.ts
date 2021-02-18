@@ -10,7 +10,6 @@ export class ModalComponent implements OnInit {
   @Input() deletedObjectType: String = '';
   @Input() deletedObjectName: String = 'Unknown';
 
-
   deletedObject = false;
 
   constructor() {}

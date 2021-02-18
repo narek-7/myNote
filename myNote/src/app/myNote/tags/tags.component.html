@@ -3,13 +3,27 @@
     >All Tags
     <button
       type="button"
-      class="btn btn-primary"
+      class="btn btn-outline-primary"
       (click)="createNewTag()"
+      style="
+        border-style: inset;
+        border-width: 1px;
+        font-weight: 600;
+        padding: 3px 3px 3px 0px;
+        width: 7rem;
+        border-radius: 15px;
+        font-style: italic;
+      "
     >
       + New Tag
     </button>
     <div
-      style="font-size: 16px; margin-top: 30px; color: rgba(15, 57, 112, 0.9)"
+      style="
+        font-size: 16px;
+        margin-top: 30px;
+        color: rgba(0, 96, 221, 0.9);
+        font-weight: 600;
+      "
     >
       {{ tagList.length }} tags
     </div>
@@ -21,7 +35,7 @@
       (click)="modifyTag(idx)"
       [class.cellClickStyle]="currentIndex === idx"
     >
-      {{ item.name }}
+      <h3>{{ item.name }}</h3>
       <div
         class="pointer"
         style="position: absolute; right: 15px; bottom: 44px"
@@ -46,14 +60,16 @@
   <div *ngIf="canCreateTag">
     <button
       style="
-        font-size: 33px;
+        font-size: 30px;
         font-family: Arial, Helvetica, sans-serif;
-        width: 250px;
+        width: 200px;
         position: absolute;
         left: 25%;
         top: 15%;
+        border-style: inset;
+        border-width: 1px;
       "
-      class="btn btn-primary"
+      class="btn btn-outline-primary"
       (click)="canCreateTag = false"
     >
       + New Tag

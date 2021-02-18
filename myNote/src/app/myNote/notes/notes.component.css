@@ -1,0 +1,19 @@
+#addTag{
+  margin-top: 50px;
+  width: 90px;
+  padding: 1px;
+  height: 25px;
+  color: rgb(116, 102, 0);
+  font-size: 12px;
+  border-radius: 0;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+}
+
+.dropup{
+  margin-top: 90px;
+}
+
+.dropup button{
+  height: 30px;
+  padding: 2px;
+}

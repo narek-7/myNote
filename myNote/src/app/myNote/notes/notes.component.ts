@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Note } from './../../model/note';
 import { DatabaseService } from './../../database.service';
 import { AuthService } from './../../auth.service';
+import { Tag } from './../../model/tag';
 declare var $: any;
 
 @Component({
@@ -13,6 +14,7 @@ declare var $: any;
 export class NotesComponent implements OnInit {
   noteEmail: string;
   noteList: Array<Note>;
+  tagList: Array<Tag>;
   note: Note = new Note();
   canCreateNote: boolean = true;
   currentIndex: number = -1;
@@ -34,6 +36,8 @@ export class NotesComponent implements OnInit {
     this.canCreateNote = true;
     this.noteEmail = window.localStorage.getItem('Email');
     this.noteList = this.database.getNotes(this.noteEmail);
+    this.tagList = this.database.getTags(this.noteEmail)
+
     console.log('NoteList', this.noteList);
     console.log('UserList', localStorage.getItem('users'));
   }
@@ -122,4 +126,9 @@ export class NotesComponent implements OnInit {
       this.hideModal(i);
     });
   }
+
+  addTagToNote(i){
+    
+  }
+
 }

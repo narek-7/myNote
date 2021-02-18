@@ -45,7 +45,7 @@ export class TagsComponent implements OnInit {
       this.canCreateTag = true;
     }
   }
-  createNewTag(){
+  createNewTag() {
     this.currentIndex = -1;
     this.canCreateTag = false;
     this.name.nativeElement.value = '';
@@ -64,7 +64,7 @@ export class TagsComponent implements OnInit {
   }
 
   deleteTag(i) {
-    this.tagList.splice(i,1)
+    this.tagList.splice(i, 1);
     this.database.saveTags(this.noteEmail, this.tagList);
   }
 }

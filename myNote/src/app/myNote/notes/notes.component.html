@@ -5,20 +5,17 @@
       type="button"
       class="btn btn-outline-primary"
       (click)="cancelSave(); newNote()"
-      style="
-      border-style: inset;
-      border-width: 1px;
-      border-radius: 15px;
-      font-weight: 600;
-      padding: 3px 3px 3px 0px;
-      width: 7rem;
-      font-style: italic;
-    "
+      id="smallAddItem"
     >
       + New Note
     </button>
     <div
-      style="font-size: 16px; margin-top: 30px; color: rgba(0, 96, 221, 0.9); font-weight: 600;"
+      style="
+        font-size: 16px;
+        margin-top: 30px;
+        color: rgba(0, 96, 221, 0.9);
+        font-weight: 600;
+      "
     >
       {{ noteList.length }} notes
     </div>
@@ -50,8 +47,8 @@
 <div class="head"></div>
 
 <app-modal
-[deletedObjectType] = "deletedObjectType"
-[deletedObjectName] = "deletedObjectName"
+  [deletedObjectType]="deletedObjectType"
+  [deletedObjectName]="deletedObjectName"
 ></app-modal>
 
 <div class="body">
@@ -59,26 +56,43 @@
   <div [style.display]="canCreateNote ? 'none' : ''">
     <input #title type="text" placeholder="Title" value="Untitled" />
     <textarea #text placeholder="Start writing ..."></textarea>
-    <button class="btn btn-primary" (click)="saveNote()">Save Note</button>
-    <button class="btn btn-secondary" (click)="cancelSave()">Don't Save</button>
+    <button
+      class="btn btn-outline-primary"
+      (click)="saveNote()"
+      style="border-radius: 25px"
+    >
+      Save Note
+    </button>
+    <button
+      class="btn btn-outline-secondary"
+      (click)="cancelSave()"
+      style="border-radius: 25px"
+    >
+      Don't Save
+    </button>
+
+    <div class="dropup">
+      <button
+        type="button"
+        class="btn btn-warning dropdown-toggle"
+        data-toggle="dropdown"
+      >
+        Add tag
+      </button>
+      <div class="dropdown-menu">
+        <div
+          class="dropdown-item"
+          *ngFor="let item of tagList; let idx = index"
+          (click)="addTagToNote(idx)"
+        >
+          {{ item.name }}
+        </div>
+      </div>
+    </div>
   </div>
   <div *ngIf="canCreateNote">
-    <button
-      style="
-        font-size: 30px;
-        font-family: Arial, Helvetica, sans-serif;
-        width: 200px;
-        position: absolute;
-        left: 25%;
-        top: 15%;
-        border-style: inset;
-        border-width: 1px;
-      "
-      class="btn btn-outline-primary"
-      (click)="newNote()"
-    >
+    <button id="bigAddItem" class="btn btn-outline-primary" (click)="newNote()">
       + New Note
     </button>
   </div>
 </div>
-

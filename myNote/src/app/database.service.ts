@@ -11,6 +11,7 @@ export class DatabaseService {
   notes: Array<Note>;
 
   constructor() {}
+  
 
   register(email: string, password: string) {
     let users = this.getAllItems('users');
@@ -82,7 +83,7 @@ export class DatabaseService {
     allTagsInNote[email] = map;
     this.saveAllItems('TagsInNote', allTagsInNote);
   }
-  
+
   getAllItems(key): Map<string, any> {
     let usersStr = window.localStorage.getItem(key);
     if (usersStr) {
@@ -94,4 +95,5 @@ export class DatabaseService {
   saveAllItems(key: string, items: Map<string, any>) {
     window.localStorage.setItem(key, JSON.stringify(items));
   }
+
 }

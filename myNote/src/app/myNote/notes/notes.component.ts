@@ -69,14 +69,6 @@ export class NotesComponent implements OnInit {
     this.canCreateNote = true;
   }
 
-  addTagsInNote(noteId) {
-    let map = this.database.getTagsInNote(this.noteEmail);
-    map[noteId] = [];
-    this.database.saveTagsInNote(this.noteEmail, map);
-    let a = window.localStorage.getItem('TagsInNote');
-    console.log(a);
-  }
-
   changeExistingNote() {
     this.noteList[this.currentIndex].title = this.title.nativeElement.value;
     this.noteList[this.currentIndex].text = this.text.nativeElement.value;
@@ -90,11 +82,19 @@ export class NotesComponent implements OnInit {
     this.note.text = this.text.nativeElement.value;
     this.note.createdDate = new Date();
     this.note.modifiedDate = new Date();
-    this.note.id = this.note.createdDate.toString();
+    this.note.id = this.createID();
     this.noteList.push(this.note);
     this.addTagsInNote(this.note.id);
     this.database.saveNotes(this.noteEmail, this.noteList);
     this.note = new Note();
+  }
+
+  createID() {
+    let id = '';
+    for (let i = 0; i < 10; i++) {
+      id += Math.floor(10 * Math.random());
+    }
+    return id;
   }
 
   mouseOverNote(index) {
@@ -141,6 +141,14 @@ export class NotesComponent implements OnInit {
     $('#myModal').on('hide.bs.modal', () => {
       this.hideModal(i);
     });
+  }
+
+  addTagsInNote(noteId) {
+    let map = this.database.getTagsInNote(this.noteEmail);
+    map[noteId] = [];
+    this.database.saveTagsInNote(this.noteEmail, map);
+    let a = window.localStorage.getItem('TagsInNote');
+    console.log(a);
   }
 
   connectTagToNote(idx) {

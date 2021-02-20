@@ -29,22 +29,40 @@ export class TagsComponent implements OnInit {
   saveTag() {
     let val = this.name.nativeElement.value;
     if (val != '' && this.currentIndex === -1) {
-      this.tag.name = val;
-      this.tag.createdDate = new Date();
-      this.tag.id = this.tag.createdDate.toString();
-      this.tagList.push(this.tag);
-      this.database.saveTags(this.noteEmail, this.tagList);
-      this.tag = new Tag();
-      this.canCreateTag = true;
+      this.createTag();
     } else {
       if (val != '' && this.currentIndex != -1) {
-        this.tagList[this.currentIndex].name = val;
-        this.database.saveTags(this.noteEmail, this.tagList);
-        this.currentIndex = -1;
+        this.changeExistingTag();
       }
-      this.canCreateTag = true;
     }
+    this.canCreateTag = true;
   }
+
+  createTag() {
+    let val = this.name.nativeElement.value;
+    this.tag.name = val;
+    this.tag.createdDate = new Date();
+    this.tag.id = this.tag.createdDate.toString();
+    this.tagList.push(this.tag);
+    this.database.saveTags(this.noteEmail, this.tagList);
+    this.tag = new Tag();
+  }
+
+  changeExistingTag() {
+    let val = this.name.nativeElement.value;
+    this.tagList[this.currentIndex].name = val;
+    this.database.saveTags(this.noteEmail, this.tagList);
+    this.currentIndex = -1;
+  }
+
+  createID() {
+    let id = '';
+    for (let i = 0; i < 10; i++) {
+      id += Math.floor(10 * Math.random());
+    }
+    return id;
+  }
+
   createNewTag() {
     this.currentIndex = -1;
     this.canCreateTag = false;

@@ -70,26 +70,40 @@
     >
       Don't Save
     </button>
-
-    <div class="dropup">
-      <button
-        type="button"
-        class="btn btn-warning dropdown-toggle"
-        data-toggle="dropdown"
-      >
-        Add tag
-      </button>
-      <div class="dropdown-menu">
-        <div
-          class="dropdown-item"
-          *ngFor="let item of tagList; let idx = index"
-          (click)="connectTagToNote(idx)"
+    <div >
+      <div class="dropup">
+        <button
+          type="button"
+          class="btn btn-warning dropdown-toggle"
+          data-toggle="dropdown"
         >
-          {{ item.name }}
+          Add tag
+        </button>
+        <div class="dropdown-menu">
+          <div
+            class="dropdown-item"
+            *ngFor="let item of tagList; let idx = index"
+            (click)="connectTagToNote(idx)"
+          >
+            {{ item.name }}
+          </div>
         </div>
+        <ul>
+          <li *ngFor="let item of currentNoteTagList()">
+            {{ item.name }}
+            <div class="pointer" style="margin-left: 12px; display: inline">
+              <img
+                [src]="'../assets/images/delete3.png'"
+                width="10"
+                height="10"
+              />
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
+
   <div *ngIf="canCreateNote">
     <button id="bigAddItem" class="btn btn-outline-primary" (click)="newNote()">
       + New Note

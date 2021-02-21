@@ -10,10 +10,25 @@
 }
 
 .dropup{
-  margin-top: 90px;
+  width: auto;
+  margin: 90px 90px 0px 40px;
 }
 
 .dropup button{
   height: 30px;
   padding: 2px;
+}
+
+ul {
+  display: inline-block;
+  padding-left: 5px;
+  list-style: none;
+}
+
+li {
+  display: inline-block;
+  border: 1px dotted rgb(128, 128, 128);
+  border-radius: 15px;
+  margin: 5px;
+  padding: 2px 10px 3px 7px;
 }

@@ -42,7 +42,7 @@ export class TagsComponent implements OnInit {
     let val = this.name.nativeElement.value;
     this.tag.name = val;
     this.tag.createdDate = new Date();
-    this.tag.id = this.tag.createdDate.toString();
+    this.tag.id = this.createID();
     this.tagList.push(this.tag);
     this.database.saveTags(this.noteEmail, this.tagList);
     this.tag = new Tag();

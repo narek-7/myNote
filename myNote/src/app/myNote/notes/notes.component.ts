@@ -38,8 +38,13 @@ export class NotesComponent implements OnInit {
     this.noteList = this.database.getNotes(this.noteEmail);
     this.tagList = this.database.getTags(this.noteEmail);
 
-    console.log('NoteList', this.noteList);
-    console.log('UserList', localStorage.getItem('users'));
+    // console.log('NoteList', this.noteList);                   //ջնջել
+    // console.log('UserList', localStorage.getItem('users'));   //ջնջել
+
+    let a = window.localStorage.getItem('TagsInNote'); //ջնջել
+    //let map = new Map()                                        //ջնջել
+    //this.database.saveTagsInNote(this.noteEmail, map);         //ջնջել
+    console.log(a); //ջնջել
   }
 
   newNote() {
@@ -123,10 +128,11 @@ export class NotesComponent implements OnInit {
     $('#myModal').modal('show');
   }
 
-  hideModal(i) {
+  hideModal(idx) {
     let param = this.route.snapshot.queryParamMap.get('deletedObject');
     if (param === 'true') {
-      this.noteList.splice(i, 1);
+      this.deleteTagsInNote(idx);
+      this.noteList.splice(idx, 1);
       this.database.saveNotes(this.noteEmail, this.noteList);
     }
     setTimeout(() => {
@@ -134,12 +140,12 @@ export class NotesComponent implements OnInit {
     }, 300);
   }
 
-  deleteNote(i) {
+  deleteNote(idx) {
     this.deletedObjectType = 'note';
-    this.deletedObjectName = this.noteList[i].title;
+    this.deletedObjectName = this.noteList[idx].title;
     this.showModal();
     $('#myModal').on('hide.bs.modal', () => {
-      this.hideModal(i);
+      this.hideModal(idx);
     });
   }
 
@@ -147,14 +153,30 @@ export class NotesComponent implements OnInit {
     let map = this.database.getTagsInNote(this.noteEmail);
     map[noteId] = [];
     this.database.saveTagsInNote(this.noteEmail, map);
-    let a = window.localStorage.getItem('TagsInNote');
-    console.log(a);
+    let a = window.localStorage.getItem('TagsInNote'); //ջնջել
+    console.log(a); //ջնջել
+  }
+
+  deleteTagsInNote(idx) {
+    let deletedNoteID = this.noteList[idx].id;
+    let map = this.database.getTagsInNote(this.noteEmail);
+    delete map[deletedNoteID];
+    this.database.saveTagsInNote(this.noteEmail, map);
+    let a = window.localStorage.getItem('TagsInNote'); //ջնջել
+    console.log(a); //ջնջել
   }
 
   connectTagToNote(idx) {
     let currentNoteId = this.noteList[this.currentIndex].id;
     let map = this.database.getTagsInNote(this.noteEmail);
-    map[currentNoteId].push(this.tagList[idx].id);
+    map[currentNoteId].push(this.tagList[idx]);
     this.database.saveTagsInNote(this.noteEmail, map);
+  }
+
+  currentNoteTagList(): Array<string> {
+    if (this.currentIndex != -1) {
+      let currentNoteId = this.noteList[this.currentIndex].id;
+      return this.database.getTagsInNote(this.noteEmail)[currentNoteId];
+    }
   }
 }

@@ -1,5 +1,6 @@
 <div class="secondSidebar">
-  <label class="listCell"
+
+  <div class="listHead"
     >All Notes
     <button
       type="button"
@@ -19,8 +20,8 @@
     >
       {{ noteList.length }} notes
     </div>
-  </label>
-  <div>
+  </div>
+
     <div
       class="listCell"
       *ngFor="let item of noteList; let idx = index"
@@ -41,7 +42,7 @@
         <img [src]="'../assets/images/delete3.png'" width="15" height="15" />
       </div>
     </div>
-  </div>
+
 </div>
 
 <div class="head"></div>
@@ -70,37 +71,35 @@
     >
       Don't Save
     </button>
-    <div >
-      <div class="dropup">
-        <button
-          type="button"
-          class="btn btn-warning dropdown-toggle"
-          data-toggle="dropdown"
+    <div class="dropup">
+      <button
+        type="button"
+        class="btn btn-warning dropdown-toggle"
+        data-toggle="dropdown"
+      >
+        Add tag
+      </button>
+      <div class="dropdown-menu">
+        <div
+          class="dropdown-item"
+          *ngFor="let item of tagList; let idx = index"
+          (click)="connectTagToNote(idx)"
         >
-          Add tag
-        </button>
-        <div class="dropdown-menu">
-          <div
-            class="dropdown-item"
-            *ngFor="let item of tagList; let idx = index"
-            (click)="connectTagToNote(idx)"
-          >
-            {{ item.name }}
-          </div>
+          {{ item.name }}
         </div>
-        <ul>
-          <li *ngFor="let item of currentNoteTagList()">
-            {{ item.name }}
-            <div class="pointer" style="margin-left: 12px; display: inline">
-              <img
-                [src]="'../assets/images/delete3.png'"
-                width="10"
-                height="10"
-              />
-            </div>
-          </li>
-        </ul>
       </div>
+      <ul>
+        <li *ngFor="let item of currentNoteTagList()">
+          {{ item.name }}
+          <div class="pointer" style="margin-left: 12px; display: inline">
+            <img
+              [src]="'../assets/images/delete3.png'"
+              width="10"
+              height="10"
+            />
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 

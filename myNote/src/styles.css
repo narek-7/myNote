@@ -23,7 +23,36 @@
   height: 120px;
 }
 
-div.listCell:hover {
+
+.listCell {
+  overflow-y: scroll;
+  position: relative;
+  padding: 6px 8px 6px 16px;
+  top: 120px;
+  height: 500px;
+  text-decoration: none;
+  font-size: 22px;
+  color: rgba(106, 106, 106, 0.905);
+  display: block;
+  border-bottom: 1px solid rgb(151, 156, 165);
+  height: 120px;
+  direction: ltr;
+}
+
+.listHead {
+  display: block;
+  border-bottom: 1px solid rgb(151, 156, 165);
+  position: fixed;
+  padding: 6px 8px 6px 16px;
+  margin-bottom: 0px;
+  color: rgba(221, 4, 15, 0.809);
+  height: 120px;
+  font-style: italic;
+  font-size: 24px;
+}
+
+
+.listCell:hover {
   background-color: #fff;
 }
 
@@ -61,25 +90,6 @@ div.listCell:hover {
   background: grey;
 }
 
-.listCell {
-  position: relative;
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 22px;
-  color: rgba(106, 106, 106, 0.905);
-  display: block;
-  border-bottom: 1px solid rgb(151, 156, 165);
-  height: 120px;
-  direction: ltr;
-}
-
-label.listCell {
-  margin-bottom: 0px;
-  color: rgba(221, 4, 15, 0.809);
-  font-style: italic;
-  font-size: 24px;
-}
-
 button {
   margin-left: 50px;
   border: 2px groove;
@@ -96,7 +106,7 @@ button {
   z-index: 1;
   top: 0;
   left: 500px;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.6);
   padding: 15px;
 }
 
@@ -104,7 +114,7 @@ button {
   display: block;
   height: 100%;
   width: 100%;
-  position: fixed;
+  position: relative;
   top: 136px;
   left: 500px;
   background-color: rgba(255, 255, 255, 0.9);

@@ -21,6 +21,7 @@ export class NotesComponent implements OnInit {
   deletedObjectType: String = 'note';
   deletedObjectName: String = '';
   deletedObject = false;
+  showAlert: boolean = false;
 
   @ViewChild('text') text: ElementRef<any> = null;
   @ViewChild('title') title: ElementRef<any> = null;
@@ -33,6 +34,7 @@ export class NotesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.showAlert = false;
     this.canCreateNote = true;
     this.noteEmail = window.localStorage.getItem('Email');
     this.noteList = this.database.getNotes(this.noteEmail);
@@ -56,6 +58,7 @@ export class NotesComponent implements OnInit {
   cancelSave() {
     this.canCreateNote = true;
     this.currentIndex = -1;
+    this.showAlert = false;
   }
 
   modifyTitleName(title: string) {
@@ -89,7 +92,7 @@ export class NotesComponent implements OnInit {
     this.note.modifiedDate = new Date();
     this.note.id = this.createID();
     this.noteList.push(this.note);
-    this.addTagsInNote(this.note.id);
+    this.addTagsArrayAtNoteCreation(this.note.id);
     this.database.saveNotes(this.noteEmail, this.noteList);
     this.note = new Note();
   }
@@ -149,7 +152,7 @@ export class NotesComponent implements OnInit {
     });
   }
 
-  addTagsInNote(noteId) {
+  addTagsArrayAtNoteCreation(noteId) {
     let map = this.database.getTagsInNote(this.noteEmail);
     map[noteId] = [];
     this.database.saveTagsInNote(this.noteEmail, map);
@@ -167,7 +170,22 @@ export class NotesComponent implements OnInit {
   }
 
   connectTagToNote(idx) {
+    let t: Tag = this.tagList[idx];
     let currentNoteId = this.noteList[this.currentIndex].id;
+    let arr = this.database.getTagsInNote(this.noteEmail)[currentNoteId];
+    for (let i in arr) {
+      if (arr[i].id === t.id) {
+        if (this.showAlert === true) {
+          return;
+        } else {
+          this.showAlert = true;
+          setTimeout(() => {
+            this.showAlert = false;
+          }, 3000);
+        }
+        return;
+      }
+    }
     let map = this.database.getTagsInNote(this.noteEmail);
     map[currentNoteId].push(this.tagList[idx]);
     this.database.saveTagsInNote(this.noteEmail, map);
@@ -178,5 +196,11 @@ export class NotesComponent implements OnInit {
       let currentNoteId = this.noteList[this.currentIndex].id;
       return this.database.getTagsInNote(this.noteEmail)[currentNoteId];
     }
+  }
+  deleteTagOfTheNote(idx) {
+    let currentNoteId = this.noteList[this.currentIndex].id;
+    let map = this.database.getTagsInNote(this.noteEmail);
+    map[currentNoteId].splice(idx, 1);
+    this.database.saveTagsInNote(this.noteEmail, map);
   }
 }

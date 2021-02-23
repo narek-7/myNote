@@ -2,12 +2,12 @@
   <ul>
     <li>
       <a
-      [routerLink]="['/myNote', 'notes']"
+        [routerLink]="['/myNote', 'notes']"
         style="font-weight: bolder; color: white; font-size: 18px"
         >{{ noteEmail }}</a
       >
     </li>
-    <li routerLinkActive="active" >
+    <li routerLinkActive="active">
       <a [routerLink]="['/myNote', 'notes']">Notes</a>
     </li>
     <li routerLinkActive="active">
@@ -20,11 +20,11 @@
       <a [routerLink]="['/myNote', 'trash']">Trash</a>
     </li>
     <li routerLinkActive="active">
-      <a [routerLink]="['/']" (click) = "logOut()">Log Out</a>
+      <a [routerLink]="['/']" (click)="logOut()">Log Out</a>
     </li>
   </ul>
 </div>
 
 <div>
-<router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </div>

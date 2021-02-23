@@ -1,7 +1,7 @@
 <div class="secondSidebar">
-
-  <div class="listHead"
-    >All Notes
+  <!-- The first cell of second sidebar -->
+  <div class="listHead">
+    All Notes
     <button
       type="button"
       class="btn btn-outline-primary"
@@ -22,37 +22,45 @@
     </div>
   </div>
 
-    <div
-      class="listCell"
-      *ngFor="let item of noteList; let idx = index"
-      (mouseover)="mouseOverNote(idx)"
-      (mouseout)="mouseOutNote()"
-      (click)="modifyNote(idx)"
-      [class.cellClickStyle]="currentIndex === idx"
-    >
-      <h3>{{ modifyTitleName(item.title) }}</h3>
-      <div style="font-size: 14px; position: absolute; bottom: 10px">
-        {{ item.createdDate | date }}
-      </div>
-      <div
-        class="pointer"
-        style="position: absolute; right: 15px; bottom: 44px"
-        (click)="deleteNote(idx)"
-      >
-        <img [src]="'../assets/images/delete3.png'" width="15" height="15" />
-      </div>
+  <!-- The cells of Notes -->
+  <div
+    class="listCell"
+    *ngFor="let item of noteList; let idx = index"
+    (mouseover)="mouseOverNote(idx)"
+    (mouseout)="mouseOutNote()"
+    (click)="modifyNote(idx)"
+    [class.cellClickStyle]="currentIndex === idx"
+  >
+    <h3>{{ modifyTitleName(item.title) }}</h3>
+    <div style="font-size: 14px; position: absolute; bottom: 10px">
+      {{ item.createdDate | date }}
     </div>
-
+    <div
+      class="pointer"
+      style="position: absolute; right: 15px; bottom: 44px"
+      (click)="deleteNote(idx)"
+    >
+      <img [src]="'../assets/images/delete3.png'" width="15" height="15" />
+    </div>
+  </div>
 </div>
 
 <div class="head"></div>
 
+<!-- modal window -->
 <app-modal
   [deletedObjectType]="deletedObjectType"
   [deletedObjectName]="deletedObjectName"
 ></app-modal>
 
 <div class="body">
+  <div *ngIf="showAlert">
+    <div class="alert alert-primary alert-dismissible fade show" style="width: 50%; margin-left: -10px;">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong></strong>This note already contains tag with that name!
+    </div>
+  </div>
+
   <h4 *ngIf="currentIndex != -1">Modify Existing Note</h4>
   <div [style.display]="canCreateNote ? 'none' : ''">
     <input #title type="text" placeholder="Title" value="Untitled" />
@@ -71,7 +79,9 @@
     >
       Don't Save
     </button>
-    <div class="dropup">
+
+    <!-- Dropup button to connect tags to note -->
+    <div class="dropdown">
       <button
         type="button"
         class="btn btn-warning dropdown-toggle"
@@ -80,18 +90,23 @@
         Add tag
       </button>
       <div class="dropdown-menu">
+        <h2 class="dropdown-header">The Whole List Of Tags</h2>
         <div
-          class="dropdown-item"
           *ngFor="let item of tagList; let idx = index"
+          class="dropdown-item"
           (click)="connectTagToNote(idx)"
         >
           {{ item.name }}
         </div>
       </div>
       <ul>
-        <li *ngFor="let item of currentNoteTagList()">
+        <li *ngFor="let item of currentNoteTagList(); let idx = index">
           {{ item.name }}
-          <div class="pointer" style="margin-left: 12px; display: inline">
+          <div
+            class="pointer"
+            style="margin-left: 12px; display: inline"
+            (click)="deleteTagOfTheNote(idx)"
+          >
             <img
               [src]="'../assets/images/delete3.png'"
               width="10"
@@ -103,6 +118,7 @@
     </div>
   </div>
 
+  <!-- The big button "Add Note" -->
   <div *ngIf="canCreateNote">
     <button id="bigAddItem" class="btn btn-outline-primary" (click)="newNote()">
       + New Note

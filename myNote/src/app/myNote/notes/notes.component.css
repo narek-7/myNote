@@ -1,4 +1,4 @@
-#addTag{
+#addTag {
   margin-top: 50px;
   width: 90px;
   padding: 1px;
@@ -6,15 +6,15 @@
   color: rgb(116, 102, 0);
   font-size: 12px;
   border-radius: 0;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
 
-.dropup{
+.dropdown {
   width: 50%;
   margin: 90px 90px 0px 40px;
 }
 
-.dropup button{
+.dropdown button {
   height: 30px;
   padding: 2px;
 }
@@ -26,9 +26,20 @@ ul {
 }
 
 li {
+  font-style: italic;
   display: inline-block;
   border: 1px dotted rgb(128, 128, 128);
   border-radius: 15px;
   margin: 5px;
   padding: 2px 10px 3px 7px;
+  background-color: rgba(240, 240, 240, 0.7);
+}
+
+.dropdown-header {
+  background-color: rgba(240, 240, 240, 0.7);
+}
+.dropdown-item{
+  color: rgb(0, 63, 158);
+  font-size: 17px;
+  font-style: italic;
 }

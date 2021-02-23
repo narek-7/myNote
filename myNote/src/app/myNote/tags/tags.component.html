@@ -1,6 +1,6 @@
 <div class="secondSidebar">
-  <label class="listCell"
-    >All Tags
+  <div class="listHead">
+    All Tags
     <button
       type="button"
       class="btn btn-outline-primary"
@@ -19,7 +19,8 @@
     >
       {{ tagList.length }} tags
     </div>
-  </label>
+  </div>
+
   <div>
     <div
       class="listCell"
@@ -52,6 +53,7 @@
     >
       Save Tag
     </button>
+
     <button
       class="btn btn-secondary"
       (click)="cancelSave()"
@@ -62,8 +64,6 @@
   </div>
 
   <div *ngIf="canCreateTag">
-
-
     <button
       id="bigAddItem"
       class="btn btn-outline-primary"
@@ -71,7 +71,5 @@
     >
       + New Tag
     </button>
-
-
   </div>
 </div>

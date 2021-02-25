@@ -1,1 +1,10 @@
-
+#smallAddItem {
+  display: inline-block;
+  position: relative;
+  margin-right: 10px;
+  border-style: solid;
+  border-width: 1px;
+  font-weight: 400;
+  padding: 3px 3px 3px 0px;
+  width: 7rem;
+}

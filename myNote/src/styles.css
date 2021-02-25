@@ -3,12 +3,12 @@
 
 .secondSidebar {
   height: 100%;
-  width: 300px;
+  width: 290px;
   position: fixed;
   z-index: 1;
   top: 0px;
   left: 200px;
-  background-color: rgba(222, 226, 233, 0.5);
+  background-color: rgba(231, 240, 255, 0.5);
   overflow-x: hidden;
   padding-top: 16px;
 }
@@ -19,7 +19,7 @@
   font-size: 18px;
   color: rgba(38, 55, 88, 0.9);
   display: block;
-  border-bottom: 1px solid rgb(198, 205, 219);
+  border-bottom: 1px solid rgb(210, 217, 233);
   height: 120px;
 }
 
@@ -47,7 +47,7 @@
   margin-bottom: 0px;
   color: rgba(221, 4, 15, 0.809);
   height: 120px;
-  font-style: italic;
+  width: 290px;
   font-size: 24px;
 }
 
@@ -90,13 +90,6 @@
   background: grey;
 }
 
-button {
-  margin-left: 50px;
-  border: 2px groove;
-  width: 120px;
-  font-size: 20px;
-}
-
 .head {
   display: block;
   height: 136px;
@@ -105,7 +98,7 @@ button {
   position: fixed;
   z-index: 1;
   top: 0;
-  left: 500px;
+  left: 489px;
   background-color: rgba(255, 255, 255, 0.6);
   padding: 15px;
 }
@@ -137,8 +130,8 @@ textarea {
   padding-left: 10px;
   display: block;
   width: 800px;
-  margin: 100px 0 40px 0;
-  height: 200px;
+  margin: 60px 0 40px 0;
+  height: 150px;
   padding: 15px;
   color: rgb(65, 65, 65);
 }
@@ -156,11 +149,19 @@ h3 {
 
 h4 {
   color: rgba(220, 0, 0, 0.9);
-  margin-bottom: 60px;
+  margin-bottom: 20px;
 }
 
 .pointer {
   cursor: pointer;
+}
+
+button {
+  position: relative;
+  margin-left: 30px;
+  border: 2px groove;
+  width: 120px;
+  font-size: 20px;
 }
 
 #bigAddItem {
@@ -169,19 +170,10 @@ h4 {
   width: 200px;
   position: absolute;
   left: 25%;
-  top: 15%;
-  border-style: inset;
+  top: 100%;
+  border-style: solid;
   border-width: 1px;
 }
 
-#smallAddItem {
-  border-style: inset;
-  border-width: 1px;
-  border-radius: 15px;
-  font-weight: 600;
-  padding: 3px 3px 3px 0px;
-  width: 7rem;
-  font-style: italic;
-}
 
 

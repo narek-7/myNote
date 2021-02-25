@@ -1,7 +1,7 @@
 <div class="secondSidebar">
   <!-- The first cell of second sidebar -->
   <div class="listHead">
-    All Notes
+    <h2 style="font-family: Vladimir Script; display: inline;">All Notes</h2>
     <button
       type="button"
       class="btn btn-outline-primary"
@@ -15,7 +15,6 @@
         font-size: 16px;
         margin-top: 30px;
         color: rgba(0, 96, 221, 0.9);
-        font-weight: 600;
       "
     >
       {{ noteList.length }} notes
@@ -55,9 +54,12 @@
 
 <div class="body">
   <div *ngIf="showAlert">
-    <div class="alert alert-primary alert-dismissible fade show" style="width: 50%; margin-left: -10px;">
+    <div
+      class="alert alert-primary alert-dismissible fade show"
+      style="width: 50%; margin-left: 0px"
+    >
       <button type="button" class="close" data-dismiss="alert">&times;</button>
-      <strong></strong>This note already contains tag with that name!
+      <strong></strong>Adding tag already exists in this note!
     </div>
   </div>
 
@@ -80,21 +82,21 @@
       Don't Save
     </button>
 
-    <!-- Dropup button to connect tags to note -->
+    <!-- Dropdown button to connect tags to note -->
     <div class="dropdown">
       <button
         type="button"
-        class="btn btn-warning dropdown-toggle"
+        class="btn btn-outline-light dropdown-toggle"
         data-toggle="dropdown"
       >
-        Add tag
+        Add tags To This Note
       </button>
       <div class="dropdown-menu">
         <h2 class="dropdown-header">The Whole List Of Tags</h2>
         <div
           *ngFor="let item of tagList; let idx = index"
           class="dropdown-item"
-          (click)="connectTagToNote(idx)"
+          (click)="connectTagWithNote(idx)"
         >
           {{ item.name }}
         </div>

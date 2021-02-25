@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Tag } from './../../model/tag';
 import { Router } from '@angular/router';
 import { DatabaseService } from './../../database.service';
+import { Note } from './../../model/note';
 
 @Component({
   selector: 'app-tags',
@@ -23,7 +24,12 @@ export class TagsComponent implements OnInit {
     this.canCreateTag = true;
     this.noteEmail = window.localStorage.getItem('Email');
     this.tagList = this.database.getTags(this.noteEmail);
-    console.log(this.tagList);
+    console.log(this.tagList);                                  //ջնջել
+    let a = window.localStorage.getItem('NotesInTag');          //ջնջել
+    console.log(a);                                             //ջնջել
+    // let a = new Map()
+    // this.database.saveNotesInTag(this.noteEmail, a)
+
   }
 
   saveTag() {
@@ -44,6 +50,7 @@ export class TagsComponent implements OnInit {
     this.tag.createdDate = new Date();
     this.tag.id = this.createID();
     this.tagList.push(this.tag);
+    this.addNotesArrayAtTagCreation(this.tag.id);
     this.database.saveTags(this.noteEmail, this.tagList);
     this.tag = new Tag();
   }
@@ -84,5 +91,22 @@ export class TagsComponent implements OnInit {
   deleteTag(i) {
     this.tagList.splice(i, 1);
     this.database.saveTags(this.noteEmail, this.tagList);
+    this.cancelSave()
   }
+
+  addNotesArrayAtTagCreation(tagId) {
+    let map = this.database.getNotesInTag(this.noteEmail);
+    map[tagId] = [];
+    this.database.saveNotesInTag(this.noteEmail, map);
+  }
+
+  deleteTagFromEveryNote(tagIndex, tagId: number){
+    let map = this.database.getNotesInTag(this.noteEmail);
+    let noteArray = map[tagId];
+
+    for(let n in noteArray){
+
+    }
+  }
+
 }

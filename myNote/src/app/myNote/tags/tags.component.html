@@ -1,21 +1,16 @@
 <div class="secondSidebar">
   <div class="listHead">
-    All Tags
+    <h2 style="font-family: Vladimir Script; display: inline;">All Tags</h2>
     <button
+      id="smallAddItem"
       type="button"
       class="btn btn-outline-primary"
       (click)="createNewTag()"
-      id="smallAddItem"
     >
       + New Tag
     </button>
     <div
-      style="
-        font-size: 16px;
-        margin-top: 30px;
-        color: rgba(0, 96, 221, 0.9);
-        font-weight: 600;
-      "
+      style="font-size: 16px; margin-top: 30px; color: rgba(0, 96, 221, 0.9)"
     >
       {{ tagList.length }} tags
     </div>
@@ -47,7 +42,7 @@
   <div [style.display]="canCreateTag ? 'none' : ''">
     <input #name type="text" placeholder="Tag Name" />
     <button
-      class="btn btn-primary"
+      class="btn btn-outline-primary"
       (click)="saveTag()"
       style="border-radius: 25px"
     >
@@ -55,7 +50,7 @@
     </button>
 
     <button
-      class="btn btn-secondary"
+      class="btn btn-outline-secondary"
       (click)="cancelSave()"
       style="border-radius: 25px"
     >

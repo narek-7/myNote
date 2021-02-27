@@ -102,12 +102,12 @@
         </div>
       </div>
       <ul>
-        <li *ngFor="let item of currentNoteTagList(); let idx = index">
+        <li *ngFor="let item of currentNoteTagList; let idx = index">
           {{ item.name }}
           <div
             class="pointer"
             style="margin-left: 12px; display: inline"
-            (click)="deleteTagOfTheNote(idx)"
+            (click)="deleteAllConnectionsTagAndNote(idx)"
           >
             <img
               [src]="'../assets/images/delete3.png'"

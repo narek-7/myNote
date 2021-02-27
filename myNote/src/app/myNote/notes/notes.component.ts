@@ -15,6 +15,7 @@ export class NotesComponent implements OnInit {
   noteEmail: string;
   noteList: Array<Note>;
   tagList: Array<Tag>;
+  currentNoteTagList: Array<Tag> = [];
   note: Note = new Note();
   canCreateNote: boolean = true;
   currentIndex: number = -1;
@@ -39,15 +40,17 @@ export class NotesComponent implements OnInit {
     this.noteEmail = window.localStorage.getItem('Email');
     this.noteList = this.database.getNotes(this.noteEmail);
     this.tagList = this.database.getTags(this.noteEmail);
-    console.log('NoteList', this.noteList);               //ջնջել
-    let a = window.localStorage.getItem('TagsInNote');   //ջնջել
-    console.log(a);                                       //ջնջել
+    this.updateTagsOfCurrentNote();
+    console.log('NoteList', this.noteList); //ջնջել
+    let a = window.localStorage.getItem('TagsInNote'); //ջնջել
+    console.log("TagsInNote", a); //ջնջել
   }
 
   newNote() {
     this.canCreateNote = false;
     this.title.nativeElement.value = 'Untitle';
     this.text.nativeElement.value = '';
+    this.updateTagsOfCurrentNote();
   }
 
   cancelSave() {
@@ -120,6 +123,7 @@ export class NotesComponent implements OnInit {
     this.currentIndex = i;
     this.title.nativeElement.value = this.noteList[i].title;
     this.text.nativeElement.value = this.noteList[i].text;
+    this.updateTagsOfCurrentNote();
   }
 
   showModal() {
@@ -129,23 +133,15 @@ export class NotesComponent implements OnInit {
   hideModal(idx) {
     let param = this.route.snapshot.queryParamMap.get('deletedObject');
     if (param === 'true') {
-      //this.deleteNoteFromEveryTag(idx)
-      this.deleteTagsInNote(idx);
+      this.deleteNoteFromEveryTag(idx);
+      this.deleteTagsArrayInNote(idx);
       this.noteList.splice(idx, 1);
       this.database.saveNotes(this.noteEmail, this.noteList);
+      //this.currentIndex = -1;
     }
     setTimeout(() => {
-      // location.reload();
+      //location.reload();
     }, 300);
-  }
-
-  deleteNoteFromEveryTag(idx){
-    console.log(idx)
-    // let noteId = this.noteList[idx].id;
-    // let tagArr = this.database.getTagsInNote(this.noteEmail)[noteId];
-    // console.log(tagArr)
-    // for(let i in tagArr){
-    // }
   }
 
   deleteNote(idx) {
@@ -163,7 +159,7 @@ export class NotesComponent implements OnInit {
     this.database.saveTagsInNote(this.noteEmail, map);
   }
 
-  deleteTagsInNote(idx) {
+  deleteTagsArrayInNote(idx) {
     let deletedNoteId = this.noteList[idx].id;
     let map = this.database.getTagsInNote(this.noteEmail);
     delete map[deletedNoteId];
@@ -173,6 +169,7 @@ export class NotesComponent implements OnInit {
   connectTagWithNote(idx) {
     this.connectTagToNote(idx);
     this.connectNoteToTag(idx);
+    this.updateTagsOfCurrentNote();
   }
 
   connectTagToNote(idx) {
@@ -199,23 +196,67 @@ export class NotesComponent implements OnInit {
 
   connectNoteToTag(idx) {
     let tagId = this.tagList[idx].id;
-    let map = this.database.getNotesInTag(this.noteEmail);
     let note = this.noteList[this.currentIndex];
+    let map = this.database.getNotesInTag(this.noteEmail);
+    let arr = map[tagId];
+    for (let i in arr) {
+      if (arr[i].id === note.id) return;
+    }
     map[tagId].push(note);
     this.database.saveNotesInTag(this.noteEmail, map);
   }
 
-  currentNoteTagList(): Array<string> {
+  updateTagsOfCurrentNote() {
     if (this.currentIndex != -1) {
       let currentNoteId = this.noteList[this.currentIndex].id;
-      return this.database.getTagsInNote(this.noteEmail)[currentNoteId];
+      this.currentNoteTagList = this.database.getTagsInNote(this.noteEmail)[
+        currentNoteId
+      ];
+    } else {
+      this.currentNoteTagList = [];
     }
   }
 
-  deleteTagOfTheNote(idx) {
+  deleteNoteFromEveryTag(idx) {
+    this.updateTagsOfCurrentNote();
+    if (this.currentNoteTagList) {
+      let tagIdArr;
+      let Map = this.database.getNotesInTag(this.noteEmail);
+      tagIdArr = this.currentNoteTagList.map((t: Tag) => {
+        return t.id;
+      });
+      for (let i in tagIdArr) {
+        Map[tagIdArr[i]] = Map[tagIdArr[i]].filter((n: Note) => {
+          if (n.id != this.noteList[idx].id) return n;
+        });
+      }
+      this.database.saveNotesInTag(this.noteEmail, Map);
+    }
+  }
+
+  deleteAllConnectionsTagAndNote(idx) {
+    this.deleteTagFromTheNote(idx);
+    this.deleteNoteFromTheTag(idx);
+    this.updateTagsOfCurrentNote();
+  }
+
+  deleteTagFromTheNote(idx) {
     let currentNoteId = this.noteList[this.currentIndex].id;
     let map = this.database.getTagsInNote(this.noteEmail);
     map[currentNoteId].splice(idx, 1);
     this.database.saveTagsInNote(this.noteEmail, map);
+  }
+
+  deleteNoteFromTheTag(idx) {
+    let deletedNoteId = this.noteList[this.currentIndex].id;
+    let deletedTagId = this.currentNoteTagList[idx].id;
+    let map = this.database.getNotesInTag(this.noteEmail);
+    for (let i in map[deletedTagId]) {
+      if (map[deletedTagId][i].id === deletedNoteId) {
+        map[deletedTagId].splice(i, 1);
+        this.database.saveNotesInTag(this.noteEmail, map);
+        return;
+      }
+    }
   }
 }

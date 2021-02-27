@@ -1,6 +1,6 @@
 <div class="secondSidebar">
   <div class="listHead">
-    <h2 style="font-family: Vladimir Script; display: inline;">All Tags</h2>
+    <h2 style="font-family: Vladimir Script; display: inline">All Tags</h2>
     <button
       id="smallAddItem"
       type="button"
@@ -24,6 +24,7 @@
       [class.cellClickStyle]="currentIndex === idx"
     >
       <h3>{{ item.name }}</h3>
+      <small>{{'(' + quantityOfNotes(item.id) + ')'}}</small>
       <div
         class="pointer"
         style="position: absolute; right: 15px; bottom: 44px"

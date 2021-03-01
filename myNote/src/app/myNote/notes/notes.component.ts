@@ -26,6 +26,7 @@ export class NotesComponent implements OnInit {
 
   @ViewChild('text') text: ElementRef<any> = null;
   @ViewChild('title') title: ElementRef<any> = null;
+  @ViewChild('search') search: ElementRef<any> = null;
 
   constructor(
     private router: Router,
@@ -42,8 +43,8 @@ export class NotesComponent implements OnInit {
     this.tagList = this.database.getTags(this.noteEmail);
     this.updateTagsOfCurrentNote();
     console.log('NoteList', this.noteList); //ջնջել
-    let a = window.localStorage.getItem('TagsInNote'); //ջնջել
-    console.log("TagsInNote", a); //ջնջել
+    // let a = window.localStorage.getItem('TagsInNote')
+    // console.log('TagsInNote', a)
   }
 
   newNote() {
@@ -51,6 +52,20 @@ export class NotesComponent implements OnInit {
     this.title.nativeElement.value = 'Untitle';
     this.text.nativeElement.value = '';
     this.updateTagsOfCurrentNote();
+  }
+
+  searching() {
+    this.cancelSave()
+    this.noteList = this.database.getNotes(this.noteEmail);
+    let str = this.search.nativeElement.value;
+    if (str) {
+      this.noteList = this.noteList.filter((n: Note) => {
+        let patt = new RegExp(str)
+        if (patt.test(n.title)) {
+          return n;
+        }
+      });
+    }
   }
 
   cancelSave() {
@@ -76,14 +91,23 @@ export class NotesComponent implements OnInit {
   }
 
   changeExistingNote() {
-    this.noteList[this.currentIndex].title = this.title.nativeElement.value;
-    this.noteList[this.currentIndex].text = this.text.nativeElement.value;
-    this.noteList[this.currentIndex].modifiedDate = new Date();
-    this.database.saveNotes(this.noteEmail, this.noteList);
+    let changedNoteId = this.noteList[this.currentIndex].id;
+    let nList = this.database.getNotes(this.noteEmail);
+    let index = nList.findIndex((n) => {
+      return n.id === changedNoteId;
+    });
+    nList[index].title = this.title.nativeElement.value;
+    nList[index].text = this.text.nativeElement.value;
+    nList[index].modifiedDate = new Date();
+    this.database.saveNotes(this.noteEmail, nList);
+    this.search.nativeElement.value = null;
     this.currentIndex = -1;
+    this.noteList = nList;
   }
 
   cretaeNote() {
+    this.search.nativeElement.value = null;
+    this.noteList = this.database.getNotes(this.noteEmail);
     this.note.title = this.title.nativeElement.value;
     this.note.text = this.text.nativeElement.value;
     this.note.createdDate = new Date();
@@ -133,14 +157,21 @@ export class NotesComponent implements OnInit {
   hideModal(idx) {
     let param = this.route.snapshot.queryParamMap.get('deletedObject');
     if (param === 'true') {
+      let deletedNoteId = this.noteList[idx].id;
       this.deleteNoteFromEveryTag(idx);
       this.deleteTagsArrayInNote(idx);
-      this.noteList.splice(idx, 1);
-      this.database.saveNotes(this.noteEmail, this.noteList);
-      //this.currentIndex = -1;
+      let nList = this.database.getNotes(this.noteEmail);
+      let index = nList.findIndex((n: Note) => {
+        return n.id === deletedNoteId;
+      });
+      nList.splice(index, 1);
+      this.database.saveNotes(this.noteEmail, nList);
+      this.currentIndex = -1;
+      this.search.nativeElement.value = null;
+      this.noteList = nList;
     }
     setTimeout(() => {
-      //location.reload();
+      location.reload();
     }, 300);
   }
 

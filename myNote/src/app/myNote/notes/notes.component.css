@@ -10,6 +10,18 @@
 }
 
 
+textarea {
+  border: 1px solid rgba(188, 193, 202, 0.87);
+  border-radius: 5px;
+  padding-left: 10px;
+  display: block;
+  width: 800px;
+  margin: 60px 0 40px 0;
+  height: 150px;
+  padding: 15px;
+  color: rgb(65, 65, 65);
+}
+
 .dropdown {
   width: 50%;
   margin: 70px 90px 20px 0px;
@@ -35,11 +47,11 @@ li {
   font-style: italic;
   display: inline-block;
   border: 1px solid #007bff;
-  color: #007bff;
+  background-color: #007bff;
   border-radius: 15px;
   margin: 5px;
   padding: 2px 10px 3px 7px;
-  background-color: white;
+  color: white;
 }
 
 .dropdown-header {
@@ -59,4 +71,9 @@ li {
   font-weight: 400;
   padding: 3px 3px 3px 0px;
   width: 7rem;
+}
+
+input{
+  width: 8rem;
+  align-items: right;
 }

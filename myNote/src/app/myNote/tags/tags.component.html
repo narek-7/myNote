@@ -24,7 +24,7 @@
       [class.cellClickStyle]="currentIndex === idx"
     >
       <h3>{{ item.name }}</h3>
-      <small>{{'(' + quantityOfNotes(item.id) + ')'}}</small>
+      <small>{{ "(" + quantityOfNotes(item.id) + ")" }}</small>
       <div
         class="pointer"
         style="position: absolute; right: 15px; bottom: 44px"
@@ -41,7 +41,13 @@
 <div class="body">
   <h4 *ngIf="currentIndex != -1">Modify Existing Tag</h4>
   <div [style.display]="canCreateTag ? 'none' : ''">
-    <input #name type="text" placeholder="Tag Name" />
+    <input
+      #name
+      type="text"
+      placeholder="Tag Name"
+      class="form-control"
+      style="width: 20rem; height: 3rem; display: inline;"
+    />
     <button
       class="btn btn-outline-primary"
       (click)="saveTag()"

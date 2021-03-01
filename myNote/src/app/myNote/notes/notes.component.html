@@ -1,7 +1,7 @@
 <div class="secondSidebar">
   <!-- The first cell of second sidebar -->
   <div class="listHead">
-    <h2 style="font-family: Vladimir Script; display: inline;">All Notes</h2>
+    <h2 style="font-family: Vladimir Script; display: inline">All Notes</h2>
     <button
       type="button"
       class="btn btn-outline-primary"
@@ -10,14 +10,25 @@
     >
       + New Note
     </button>
-    <div
-      style="
-        font-size: 16px;
-        margin-top: 30px;
-        color: rgba(0, 96, 221, 0.9);
-      "
-    >
-      {{ noteList.length }} notes
+    <div style="display: flex; justify-content: space-between">
+      <div
+        style="
+          display: inline;
+          font-size: 16px;
+          margin-top: 30px;
+          color: rgba(0, 96, 221, 0.9);
+        "
+      >
+        {{ noteList.length }} notes
+      </div>
+      <input
+        #search
+        type="search"
+        placeholder="search"
+        class="form-control"
+        style="margin-right: 10px; width: 7.1rem; height: 2.1rem"
+        (input)="searching()"
+      />
     </div>
   </div>
 
@@ -65,8 +76,19 @@
 
   <h4 *ngIf="currentIndex != -1">Modify Existing Note</h4>
   <div [style.display]="canCreateNote ? 'none' : ''">
-    <input #title type="text" placeholder="Title" value="Untitled" />
-    <textarea #text placeholder="Start writing ..."></textarea>
+    <input
+      #title
+      type="text"
+      placeholder="Title"
+      value="Untitled"
+      class="form-control"
+      style="width: 20rem; height: 3rem"
+    />
+    <textarea
+      #text
+      class="form-control"
+      placeholder="Start writing ..."
+    ></textarea>
     <button
       class="btn btn-outline-primary"
       (click)="saveNote()"

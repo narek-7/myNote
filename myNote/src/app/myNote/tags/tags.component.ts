@@ -25,9 +25,9 @@ export class TagsComponent implements OnInit {
     this.canCreateTag = true;
     this.noteEmail = window.localStorage.getItem('Email');
     this.tagList = this.database.getTags(this.noteEmail);
-    console.log('TagList', this.tagList); //ջնջել
-    let a = window.localStorage.getItem('NotesInTag'); //ջնջել
-    console.log('NotesInTag', a);
+    console.log('TagList', this.tagList);
+    // let a = window.localStorage.getItem('NotesInTag');
+    // console.log('NotesInTag', a);
   }
 
   saveTag() {

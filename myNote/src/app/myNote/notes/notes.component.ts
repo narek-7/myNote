@@ -27,6 +27,7 @@ export class NotesComponent implements OnInit {
   @ViewChild('text') text: ElementRef<any> = null;
   @ViewChild('title') title: ElementRef<any> = null;
   @ViewChild('search') search: ElementRef<any> = null;
+  @ViewChild('markTitle') markTitle: ElementRef<any> = null;
 
   constructor(
     private router: Router,
@@ -42,9 +43,27 @@ export class NotesComponent implements OnInit {
     this.noteList = this.database.getNotes(this.noteEmail);
     this.tagList = this.database.getTags(this.noteEmail);
     this.updateTagsOfCurrentNote();
-    console.log('NoteList', this.noteList); //ջնջել
+    console.log('NoteList', this.noteList);
     // let a = window.localStorage.getItem('TagsInNote')
     // console.log('TagsInNote', a)
+  }
+
+  searching() {
+    this.cancelSave();
+    this.noteList = this.database.getNotes(this.noteEmail);
+    let str = this.search.nativeElement.value;
+    if (str) {
+      this.noteList = this.noteList.filter((n: Note) => {
+        let patt = new RegExp(str);
+        if (patt.test(n.title)) {
+          this.markTitle.nativeElement.innerHTML.replace(
+            new RegExp(str + '(?!([^<]+)?<)', 'gi'),
+            '<h3 style="background-color:#ff0; font-size:100%">$&</h3>'
+          );
+          return n;
+        }
+      });
+    }
   }
 
   newNote() {
@@ -52,20 +71,6 @@ export class NotesComponent implements OnInit {
     this.title.nativeElement.value = 'Untitle';
     this.text.nativeElement.value = '';
     this.updateTagsOfCurrentNote();
-  }
-
-  searching() {
-    this.cancelSave()
-    this.noteList = this.database.getNotes(this.noteEmail);
-    let str = this.search.nativeElement.value;
-    if (str) {
-      this.noteList = this.noteList.filter((n: Note) => {
-        let patt = new RegExp(str)
-        if (patt.test(n.title)) {
-          return n;
-        }
-      });
-    }
   }
 
   cancelSave() {

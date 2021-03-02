@@ -77,3 +77,7 @@ input{
   width: 8rem;
   align-items: right;
 }
+
+.highlightText {
+  background: yellow;
+}

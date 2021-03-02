@@ -41,7 +41,8 @@
     (click)="modifyNote(idx)"
     [class.cellClickStyle]="currentIndex === idx"
   >
-    <h3>{{ modifyTitleName(item.title) }}</h3>
+    <!-- modifyTitleName(item.title)  -->
+    <h3 #markTitle>{{item.title}}</h3>
     <div style="font-size: 14px; position: absolute; bottom: 10px">
       {{ item.createdDate | date }}
     </div>

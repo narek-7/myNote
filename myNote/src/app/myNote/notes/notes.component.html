@@ -26,8 +26,10 @@
         type="search"
         placeholder="search"
         class="form-control"
+        [(ngModel)]="query"
         style="margin-right: 10px; width: 7.1rem; height: 2.1rem"
         (input)="searching()"
+
       />
     </div>
   </div>
@@ -42,7 +44,9 @@
     [class.cellClickStyle]="currentIndex === idx"
   >
     <!-- modifyTitleName(item.title)  -->
-    <h3 #markTitle>{{item.title}}</h3>
+    <h3 #markTitle [innerHTML]="highlight(item.title)"></h3>
+
+    <!-- {{item.title}} -->
     <div style="font-size: 14px; position: absolute; bottom: 10px">
       {{ item.createdDate | date }}
     </div>

@@ -9,7 +9,6 @@
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
 
-
 textarea {
   border: 1px solid rgba(188, 193, 202, 0.87);
   border-radius: 5px;
@@ -57,7 +56,7 @@ li {
 .dropdown-header {
   background-color: rgba(240, 240, 240, 0.7);
 }
-.dropdown-item{
+.dropdown-item {
   color: #007bff;
   font-size: 17px;
   font-style: italic;
@@ -73,11 +72,15 @@ li {
   width: 7rem;
 }
 
-input{
+input {
   width: 8rem;
   align-items: right;
 }
 
-.highlightText {
-  background: yellow;
+:host ::ng-deep .highlightText {
+  background: #96ff62ad;
+  border: 1px dashed rgb(12, 42, 100);
+  border-radius: 3px;
+  padding: 0px 7px;
+  margin: 0px 2px;
 }

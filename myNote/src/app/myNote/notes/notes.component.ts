@@ -23,6 +23,7 @@ export class NotesComponent implements OnInit {
   deletedObjectName: String = '';
   deletedObject = false;
   showAlert: boolean = false;
+  query: string = '';
 
   @ViewChild('text') text: ElementRef<any> = null;
   @ViewChild('title') title: ElementRef<any> = null;
@@ -51,18 +52,27 @@ export class NotesComponent implements OnInit {
   searching() {
     this.cancelSave();
     this.noteList = this.database.getNotes(this.noteEmail);
-    let str = this.search.nativeElement.value;
-    if (str) {
+    if (this.query) {
       this.noteList = this.noteList.filter((n: Note) => {
-        let patt = new RegExp(str);
+        let patt = new RegExp(this.query, 'gi');
         if (patt.test(n.title)) {
-          this.markTitle.nativeElement.innerHTML.replace(
-            new RegExp(str + '(?!([^<]+)?<)', 'gi'),
-            '<h3 style="background-color:#ff0; font-size:100%">$&</h3>'
-          );
           return n;
         }
       });
+    }
+  }
+
+  highlight(title) {
+    if (this.query) {
+      return title.replace(new RegExp(this.query, 'gi'), (a) => {
+        return (
+          '<span class="highlightText">' +
+          (a = this.modifyTitleName(a)) +
+          '</span>'
+        );
+      });
+    } else {
+      return '<span>' + (title = this.modifyTitleName(title)) + '</span>';
     }
   }
 

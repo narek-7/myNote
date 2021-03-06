@@ -1,21 +1,21 @@
-<div class="secondSidebar">
-  <div class="listHead">
-    <h2 style="font-family: Vladimir Script; display: inline">All Tags</h2>
-    <button
-      id="smallAddItem"
-      type="button"
-      class="btn btn-outline-primary"
-      (click)="createNewTag()"
-    >
-      + New Tag
-    </button>
-    <div
-      style="font-size: 16px; margin-top: 30px; color: rgba(0, 96, 221, 0.9)"
-    >
-      {{ tagList.length }} tags
-    </div>
+<div class="listHead">
+  <h2 style="font-family: Vladimir Script; display: inline">All Tags</h2>
+  <button
+    id="smallAddItem"
+    type="button"
+    class="btn btn-outline-primary"
+    (click)="createNewTag()"
+  >
+    + New Tag
+  </button>
+  <div
+    style="font-size: 16px; margin-top: 30px; color: rgba(0, 96, 221, 0.9)"
+  >
+    {{ tagList.length }} tags
   </div>
+</div>
 
+<div class="secondSidebar">
   <div>
     <div
       class="listCell"
@@ -23,8 +23,11 @@
       (click)="modifyTag(idx)"
       [class.cellClickStyle]="currentIndex === idx"
     >
-      <h3>{{ item.name }}</h3>
-      <small>{{ "(" + quantityOfNotes(item.id) + ")" }}</small>
+      <div class="titleCell">
+        {{ item.name }}
+        <small>{{ "(" + quantityOfNotes(item.id) + ")" }}</small>
+      </div>
+
       <div
         class="pointer"
         style="position: absolute; right: 15px; bottom: 44px"
@@ -46,7 +49,7 @@
       type="text"
       placeholder="Tag Name"
       class="form-control"
-      style="width: 20rem; height: 3rem; display: inline;"
+      style="width: 20rem; height: 3rem; display: inline"
     />
     <button
       class="btn btn-outline-primary"

@@ -16,6 +16,6 @@ small{
 }
 
 h3{
-  display: inline;
+  display: block;
   padding: 10px;
 }

@@ -28,7 +28,6 @@ export class NotesComponent implements OnInit {
   @ViewChild('text') text: ElementRef<any> = null;
   @ViewChild('title') title: ElementRef<any> = null;
   @ViewChild('search') search: ElementRef<any> = null;
-  @ViewChild('markTitle') markTitle: ElementRef<any> = null;
 
   constructor(
     private router: Router,
@@ -77,21 +76,28 @@ export class NotesComponent implements OnInit {
   }
 
   newNote() {
+    this.cancelFilter();
     this.canCreateNote = false;
     this.title.nativeElement.value = 'Untitle';
-    this.text.nativeElement.value = '';
     this.updateTagsOfCurrentNote();
+  }
+
+  cancelFilter(){
+    this.search.nativeElement.value = '';
+    this.query = '';
+    this.noteList = this.database.getNotes(this.noteEmail);
   }
 
   cancelSave() {
     this.canCreateNote = true;
     this.currentIndex = -1;
     this.showAlert = false;
+    this.currentNoteTagList = [];
   }
 
   modifyTitleName(title: string) {
-    if (title.length > 20) {
-      return title.slice(0, 15) + '...';
+    if (title.length > 13) {
+      return title.slice(0, 13) + '...';
     }
     return title;
   }
@@ -115,16 +121,17 @@ export class NotesComponent implements OnInit {
     nList[index].text = this.text.nativeElement.value;
     nList[index].modifiedDate = new Date();
     this.database.saveNotes(this.noteEmail, nList);
-    this.search.nativeElement.value = null;
+    this.cancelFilter();
     this.currentIndex = -1;
     this.noteList = nList;
   }
 
   cretaeNote() {
-    this.search.nativeElement.value = null;
+    this.cancelFilter();
     this.noteList = this.database.getNotes(this.noteEmail);
     this.note.title = this.title.nativeElement.value;
     this.note.text = this.text.nativeElement.value;
+    console.log('text', this.note.text)
     this.note.createdDate = new Date();
     this.note.modifiedDate = new Date();
     this.note.id = this.createId();

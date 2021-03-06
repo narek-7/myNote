@@ -78,9 +78,10 @@ input {
 }
 
 :host ::ng-deep .highlightText {
-  background: #96ff62ad;
+  background: rgba(255, 255, 110, 0.945);
   border: 1px dashed rgb(12, 42, 100);
   border-radius: 3px;
   padding: 0px 7px;
   margin: 0px 2px;
+  font-size: larger;
 }

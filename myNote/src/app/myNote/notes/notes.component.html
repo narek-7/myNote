@@ -1,39 +1,38 @@
-<div class="secondSidebar">
-  <!-- The first cell of second sidebar -->
-  <div class="listHead">
-    <h2 style="font-family: Vladimir Script; display: inline">All Notes</h2>
-    <button
-      type="button"
-      class="btn btn-outline-primary"
-      (click)="cancelSave(); newNote()"
-      id="smallAddItem"
+<!-- The first cell of second sidebar -->
+<div class="listHead">
+  <h2 style="font-family: Vladimir Script; display: inline">All Notes</h2>
+  <button
+    type="button"
+    class="btn btn-outline-primary"
+    (click)="cancelSave(); newNote()"
+    id="smallAddItem"
+  >
+    + New Note
+  </button>
+  <div style="display: flex; justify-content: space-between">
+    <div
+      style="
+        display: inline;
+        font-size: 16px;
+        margin-top: 30px;
+        color: rgba(0, 96, 221, 0.9);
+      "
     >
-      + New Note
-    </button>
-    <div style="display: flex; justify-content: space-between">
-      <div
-        style="
-          display: inline;
-          font-size: 16px;
-          margin-top: 30px;
-          color: rgba(0, 96, 221, 0.9);
-        "
-      >
-        {{ noteList.length }} notes
-      </div>
-      <input
-        #search
-        type="search"
-        placeholder="search"
-        class="form-control"
-        [(ngModel)]="query"
-        style="margin-right: 10px; width: 7.1rem; height: 2.1rem"
-        (input)="searching()"
-
-      />
+      {{ noteList.length }} notes
     </div>
+    <input
+      #search
+      type="search"
+      placeholder="search"
+      class="form-control"
+      [(ngModel)]="query"
+      style="margin-right: 10px; width: 7.1rem; height: 2.1rem"
+      (input)="searching()"
+    />
   </div>
+</div>
 
+<div class="secondSidebar">
   <!-- The cells of Notes -->
   <div
     class="listCell"
@@ -44,9 +43,8 @@
     [class.cellClickStyle]="currentIndex === idx"
   >
     <!-- modifyTitleName(item.title)  -->
-    <h3 #markTitle [innerHTML]="highlight(item.title)"></h3>
+    <div class="titleCell" [innerHTML]="highlight(item.title)"></div>
 
-    <!-- {{item.title}} -->
     <div style="font-size: 14px; position: absolute; bottom: 10px">
       {{ item.createdDate | date }}
     </div>

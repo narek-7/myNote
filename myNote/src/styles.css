@@ -2,19 +2,17 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 
 .secondSidebar {
-  height: 100%;
+  height: calc(100% - 122px);
   width: 290px;
   position: fixed;
-  z-index: 1;
-  top: 0px;
+  top: 136px;
   left: 200px;
   background-color: rgba(231, 240, 255, 0.5);
-  overflow-x: hidden;
-  padding-top: 16px;
+  overflow:scroll;
 }
 
 .secondSidebar a {
-  padding: 6px 8px 6px 16px;
+  padding: 0px 8px 6px 16px;
   text-decoration: none;
   font-size: 18px;
   color: rgba(38, 55, 88, 0.9);
@@ -23,12 +21,25 @@
   height: 120px;
 }
 
+.listHead {
+  top: 0px;
+  left: 200px;
+  display: block;
+  border-bottom: 1px solid rgb(151, 156, 165);
+  position: fixed;
+  padding: 20px 8px 6px 17px;
+  margin-bottom: 0px;
+  color: rgba(221, 4, 15, 0.809);
+  height: 136px;
+  width: 290px;
+  font-size: 24px;
+  background-color: rgba(231, 240, 255, 0.5);
+}
 
 .listCell {
-  overflow-y: scroll;
+  overflow: clip;
   position: relative;
   padding: 6px 8px 6px 16px;
-  top: 120px;
   height: 500px;
   text-decoration: none;
   font-size: 22px;
@@ -39,18 +50,17 @@
   direction: ltr;
 }
 
-.listHead {
-  display: block;
-  border-bottom: 1px solid rgb(151, 156, 165);
-  position: fixed;
-  padding: 6px 8px 6px 16px;
-  margin-bottom: 0px;
-  color: rgba(221, 4, 15, 0.809);
-  height: 120px;
-  width: 290px;
-  font-size: 24px;
+.titleCell {
+  position: relative;
+  height: 85px;
+  width: 230px;
+  font-size: 21.5px;
+  color: rgba(29, 0, 0, 0.878);
+  font-weight: 400;
+  font-style: italic;
+  overflow: auto;
+  padding: 2px;
 }
-
 
 .listCell:hover {
   background-color: #fff;
@@ -94,7 +104,7 @@
   display: block;
   height: 136px;
   border-bottom: 1px solid rgb(151, 156, 165);
-  width: 74%;
+  width: calc(100% - 500px);
   position: fixed;
   z-index: 1;
   top: 0;
@@ -106,7 +116,7 @@
 .body {
   display: block;
   height: 100%;
-  width: 100%;
+  width: calc(100% - 500px);
   position: relative;
   top: 136px;
   left: 500px;
@@ -126,13 +136,6 @@ input {
 
 input:active {
   border: 1px dotted rgb(90, 117, 168);
-}
-
-h3 {
-  font-size: 20px;
-  color: rgba(29, 0, 0, 0.878);
-  font-weight: 400;
-  font-style: italic;
 }
 
 h4 {
@@ -162,6 +165,3 @@ button {
   border-style: solid;
   border-width: 1px;
 }
-
-
-

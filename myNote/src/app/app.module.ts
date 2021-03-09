@@ -8,10 +8,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MyNoteComponent } from './myNote/myNote.component';
 import { NotesComponent } from './myNote/notes/notes.component';
-import { CommonModule } from '@angular/common';
 import { ShortcutsComponent } from './myNote/shortcuts/shortcuts.component';
 import { TagsComponent } from './myNote/tags/tags.component';
 import { ModalComponent } from './myNote/modal/modal.component';
+import { TrashComponent } from './myNote/trash/trash.component';
 
 @NgModule({
   declarations: [
@@ -22,15 +22,15 @@ import { ModalComponent } from './myNote/modal/modal.component';
     NotesComponent,
     ShortcutsComponent,
     TagsComponent,
-    ModalComponent
+    TrashComponent,
+    ModalComponent,
   ],
   imports: [
-  BrowserModule,
+    BrowserModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    CommonModule,
   ],
 
   providers: [],

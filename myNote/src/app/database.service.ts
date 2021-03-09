@@ -11,7 +11,6 @@ export class DatabaseService {
   notes: Array<Note>;
 
   constructor() {}
-  
 
   register(email: string, password: string) {
     let users = this.getAllItems('users');
@@ -84,6 +83,17 @@ export class DatabaseService {
     this.saveAllItems('TagsInNote', allTagsInNote);
   }
 
+  saveNoteInTrash(email: string, map: Map<string, Map<string, any>>) {
+    let allTrashList = this.getAllItems('Trash');
+    allTrashList[email] = map;
+    this.saveAllItems('Trash', allTrashList);
+  }
+
+  getNoteFromTrash(email: string) {
+    let allTrashList = this.getAllItems('Trash');
+    return allTrashList[email] ? allTrashList[email] : new Map<string, any>();
+  }
+
   getAllItems(key): Map<string, any> {
     let usersStr = window.localStorage.getItem(key);
     if (usersStr) {
@@ -95,5 +105,4 @@ export class DatabaseService {
   saveAllItems(key: string, items: Map<string, any>) {
     window.localStorage.setItem(key, JSON.stringify(items));
   }
-
 }

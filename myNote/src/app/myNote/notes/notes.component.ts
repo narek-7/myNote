@@ -82,7 +82,7 @@ export class NotesComponent implements OnInit {
     this.updateTagsOfCurrentNote();
   }
 
-  cancelFilter(){
+  cancelFilter() {
     this.search.nativeElement.value = '';
     this.query = '';
     this.noteList = this.database.getNotes(this.noteEmail);
@@ -131,7 +131,7 @@ export class NotesComponent implements OnInit {
     this.noteList = this.database.getNotes(this.noteEmail);
     this.note.title = this.title.nativeElement.value;
     this.note.text = this.text.nativeElement.value;
-    console.log('text', this.note.text)
+    console.log('text', this.note.text);
     this.note.createdDate = new Date();
     this.note.modifiedDate = new Date();
     this.note.id = this.createId();
@@ -180,6 +180,7 @@ export class NotesComponent implements OnInit {
     let param = this.route.snapshot.queryParamMap.get('deletedObject');
     if (param === 'true') {
       let deletedNoteId = this.noteList[idx].id;
+      this.throwNoteInTheTrash(deletedNoteId, idx);
       this.deleteNoteFromEveryTag(idx);
       this.deleteTagsArrayInNote(idx);
       let nList = this.database.getNotes(this.noteEmail);
@@ -195,6 +196,19 @@ export class NotesComponent implements OnInit {
     setTimeout(() => {
       location.reload();
     }, 300);
+  }
+
+  throwNoteInTheTrash(id: string, idx: number) {
+    let deletedNote: Note = this.noteList[idx];
+    let deletedNoteTagList: Tag[] = this.database.getTagsInNote(this.noteEmail)[
+      id
+    ];
+    let map = this.database.getNoteFromTrash(this.noteEmail);
+    map[id] = {
+      note: deletedNote,
+      tagList: deletedNoteTagList,
+    };
+    this.database.saveNoteInTrash(this.noteEmail, map);
   }
 
   deleteNote(idx) {

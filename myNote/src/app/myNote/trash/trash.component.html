@@ -1,3 +1,95 @@
+<!-- The first cell of second sidebar -->
+<div class="listHead">
+  <h2 style="font-family: Vladimir Script; display: inline">Trash</h2>
+  <div style="display: flex; justify-content: space-between">
+    <div
+      style="
+        display: inline;
+        font-size: 16px;
+        margin-top: 30px;
+        color: rgba(0, 96, 221, 0.9);
+      "
+    >
+      {{ noteTrashList.length }} notes
+    </div>
+  </div>
+</div>
+
+<div class="secondSidebar">
+  <!-- The cells of Notes -->
+  <div *ngIf="noteTrashList.length">
+    <div
+      class="listCell"
+      *ngFor="let item of this.noteTrashList; let idx = index"
+      (click)="overviewNoteInTrash(idx)"
+    >
+      <div class="titleCell">{{ item.title }}</div>
+
+      <div style="font-size: 14px; position: absolute; bottom: 10px">
+        {{ item.createdDate | date }}
+      </div>
+      <div
+        class="pointer"
+        style="position: absolute; right: 15px; bottom: 44px"
+        (click)="deleteNoteInTash(idx)"
+      >
+        <img [src]="'../assets/images/delete3.png'" width="12" height="12" />
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!noteTrashList.length">
+    <h2
+      style="font-family: Vladimir Script; margin-left: 10px; margin-top: 10px"
+    >
+      Your Trash Is Empty
+    </h2>
+  </div>
+</div>
+
+<div class="head"></div>
+
 <div class="body">
-  <h1>Trash works!</h1>
+  <div
+    *ngIf="canEmptyTrash"
+    style="display: flex; flex-flow: column; align-items: center"
+  >
+    <img
+      [src]="'../assets/images/app_trash.png'"
+      width="280"
+      height="280"
+      style="background-color: rgba(231, 240, 255, 0.5)"
+    />
+    <button class="btn btn-outline-dark" (click)="deleteAllInTrash()">
+      To Empty The Trash
+    </button>
+  </div>
+
+  <div [style.display]="currentIndex < 0 ? 'none' : ''">
+    <input
+      #title
+      type="text"
+      class="form-control"
+      disabled
+      style="width: 20rem; height: 3rem; margin: 60px 0 40px 0"
+    />
+    <textarea
+      #text
+      class="form-control"
+      placeholder="Start writing ..."
+      disabled
+    ></textarea>
+
+    <ul>
+      <li *ngFor="let item of noteTrashList; let idx = index">
+        {{ item.title }}
+        <div
+        class="onTag"
+          style="margin-left: 12px; display: inline; "
+          (click)="deleteAllConnectionsTagAndNote(idx)"
+        >
+          <img [src]="'../assets/images/delete3.png'" width="10" height="10" />
+        </div>
+      </li>
+    </ul>
+  </div>
 </div>

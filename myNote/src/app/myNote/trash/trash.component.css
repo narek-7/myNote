@@ -1,0 +1,67 @@
+textarea {
+  border: 1px solid rgba(188, 193, 202, 0.87);
+  border-radius: 5px;
+  padding-left: 10px;
+  display: block;
+  width: 800px;
+  margin: 60px 0 40px 0;
+  height: 150px;
+  padding: 15px;
+  color: rgb(65, 65, 65);
+}
+
+.dropdown {
+  width: 50%;
+  margin: 70px 90px 20px 0px;
+}
+
+.dropdown button {
+  color: rgb(58, 58, 58);
+  height: 39px;
+  width: auto;
+  padding: 3px 10px;
+  border-radius: 5px;
+  margin-left: 1px;
+  border: 1px dotted rgb(128, 128, 128);
+}
+
+ul {
+  display: block;
+  padding: 25px 0 0 45px;
+  list-style: none;
+}
+
+li {
+  font-style: italic;
+  display: inline-block;
+  border: 1px solid #3f3f3f;
+  background-color: #ededed;
+  border-radius: 15px;
+  margin: 5px;
+  padding: 2px 10px 3px 7px;
+  color: rgb(68, 68, 68);
+}
+
+.dropdown-header {
+  background-color: rgba(240, 240, 240, 0.7);
+}
+.dropdown-item {
+  color: #007bff;
+  font-size: 17px;
+  font-style: italic;
+}
+
+button {
+  font-family: Vladimir Script;
+  font-size: 30px;
+  margin-top: 2rem;
+  width: 18rem;
+  height: 3rem;
+  font-weight: bolder;
+  border: none;
+  padding-right: 2rem;
+}
+
+.onTag {
+  cursor: not-allowed;
+}

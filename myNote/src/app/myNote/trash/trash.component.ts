@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DatabaseService } from './../../database.service';
 
 @Component({
@@ -9,8 +9,10 @@ import { DatabaseService } from './../../database.service';
 export class TrashComponent implements OnInit {
   noteTrashList: Array<string> = [];
   noteEmail: string;
-  canEmptyTrash: boolean = false;
-  currentIndex: number = 1;
+  currentIndex: number = -1;
+
+  @ViewChild('title') title: ElementRef<string> = null;
+  @ViewChild('text') text: ElementRef<string> = null;
 
   constructor(private database: DatabaseService) {}
 
@@ -25,13 +27,24 @@ export class TrashComponent implements OnInit {
     this.database.saveNoteInTrash(this.noteEmail, M)
   }
 
-  deleteNoteInTash(idx){
+  restoreNote(){
+
+  }
+
+  deleteNoteInTash(){
 
   }
 
   overviewNoteInTrash(idx){
+    this.currentIndex = idx;
+    console.log(this.noteTrashList[idx])
 
   }
+
+  cancelOverviewNote(){
+    this.currentIndex = -1;
+  }
+
 
   makeNoteTrashList() {
     let M = new Map();

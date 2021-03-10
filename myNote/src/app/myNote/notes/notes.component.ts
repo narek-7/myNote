@@ -71,7 +71,7 @@ export class NotesComponent implements OnInit {
         );
       });
     } else {
-      return '<span>' + (title = this.modifyTitleName(title)) + '</span>';
+      return this.modifyTitleName(title);
     }
   }
 

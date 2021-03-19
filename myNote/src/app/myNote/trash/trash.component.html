@@ -31,21 +31,24 @@
       <div
         class="pointer"
         style="position: absolute; right: 15px; bottom: 44px"
-        (click)="deleteNoteInTash(idx)"
       >
         <img
           [src]="'../assets/images/restore2.png'"
           width="17"
           height="17"
           [title]="'restore'"
-          style="margin-right: 1rem"
+          style="margin-right: 3rem"
         />
+        </div>
+        <div class="pointer"
+        style="position: absolute; right: 15px; bottom: 44px">
         <img
           [src]="'../assets/images/delete3.png'"
           width="12"
           height="12"
           [title]="'delete'"
-          style="margin-left: 1rem"
+          (click)="deleteNoteInTash(idx)"
+          style="margin-right: 1rem"
         />
       </div>
     </div>
@@ -77,9 +80,19 @@
     style="display: flex; flex-flow: column; align-items: center"
   >
     <button
-      id="deleteAll"
+      *ngIf="noteTrashList.length"
+      id="activeDeleteAll"
       class="btn btn-outline-danger"
       (click)="deleteAllInTrash()"
+    >
+      Empty the entire trash can
+    </button>
+
+    <button
+      *ngIf="!noteTrashList.length"
+      disabled
+      id="passiveDeleteAll"
+      class="btn btn-outline-danger"
     >
       Empty the entire trash can
     </button>
@@ -96,17 +109,15 @@
     <textarea
       #text
       class="form-control"
-      placeholder="Start writing ..."
       disabled
     ></textarea>
 
     <ul>
-      <li *ngFor="let item of noteTrashList; let idx = index">
-        {{ item.title }}
+      <li *ngFor="let item of actualNoteTagList; let idx = index">
+        {{ item.name }}
         <div
-          class="onTag"
+          class="onTagDelete"
           style="margin-left: 12px; display: inline"
-          (click)="deleteAllConnectionsTagAndNote(idx)"
         >
           <img [src]="'../assets/images/delete3.png'" width="10" height="10" />
         </div>
@@ -117,7 +128,7 @@
       <button class="btn btn-outline-primary" (click)="restoreNote()">
         Restore Note
       </button>
-      <button class="btn btn-outline-danger" (click)="deleteNoteInTash()">
+      <button class="btn btn-outline-danger" (click)="deleteNoteInTash(currentIndex)">
         Delete Note
       </button>
       <button class="btn btn-outline-secondary" (click)="cancelOverviewNote()">

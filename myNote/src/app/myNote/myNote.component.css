@@ -1,6 +1,6 @@
 a {
   text-decoration: underline;
-  color: blue;
+  color: rgb(255, 255, 255);
 }
 
 ul {
@@ -19,6 +19,11 @@ li {
   top: 0;
   left: 0;
   background-color: rgba(12, 42, 100, 0.9);
+  background-image: url("/assets/images/b31.jfif");
+  height: 100%; /* You must set a specified height */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
   overflow-x: hidden;
   padding-top: 16px;
 }
@@ -27,12 +32,14 @@ li {
   padding: 14px 5px 2px 5px;
   text-decoration: none;
   font-size: 18px;
-  color: rgb(148, 158, 179);
+  /* color: rgb(148, 158, 179); */
+  color: rgba(255, 255, 255, 0.9);
   display: block;
 }
 
 .firstSidebar a:hover {
-  color: #ffffff;
+  /* color: #ffffff; */
+  font-style: italic;
 }
 
 .main {

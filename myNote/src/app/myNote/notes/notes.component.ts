@@ -4,6 +4,7 @@ import { Note } from './../../model/note';
 import { DatabaseService } from './../../database.service';
 import { AuthService } from './../../auth.service';
 import { Tag } from './../../model/tag';
+import { DomSanitizer } from '@angular/platform-browser';
 declare var $: any;
 
 @Component({
@@ -24,6 +25,7 @@ export class NotesComponent implements OnInit {
   deletedObject = false;
   showAlert: boolean = false;
   query: string = '';
+  titleQuery: string = '';
 
   @ViewChild('text') text: ElementRef<any> = null;
   @ViewChild('title') title: ElementRef<any> = null;
@@ -33,7 +35,8 @@ export class NotesComponent implements OnInit {
     private router: Router,
     private database: DatabaseService,
     private route: ActivatedRoute,
-    private auth: AuthService
+    private auth: AuthService,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit() {
@@ -43,9 +46,19 @@ export class NotesComponent implements OnInit {
     this.noteList = this.database.getNotes(this.noteEmail);
     this.tagList = this.database.getTags(this.noteEmail);
     this.updateTagsOfCurrentNote();
+    this.makeTitle();
     console.log('NoteList', this.noteList);
     // let a = window.localStorage.getItem('TagsInNote')
     // console.log('TagsInNote', a)
+  }
+
+  makeTitle() {
+    if (this.currentIndex != -1) {
+      this.titleQuery = this.noteList[this.currentIndex].title;
+    }
+    if (this.currentIndex === -1 && !this.canCreateNote) {
+      this.titleQuery = 'Untitle';
+    }
   }
 
   searching() {
@@ -64,11 +77,9 @@ export class NotesComponent implements OnInit {
   highlight(title) {
     if (this.query) {
       return title.replace(new RegExp(this.query, 'gi'), (a) => {
-        return (
-          '<span class="highlightText">' +
-          (a = this.modifyTitleName(a)) +
-          '</span>'
-        );
+        return `<span class="highlightText">${(a = this.modifyTitleName(
+          a
+        ))}</span>`;
       });
     } else {
       return this.modifyTitleName(title);
@@ -79,6 +90,7 @@ export class NotesComponent implements OnInit {
     this.cancelFilter();
     this.canCreateNote = false;
     this.title.nativeElement.value = 'Untitle';
+    this.text.nativeElement.value = '';
     this.updateTagsOfCurrentNote();
   }
 
@@ -126,19 +138,25 @@ export class NotesComponent implements OnInit {
     this.noteList = nList;
   }
 
-  cretaeNote() {
-    this.cancelFilter();
-    this.noteList = this.database.getNotes(this.noteEmail);
-    this.note.title = this.title.nativeElement.value;
-    this.note.text = this.text.nativeElement.value;
-    console.log('text', this.note.text);
-    this.note.createdDate = new Date();
-    this.note.modifiedDate = new Date();
-    this.note.id = this.createId();
-    this.noteList.push(this.note);
-    this.addTagsArrayAtNoteCreation(this.note.id);
-    this.database.saveNotes(this.noteEmail, this.noteList);
-    this.note = new Note();
+  cretaeNote(note?: Note): void {
+    if (!note) {
+      this.cancelFilter();
+      this.noteList = this.database.getNotes(this.noteEmail);
+      this.note.title = this.title.nativeElement.value;
+      this.note.text = this.text.nativeElement.value;
+      this.note.createdDate = new Date();
+      this.note.modifiedDate = new Date();
+      this.note.id = this.createId();
+      this.noteList.push(this.note);
+      this.addTagsArrayAtNoteCreation(this.note.id);
+      this.database.saveNotes(this.noteEmail, this.noteList);
+      this.note = new Note();
+    } else {
+      let noteList = this.database.getNotes(this.noteEmail);
+      noteList.push(note);
+      this.addTagsArrayAtNoteCreation(this.note.id);
+      this.database.saveNotes(this.noteEmail, this.noteList);
+    }
   }
 
   createId() {
@@ -193,9 +211,6 @@ export class NotesComponent implements OnInit {
       this.search.nativeElement.value = null;
       this.noteList = nList;
     }
-    setTimeout(() => {
-      location.reload();
-    }, 300);
   }
 
   throwNoteInTheTrash(id: string, idx: number) {
@@ -217,6 +232,7 @@ export class NotesComponent implements OnInit {
     this.showModal();
     $('#myModal').on('hide.bs.modal', () => {
       this.hideModal(idx);
+      $('#myModal').off('hide.bs.modal');
     });
   }
 

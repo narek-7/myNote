@@ -14,26 +14,33 @@ textarea {
   border-radius: 5px;
   padding-left: 10px;
   display: block;
-  width: 800px;
+  width: 95%;
   margin: 60px 0 40px 0;
   height: 150px;
   padding: 15px;
   color: rgb(65, 65, 65);
 }
 
-.dropdown {
+ul {
   width: 50%;
   margin: 70px 90px 20px 0px;
 }
 
 .dropdown button {
+  margin: 20px 0 0 20px;
   color: rgb(58, 58, 58);
-  height: 39px;
-  width: auto;
+  height: 3rem;
+  width: 15rem;
   padding: 3px 10px;
   border-radius: 5px;
   margin-left: 1px;
   border: 1px dotted rgb(128, 128, 128);
+}
+
+.topOfNote{
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
 }
 
 ul {
@@ -64,7 +71,7 @@ li {
 
 #smallAddItem {
   position: relative;
-  margin-right: 10px;
+  margin-right: 9px;
   border-style: solid;
   border-width: 1px;
   font-weight: 400;
@@ -73,7 +80,7 @@ li {
 }
 
 input {
-  width: 8rem;
+  width: 15rem;
   align-items: right;
 }
 

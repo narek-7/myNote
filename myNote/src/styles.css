@@ -7,10 +7,14 @@
   position: fixed;
   top: 136px;
   left: 200px;
-  background-color: rgba(231, 240, 255, 0.5);
-  overflow:scroll;
+  background-color: rgba(235, 235, 235, 0.152);
+  overflow: scroll;
+  background-image: url("/assets/images/coffee3.jpg");
+  height: 100%; /* You must set a specified height */
+  background-position: left bottom; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
 }
-
 .secondSidebar a {
   padding: 0px 8px 6px 16px;
   text-decoration: none;
@@ -33,7 +37,7 @@
   height: 136px;
   width: 290px;
   font-size: 24px;
-  background-color: rgba(231, 240, 255, 0.5);
+  background-color: white;
 }
 
 .listCell {
@@ -63,12 +67,17 @@
 }
 
 .listCell:hover {
-  background-color: #fff;
+  background-color: white;
+  background-image: url("/assets/images/b20.jfif");
+  background-position: left top;
+  background-repeat: no-repeat;
 }
 
 .cellClickStyle {
   border-right: 1px solid rgb(151, 156, 165);
-  background-color: #fff;
+  background-image: url("/assets/images/b20.jfif");
+  background-position: left top;
+  background-repeat: no-repeat;
 }
 
 .main {
@@ -97,7 +106,7 @@
   background: rgba(222, 226, 233, 0);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: grey;
+  background: rgb(216, 216, 216);
 }
 
 .head {
@@ -106,26 +115,56 @@
   border-bottom: 1px solid rgb(151, 156, 165);
   width: calc(100% - 500px);
   position: fixed;
+  opacity: 0.4;
   z-index: 1;
   top: 0;
   left: 489px;
   background-color: rgba(255, 255, 255, 0.6);
   padding: 15px;
+  background-image: url("/assets/images/b33.jpg");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: cover;
 }
 
 .body {
+  margin: 3rem 0rem 5rem 3rem;
   display: block;
-  height: 100%;
+  height: auto;
   width: calc(100% - 500px);
-  position: relative;
+  width: 600px;
   top: 136px;
   left: 500px;
   background-color: rgba(255, 255, 255, 0.9);
   padding: 35px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.20), 0 6px 15px 0 rgba(0, 0, 0, 0.20);
+  /* background-image: url("/assets/images/note1.png");
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: cover; */
+}
+
+.allBody {
+  display: block;
+  top: 200px;
+  position: fixed;
+  top: 136px;
+  left: 490px;
+  overflow: scroll;
+  padding: 1rem;
+  opacity: 0.99;
+  background-image: url("/assets/images/coffee1.jpg");
+  z-index: 2;
+  width: 100%;
+  height: 100%; /* You must set a specified height */
+  background-position: left; /* Center the image */
+  background-repeat: repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
 }
 
 input {
-  width: 250px;
+  width: 15rem;
   height: 40px;
   margin-top: 20px;
   border: 1px dotted rgb(151, 156, 165);
@@ -140,15 +179,15 @@ input:active {
 
 h4 {
   color: rgba(220, 0, 0, 0.9);
-  margin-bottom: 20px;
+  margin: 20px;
 }
 
 .pointer {
   cursor: pointer;
 }
 
-.btn{
-  border: 2px solid
+.btn {
+  border: 2px solid;
 }
 
 button {

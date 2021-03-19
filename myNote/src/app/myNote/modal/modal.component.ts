@@ -16,4 +16,12 @@ export class ModalComponent implements OnInit {
 
   ngOnInit() {}
 
+  onlyClosed() {
+    console.log('close')
+  }
+
+  delete(){
+    console.log('delete')
+  }
+
 }

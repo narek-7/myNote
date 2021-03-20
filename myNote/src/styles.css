@@ -9,11 +9,11 @@
   left: 200px;
   background-color: rgba(235, 235, 235, 0.152);
   overflow: scroll;
-  background-image: url("/assets/images/coffee3.jpg");
-  height: 100%; /* You must set a specified height */
-  background-position: left bottom; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: cover; /* Resize the background image to cover the entire container */
+  height: 100%;
+  /* background-image: url("/assets/images/b20.jfif");
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  background-size: cover; */
 }
 .secondSidebar a {
   padding: 0px 8px 6px 16px;
@@ -29,7 +29,7 @@
   top: 0px;
   left: 200px;
   display: block;
-  border-bottom: 1px solid rgb(151, 156, 165);
+  border-bottom: 1px solid rgba(184, 190, 202, 0.692);
   position: fixed;
   padding: 20px 8px 6px 17px;
   margin-bottom: 0px;
@@ -37,7 +37,11 @@
   height: 136px;
   width: 290px;
   font-size: 24px;
-  background-color: white;
+  background-color: rgba(180, 191, 211, 0.111);
+  /* background-image: url("/assets/images/coffee1.jpg"); */
+  background-repeat: no-repeat;
+  background-position: right bottom;
+
 }
 
 .listCell {
@@ -52,6 +56,10 @@
   border-bottom: 1px solid rgb(151, 156, 165);
   height: 120px;
   direction: ltr;
+  background-color: white;
+  background-image: url("/assets/images/coffee1.jpg");
+  background-position: left bottom;
+  background-repeat: no-repeat;
 }
 
 .titleCell {
@@ -67,15 +75,14 @@
 }
 
 .listCell:hover {
-  background-color: white;
-  background-image: url("/assets/images/b20.jfif");
+  background-image: url("/assets/images/b24.jfif");
   background-position: left top;
   background-repeat: no-repeat;
 }
 
 .cellClickStyle {
   border-right: 1px solid rgb(151, 156, 165);
-  background-image: url("/assets/images/b20.jfif");
+  background-image: url("/assets/images/b24.jfif");
   background-position: left top;
   background-repeat: no-repeat;
 }
@@ -103,10 +110,10 @@
   width: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(222, 226, 233, 0);
+  background: rgba(180, 191, 211, 0.145);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(216, 216, 216);
+  background: rgba(178, 186, 202, 0.808);
 }
 
 .head {
@@ -121,9 +128,9 @@
   left: 489px;
   background-color: rgba(255, 255, 255, 0.6);
   padding: 15px;
-  background-image: url("/assets/images/b33.jpg");
+  background-image: url("/assets/images/coffee1.jpg");
   background-repeat: no-repeat;
-  background-position: left center;
+  background-position: right center;
   background-size: cover;
 }
 

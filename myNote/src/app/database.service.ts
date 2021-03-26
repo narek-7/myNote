@@ -94,6 +94,17 @@ export class DatabaseService {
     return allTrashList[email] ? allTrashList[email] : new Map<string, any>();
   }
 
+  saveNoteStyle(email: string, map: Map<string, Map<string, any>>) {
+    let allNoteStyles = this.getAllItems('NoteStyle');
+    allNoteStyles[email] = map;
+    this.saveAllItems('NoteStyle', allNoteStyles);
+  }
+
+  getNoteStyle(email: string): Map<string, Map<string, any>> {
+    let allNoteStyles = this.getAllItems('NoteStyle');
+    return allNoteStyles[email] ? allNoteStyles[email] : new Map();
+  }
+
   getAllItems(key): Map<string, any> {
     let usersStr = window.localStorage.getItem(key);
     if (usersStr) {

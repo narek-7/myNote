@@ -39,33 +39,34 @@
 
 <div class="head"></div>
 
-<div class="body">
-  <h4 *ngIf="currentIndex != -1">Modify Existing Tag</h4>
-  <div [style.display]="canCreateTag ? 'none' : ''">
-    <input
-      #name
-      type="text"
-      placeholder="Tag Name"
-      class="form-control"
-      style="width: 20rem; height: 3rem; display: inline"
-    />
-    <button
-      class="btn btn-outline-primary"
-      (click)="saveTag()"
-      style="border-radius: 25px"
-    >
-      Save Tag
-    </button>
+<div class="allBody">
+  <div class="body" [style.display]="canCreateTag ? 'none' : ''">
+    <h4 *ngIf="currentIndex != -1">Modify Existing Tag</h4>
+    <div>
+      <input
+        #name
+        type="text"
+        placeholder="Tag Name"
+        class="form-control"
+        style="width: 20rem; height: 3rem; display: inline"
+      />
+      <button
+        class="btn btn-outline-primary"
+        (click)="saveTag()"
+        style="border-radius: 25px"
+      >
+        Save Tag
+      </button>
 
-    <button
-      class="btn btn-outline-secondary"
-      (click)="cancelSave()"
-      style="border-radius: 25px"
-    >
-      Don't Save
-    </button>
-  </div>
-
+      <button
+        class="btn btn-outline-secondary"
+        (click)="cancelSave()"
+        style="border-radius: 25px"
+      >
+        Don't Save
+      </button>
+    </div>
+  </div> 
   <div *ngIf="canCreateTag">
     <button
       id="bigAddItem"

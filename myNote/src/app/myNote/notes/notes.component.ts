@@ -1,10 +1,15 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  Renderer2,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Note } from './../../model/note';
 import { DatabaseService } from './../../database.service';
 import { AuthService } from './../../auth.service';
 import { Tag } from './../../model/tag';
-import { DomSanitizer } from '@angular/platform-browser';
 declare var $: any;
 
 @Component({
@@ -25,18 +30,15 @@ export class NotesComponent implements OnInit {
   deletedObject = false;
   showAlert: boolean = false;
   query: string = '';
-  titleQuery: string = '';
 
   @ViewChild('text') text: ElementRef<any> = null;
   @ViewChild('title') title: ElementRef<any> = null;
   @ViewChild('search') search: ElementRef<any> = null;
 
   constructor(
-    private router: Router,
     private database: DatabaseService,
     private route: ActivatedRoute,
-    private auth: AuthService,
-    private sanitizer: DomSanitizer
+    private r: Renderer2
   ) {}
 
   ngOnInit() {
@@ -46,19 +48,9 @@ export class NotesComponent implements OnInit {
     this.noteList = this.database.getNotes(this.noteEmail);
     this.tagList = this.database.getTags(this.noteEmail);
     this.updateTagsOfCurrentNote();
-    this.makeTitle();
     console.log('NoteList', this.noteList);
     // let a = window.localStorage.getItem('TagsInNote')
     // console.log('TagsInNote', a)
-  }
-
-  makeTitle() {
-    if (this.currentIndex != -1) {
-      this.titleQuery = this.noteList[this.currentIndex].title;
-    }
-    if (this.currentIndex === -1 && !this.canCreateNote) {
-      this.titleQuery = 'Untitle';
-    }
   }
 
   searching() {
@@ -92,6 +84,7 @@ export class NotesComponent implements OnInit {
     this.title.nativeElement.value = 'Untitle';
     this.text.nativeElement.value = '';
     this.updateTagsOfCurrentNote();
+    this.resetTextStyle();
   }
 
   cancelFilter() {
@@ -187,7 +180,27 @@ export class NotesComponent implements OnInit {
     this.currentIndex = i;
     this.title.nativeElement.value = this.noteList[i].title;
     this.text.nativeElement.value = this.noteList[i].text;
+    this.applyStylesToNote();
     this.updateTagsOfCurrentNote();
+  }
+
+  applyStylesToNote() {
+    this.resetTextStyle();
+    let id = this.noteList[this.currentIndex].id;
+    let nStyle: Map<string, any> = this.database.getNoteStyle(this.noteEmail);
+    if (nStyle[id]) {
+      let v = Object.values(nStyle[id]);
+      let k = Object.keys(nStyle[id]);
+      for (let i = 0; i < v.length; i++) {
+        this.r.setStyle(this.text.nativeElement, k[i], v[i]);
+      }
+    }
+  }
+
+  resetTextStyle() {
+    this.r.setStyle(this.text.nativeElement, 'fontWeight', null);
+    this.r.setStyle(this.text.nativeElement, 'fontStyle', null);
+    this.r.setStyle(this.text.nativeElement, 'textDecorationLine', null);
   }
 
   showModal() {
@@ -340,6 +353,36 @@ export class NotesComponent implements OnInit {
         this.database.saveNotesInTag(this.noteEmail, map);
         return;
       }
+    }
+  }
+
+  textStyle(s: string) {
+    if (this.currentIndex != -1) {
+      let map = this.database.getNoteStyle(this.noteEmail);
+      let id = this.noteList[this.currentIndex].id;
+      if (!map[id]) {
+        map[id] = new Map();
+      }
+      switch (s) {
+        case 'bold':
+          map[id].fontWeight
+            ? (map[id].fontWeight = null)
+            : (map[id].fontWeight = 'bold');
+          break;
+        case 'italic':
+          map[id].fontStyle
+            ? (map[id].fontStyle = null)
+            : (map[id].fontStyle = 'italic');
+          break;
+        case 'underline':
+          map[id].textDecorationLine
+            ? (map[id].textDecorationLine = null)
+            : (map[id].textDecorationLine = 'underline');
+          break;
+      }
+      this.database.saveNoteStyle(this.noteEmail, map);
+      this.applyStylesToNote();
+      console.log(map);
     }
   }
 }

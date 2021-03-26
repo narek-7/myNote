@@ -60,7 +60,29 @@ sd
 </div>
 
 <div class="head">
-  <h4 *ngIf="currentIndex != -1">Modify Existing Note</h4>
+  <div>
+    <button
+      class="styleButton"
+      (click)="textStyle('bold')"
+      style="font-weight: bold"
+    >
+      B
+    </button>
+    <button
+      class="styleButton"
+      (click)="textStyle('italic')"
+      style="font-style: italic"
+    >
+      I
+    </button>
+    <button
+      class="styleButton"
+      (click)="textStyle('underline')"
+      style="text-decoration: underline"
+    >
+      U
+    </button>
+  </div>
 </div>
 
 <!-- modal window -->
@@ -70,29 +92,29 @@ sd
 ></app-modal>
 
 <div class="allBody">
-  <div class="body">
-    <div *ngIf="showAlert">
-      <div
-        class="alert alert-primary alert-dismissible fade show"
-        style="width: 90%; margin-left: 0px"
-      >
-        <button type="button" class="close" data-dismiss="alert">
-          &times;
-        </button>
-        Adding tag already exists in this note!
+  <div>
+    <div class="body" [style.display]="canCreateNote ? 'none' : ''">
+      <div style="display: flex; justify-content: flex-end">
+        <h4 *ngIf="currentIndex != -1">Modify Existing Note</h4>
+        <h4 *ngIf="currentIndex === -1">New Note</h4>
       </div>
-    </div>
-
-    <h4 *ngIf="currentIndex != -1">{{ titleQuery }}</h4>
-
-    <div [style.display]="canCreateNote ? 'none' : ''">
+      <div *ngIf="showAlert">
+        <div
+          class="alert alert-primary alert-dismissible fade show"
+          style="width: 95%; margin: 0px"
+        >
+          <button type="button" class="close" data-dismiss="alert">
+            &times;
+          </button>
+          Adding tag already exists in this note!
+        </div>
+      </div>
       <div class="topOfNote">
         <input
           #title
           type="text"
           placeholder="Title"
           value="Untitled"
-          [(ngModel)]="titleQuery"
           class="form-control"
           style="width: 15rem; height: 3rem"
         />

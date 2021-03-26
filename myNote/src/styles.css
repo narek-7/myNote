@@ -107,10 +107,10 @@
   width: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(180, 191, 211, 0.145);
+  background: rgba(178, 186, 202, 0.3);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(178, 186, 202, 0.808);
+  background: rgba(178, 186, 202, 0.5);
 }
 
 .head {
@@ -213,7 +213,18 @@ button {
 }
 
 .styleButton{
+  background-color: rgb(205, 211, 221);
   font-family: 'Courier New', Courier, monospace;
-  border: 1px solid grey;
+  border: 1px solid gray;
   width: 2rem;
+}
+
+.styleButton:focus {
+  background-color: white;
+  outline: 2px solid rgb(30, 108, 255);
+}
+
+
+.styleButton:hover {
+  background-color: white;
 }

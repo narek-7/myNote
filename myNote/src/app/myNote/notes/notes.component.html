@@ -96,7 +96,8 @@ sd
     <div class="body" [style.display]="canCreateNote ? 'none' : ''">
       <div style="display: flex; justify-content: flex-end">
         <h4 *ngIf="currentIndex != -1">Modify Existing Note</h4>
-        <h4 *ngIf="currentIndex === -1">New Note</h4>
+        <h4 *ngIf="currentIndex === -1 && !previewNote">New Note</h4>
+        <h4 *ngIf="previewNote && currentIndex === -1">Preview Note</h4>
       </div>
       <div *ngIf="showAlert">
         <div
@@ -118,7 +119,8 @@ sd
           class="form-control"
           style="width: 15rem; height: 3rem"
         />
-        <div class="dropdown">
+        <!-- Dropdown button to connect tags to note -->
+        <div class="dropdown" *ngIf="currentIndex != -1">
           <button
             type="button"
             class="btn btn-outline-light dropdown-toggle"
@@ -159,7 +161,7 @@ sd
         Don't Save
       </button>
 
-      <!-- Dropdown button to connect tags to note -->
+      <!-- Note tag list -->
       <div>
         <ul>
           <li *ngFor="let item of currentNoteTagList; let idx = index">

@@ -39,9 +39,11 @@
           [title]="'restore'"
           style="margin-right: 3rem"
         />
-        </div>
-        <div class="pointer"
-        style="position: absolute; right: 15px; bottom: 44px">
+      </div>
+      <div
+        class="pointer"
+        style="position: absolute; right: 15px; bottom: 44px"
+      >
         <img
           [src]="'../assets/images/delete3.png'"
           width="12"
@@ -74,11 +76,8 @@
 
 <div class="head"></div>
 
-<div class="body">
-  <div
-    *ngIf="currentIndex === -1"
-    style="display: flex; flex-flow: column; align-items: center"
-  >
+<div class="allBody">
+  <div style="display: flex; flex-flow: column; align-items: center">
     <button
       *ngIf="noteTrashList.length"
       id="activeDeleteAll"
@@ -97,43 +96,47 @@
       Empty the entire trash can
     </button>
   </div>
+  <div class="body" [style.display]="currentIndex === -1 ? 'none' : ''">
+    <div [style.display]="currentIndex === -1 ? 'none' : ''">
+      <input
+        #title
+        type="text"
+        class="form-control"
+        disabled
+        style="width: 20rem; height: 3rem; margin: 60px 0 40px 0"
+      />
+      <textarea #text class="form-control" disabled></textarea>
 
-  <div [style.display]="currentIndex === -1 ? 'none' : ''">
-    <input
-      #title
-      type="text"
-      class="form-control"
-      disabled
-      style="width: 20rem; height: 3rem; margin: 60px 0 40px 0"
-    />
-    <textarea
-      #text
-      class="form-control"
-      disabled
-    ></textarea>
-
-    <ul>
-      <li *ngFor="let item of actualNoteTagList; let idx = index">
-        {{ item.name }}
-        <div
-          class="onTagDelete"
-          style="margin-left: 12px; display: inline"
+      <div class="deleteRestoreCancel">
+        <button class="btn btn-outline-primary" (click)="restoreNote()">
+          Restore Note
+        </button>
+        <button
+          class="btn btn-outline-danger"
+          (click)="deleteNoteInTash(currentIndex)"
         >
-          <img [src]="'../assets/images/delete3.png'" width="10" height="10" />
-        </div>
-      </li>
-    </ul>
+          Delete Note
+        </button>
+        <button
+          class="btn btn-outline-secondary"
+          (click)="cancelOverviewNote()"
+        >
+          Cancel
+        </button>
+      </div>
 
-    <div class="deleteRestoreCancel">
-      <button class="btn btn-outline-primary" (click)="restoreNote()">
-        Restore Note
-      </button>
-      <button class="btn btn-outline-danger" (click)="deleteNoteInTash(currentIndex)">
-        Delete Note
-      </button>
-      <button class="btn btn-outline-secondary" (click)="cancelOverviewNote()">
-        Cancel
-      </button>
+      <ul>
+        <li *ngFor="let item of actualNoteTagList; let idx = index">
+          {{ item.name }}
+          <div class="onTagDelete" style="margin-left: 12px; display: inline">
+            <img
+              [src]="'../assets/images/delete3.png'"
+              width="10"
+              height="10"
+            />
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </div>

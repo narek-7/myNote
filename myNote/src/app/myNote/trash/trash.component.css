@@ -3,7 +3,6 @@ textarea {
   border-radius: 5px;
   padding-left: 10px;
   display: block;
-  width: 800px;
   margin: 60px 0 40px 0;
   height: 150px;
   padding: 15px;
@@ -34,12 +33,12 @@ ul {
 li {
   font-style: italic;
   display: inline-block;
-  border: 1px solid #8c8c8c;
-  background-color: #f0f0f0;
+  border: 1px solid #414141;
+  background-color: #ffffffad;
   border-radius: 15px;
   margin: 5px;
   padding: 2px 10px 3px 7px;
-  color: #8c8c8c;
+  color: #414141;
 }
 
 .dropdown-header {
@@ -64,16 +63,16 @@ li {
 }
 
 .deleteRestoreCancel {
-  margin-top: 5rem;
+  margin: 3rem 0rem;
 }
 
 .deleteRestoreCancel button {
-  border-radius: 25px;
+  border-radius: 20px;
   position: relative;
   margin: 10px;
   border: 2px solid;
-  width: 12rem;
-  font-size: 26px;
+  width: 9rem;
+  font-size: 20px;
   font-family: Calibri Light, Times, "Times New Roman", serif;
   padding: 1px;
 }

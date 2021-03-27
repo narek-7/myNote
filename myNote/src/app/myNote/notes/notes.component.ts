@@ -25,6 +25,7 @@ export class NotesComponent implements OnInit {
   note: Note = new Note();
   canCreateNote: boolean = true;
   currentIndex: number = -1;
+  previewNote: boolean = false;
   deletedObjectType: String = 'note';
   deletedObjectName: String = '';
   deletedObject = false;
@@ -161,16 +162,20 @@ export class NotesComponent implements OnInit {
   }
 
   mouseOverNote(index) {
+    this.previewNote = true;
     if (this.currentIndex === -1) {
       this.canCreateNote = false;
       setTimeout(() => {
         this.title.nativeElement.value = this.noteList[index].title;
         this.text.nativeElement.value = this.noteList[index].text;
+        this.updateTagsOfCurrentNote(index);
+        this.applyStylesToNote(index);
       }, 10);
     }
   }
 
   mouseOutNote() {
+    this.previewNote = false;
     if (this.currentIndex === -1) {
       this.canCreateNote = true;
     }
@@ -180,13 +185,13 @@ export class NotesComponent implements OnInit {
     this.currentIndex = i;
     this.title.nativeElement.value = this.noteList[i].title;
     this.text.nativeElement.value = this.noteList[i].text;
-    this.applyStylesToNote();
+    this.applyStylesToNote(i);
     this.updateTagsOfCurrentNote();
   }
 
-  applyStylesToNote() {
+  applyStylesToNote(index) {
     this.resetTextStyle();
-    let id = this.noteList[this.currentIndex].id;
+    let id = this.noteList[index].id;
     let nStyle: Map<string, any> = this.database.getNoteStyle(this.noteEmail);
     if (nStyle[id]) {
       let v = Object.values(nStyle[id]);
@@ -302,9 +307,12 @@ export class NotesComponent implements OnInit {
     this.database.saveNotesInTag(this.noteEmail, map);
   }
 
-  updateTagsOfCurrentNote() {
-    if (this.currentIndex != -1) {
-      let currentNoteId = this.noteList[this.currentIndex].id;
+  updateTagsOfCurrentNote(index?) {
+    if (!index) {
+      index = this.currentIndex;
+    }
+    if (index != -1) {
+      let currentNoteId = this.noteList[index].id;
       this.currentNoteTagList = this.database.getTagsInNote(this.noteEmail)[
         currentNoteId
       ];
@@ -381,7 +389,7 @@ export class NotesComponent implements OnInit {
           break;
       }
       this.database.saveNoteStyle(this.noteEmail, map);
-      this.applyStylesToNote();
+      this.applyStylesToNote(this.currentIndex);
       console.log(map);
     }
   }

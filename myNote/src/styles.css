@@ -122,12 +122,12 @@
   opacity: 0.4;
   z-index: 1;
   top: 0;
-  right: 0;
+  left: 490px;
   background-color: rgba(255, 255, 255, 0.6);
   padding: 15px;
   background-image: url("/assets/images/coffee1.jpg");
   background-repeat: no-repeat;
-  background-position: right center;
+  background-position: left center;
   background-size: cover;
 }
 
@@ -135,11 +135,10 @@
   margin: 3rem 0rem 5rem 3rem;
   display: block;
   height: auto;
-  width: calc(100% - 500px);
   width: 600px;
   top: 136px;
   left: 500px;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.95);
   padding: 35px;
   border-radius: 5px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.2);
@@ -155,15 +154,15 @@
   position: fixed;
   top: 136px;
   left: 490px;
-  overflow: scroll;
+  overflow: auto;
   padding: 1rem;
-  opacity: 0.99;
+  opacity: 0.9;
   background-image: url("/assets/images/coffee1.jpg");
   z-index: 2;
-  width: 100%;
-  height: 100%; /* You must set a specified height */
+  width: calc(100% - 490px);
+  height: calc(100% - 137px); /* You must set a specified height */
   background-position: left; /* Center the image */
-  background-repeat: repeat; /* Do not repeat the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover; /* Resize the background image to cover the entire container */
 }
 
@@ -216,12 +215,18 @@ button {
   background-color: rgb(205, 211, 221);
   font-family: 'Courier New', Courier, monospace;
   border: 1px solid gray;
-  width: 2rem;
+  width: 40px;
+  height: 40px;
+  padding: 1px
 }
 
 .styleButton:focus {
   background-color: white;
-  outline: 2px solid rgb(30, 108, 255);
+  outline: 1.5px solid rgb(30, 108, 255);
+}
+
+.styleButton:active {
+  outline: 2.5px solid rgb(30, 108, 255);
 }
 
 

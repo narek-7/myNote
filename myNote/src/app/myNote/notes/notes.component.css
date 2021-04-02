@@ -89,7 +89,7 @@ input {
 .stylePanel{
   margin: 10px 0 0 10px;
   display: flex;
-  border-top: 1px dotted gray;
+  /* border: 1px solid rgba(128, 128, 128, 0.829); */
   align-items: center;
   height: 70px;
   width: auto;
@@ -102,7 +102,7 @@ input {
   border: 1px solid rgb(184, 184, 184);
   width: 40px;
   height: 40px;
-  padding: 1px
+  padding: 1px;
 }
 
 .styleButton:focus {
@@ -117,14 +117,6 @@ input {
 .styleButton:hover {
   background-color: white;
 }
-
-
-
-
-
-
-
-
 
 /* .dropbtn {
   background-color: rgb(205, 211, 221);

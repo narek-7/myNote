@@ -27,13 +27,12 @@ export class NotesComponent implements OnInit {
   canCreateNote: boolean = true;
   currentIndex: number = -1;
   previewNote: boolean = false;
-  deletedObjectType: String = 'note';
-  deletedObjectName: String = '';
+  delObjType: String = 'note';
+  delObjName: String = '';
   deletedObject = false;
   showAlert: boolean = false;
   query: string = '';
   textSizeArray: Array<number> = [10, 12, 14, 16, 18, 20, 22, 24, 26];
-
 
   @ViewChild('text') text: ElementRef<any> = null;
   @ViewChild('title') title: ElementRef<any> = null;
@@ -55,11 +54,12 @@ export class NotesComponent implements OnInit {
     this.updateTagsOfCurrentNote();
     this.database.restoredNote.subscribe((note) => {
       this.restoreNote(note);
+      this.database.restoredNote.unsubscribe;
     });
     let users = this.database.getAllItems('users');
     console.log('NoteList', this.noteList);
     console.log('user', users);
-    }
+  }
 
   restoreNote(note: Note) {
     let nList = this.database.getNotes(this.noteEmail);
@@ -253,8 +253,8 @@ export class NotesComponent implements OnInit {
   }
 
   deleteNote(idx) {
-    this.deletedObjectType = 'note';
-    this.deletedObjectName = this.noteList[idx].title;
+    this.delObjType = 'note';
+    this.delObjName = this.noteList[idx].title;
     this.showModal();
     $('#myModal').on('hide.bs.modal', () => {
       this.hideModal(idx);
@@ -316,7 +316,7 @@ export class NotesComponent implements OnInit {
   }
 
   updateTagsOfCurrentNote(index?) {
-    if (!(index+1)) {
+    if (!(index + 1)) {
       index = this.currentIndex;
     }
     if (index != -1) {

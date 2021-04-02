@@ -59,7 +59,7 @@
 </div>
 
 <div class="head">
-  <div class="stylePanel">
+  <div *ngIf="currentIndex != -1" class="stylePanel">
     <button
       class="styleButton"
       (click)="textStyle('bold')"
@@ -81,7 +81,6 @@
     >
       U
     </button>
-
     <!-- <div>
       <div
         style="margin-left: 40px; width: auto; padding: 5px"
@@ -102,7 +101,7 @@
       </div>
     </div> -->
 
-      <!-- <div>
+    <!-- <div>
       <div
         style="margin-left: 40px; width: auto; padding: 5px"
         type="button"
@@ -142,118 +141,120 @@
   </div>
 
   <!-- modal window -->
-  <app-modal
-    [deletedObjectType]="deletedObjectType"
-    [deletedObjectName]="deletedObjectName"
-  ></app-modal>
+  </div>
+</div>
 
-  <div class="allBody">
-    <div>
-      <div class="body" [style.display]="canCreateNote ? 'none' : ''">
-        <div style="display: flex; justify-content: flex-end">
-          <h4 *ngIf="currentIndex != -1">Modify Existing Note</h4>
-          <h4 *ngIf="currentIndex === -1 && !previewNote">New Note</h4>
-          <h4 *ngIf="previewNote && currentIndex === -1">Preview Note</h4>
+<app-modal
+  [deletedObjectType]="delObjType"
+  [deletedObjectName]="delObjName"
+></app-modal>
+
+<div class="allBody">
+  <div>
+    <div class="body" [style.display]="canCreateNote ? 'none' : ''">
+      <div style="display: flex; justify-content: flex-end">
+        <h4 *ngIf="currentIndex != -1">Modify Existing Note</h4>
+        <h4 *ngIf="currentIndex === -1 && !previewNote">New Note</h4>
+        <h4 *ngIf="previewNote && currentIndex === -1">Preview Note</h4>
+      </div>
+      <div *ngIf="showAlert">
+        <div
+          class="alert alert-primary alert-dismissible fade show"
+          style="width: 95%; height: 51px; margin-bottom: 10px"
+        >
+          <span type="button" class="close" data-dismiss="alert">
+            &times;
+          </span>
+          Adding tag already exists in this note!
         </div>
-        <div *ngIf="showAlert">
-          <div
-            class="alert alert-primary alert-dismissible fade show"
-            style="width: 95%; height: 51px; margin-bottom: 10px"
+      </div>
+      <div class="topOfNote">
+        <input
+          #title
+          type="text"
+          placeholder="Title"
+          value="Untitled"
+          class="form-control"
+          style="width: 15rem; height: 3rem"
+        />
+        <!-- Dropdown button to connect tags to note -->
+        <div class="dropdown" *ngIf="currentIndex != -1">
+          <button
+            type="button"
+            class="btn btn-outline-light dropdown-toggle"
+            data-toggle="dropdown"
           >
-            <button type="button" class="close" data-dismiss="alert">
-              &times;
-            </button>
-            Adding tag already exists in this note!
-          </div>
-        </div>
-        <div class="topOfNote">
-          <input
-            #title
-            type="text"
-            placeholder="Title"
-            value="Untitled"
-            class="form-control"
-            style="width: 15rem; height: 3rem"
-          />
-          <!-- Dropdown button to connect tags to note -->
-          <div class="dropdown" *ngIf="currentIndex != -1">
-            <button
-              type="button"
-              class="btn btn-outline-light dropdown-toggle"
-              data-toggle="dropdown"
+            Add tags To This Note
+          </button>
+          <div class="dropdown-menu">
+            <h2 class="dropdown-header">The Whole List Of Tags</h2>
+            <div
+              *ngFor="let item of tagList; let idx = index"
+              class="dropdown-item"
+              (click)="connectTagWithNote(idx)"
             >
-              Add tags To This Note
-            </button>
-            <div class="dropdown-menu">
-              <h2 class="dropdown-header">The Whole List Of Tags</h2>
-              <div
-                *ngFor="let item of tagList; let idx = index"
-                class="dropdown-item"
-                (click)="connectTagWithNote(idx)"
-              >
-                {{ item.name }}
-              </div>
+              {{ item.name }}
             </div>
           </div>
         </div>
-
-        <textarea
-          #text
-          class="form-control"
-          placeholder="Start writing ..."
-        ></textarea>
-        <button
-          class="btn btn-outline-primary"
-          (click)="saveNote()"
-          style="border-radius: 25px; border: 2px solid"
-        >
-          Save Note
-        </button>
-        <button
-          class="btn btn-outline-secondary"
-          (click)="cancelSave()"
-          style="border-radius: 25px; border: 2px solid"
-        >
-          Close
-        </button>
-
-        <!-- Note tag list -->
-        <div>
-          <ul>
-            <li *ngFor="let item of currentNoteTagList; let idx = index">
-              {{ item.name }}
-              <div
-                class="pointer"
-                style="margin-left: 12px; display: inline"
-                (click)="deleteAllConnectionsTagAndNote(idx)"
-              >
-                <img
-                  [src]="'../assets/images/delete3.png'"
-                  width="10"
-                  height="10"
-                />
-              </div>
-            </li>
-          </ul>
-        </div>
       </div>
 
-      <!-- The big button "Add Note" -->
-      <div *ngIf="canCreateNote">
-        <button
-          id="bigAddItem"
-          class="btn btn-outline-primary"
-          (click)="newNote()"
-        >
-          + New Note
-        </button>
+      <textarea
+        #text
+        class="form-control"
+        placeholder="Start writing ..."
+      ></textarea>
+      <button
+        class="btn btn-outline-primary"
+        (click)="saveNote()"
+        style="border-radius: 25px; border: 2px solid"
+      >
+        Save Note
+      </button>
+      <button
+        class="btn btn-outline-secondary"
+        (click)="cancelSave()"
+        style="border-radius: 25px; border: 2px solid"
+      >
+        Close
+      </button>
+
+      <!-- Note tag list -->
+      <div>
+        <ul>
+          <li *ngFor="let item of currentNoteTagList; let idx = index">
+            {{ item.name }}
+            <div
+              class="pointer"
+              style="margin-left: 12px; display: inline"
+              (click)="deleteAllConnectionsTagAndNote(idx)"
+            >
+              <img
+                [src]="'../assets/images/delete3.png'"
+                width="10"
+                height="10"
+              />
+            </div>
+          </li>
+        </ul>
       </div>
-      <!-- <img
+    </div>
+
+    <!-- The big button "Add Note" -->
+    <div *ngIf="canCreateNote">
+      <button
+        id="bigAddItem"
+        class="btn btn-outline-primary"
+        (click)="newNote()"
+      >
+        + New Note
+      </button>
+    </div>
+    <!-- <img
     [src]="'../assets/images/AAA.png'"
     width="100"
     height="100"
     style="position: absolute; bottom: -1.5px; right: -1.5px"
   /> -->
-    </div>
   </div>
 </div>

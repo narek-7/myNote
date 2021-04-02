@@ -119,7 +119,7 @@
   border-bottom: 1px solid rgb(151, 156, 165);
   width: calc(100% - 490px);
   position: fixed;
-  opacity: .99;
+  opacity: 0.8;
   z-index: -1;
   top: 0;
   left: 490px;
@@ -168,6 +168,7 @@
 }
 
 input {
+  text-overflow: ellipsis;
   width: 15rem;
   height: 40px;
   margin-top: 20px;
@@ -186,7 +187,7 @@ h4 {
   font-family: Calibri Light, Helvetica, sans-serif;
   font-weight: normal;
   color: rgba(221, 4, 15, 0.809);
-  margin: 20px;
+  margin: 27px;
 }
 
 .pointer {
@@ -213,4 +214,3 @@ button {
   border-width: 1px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 8px 0 rgba(0, 0, 0, 0.2);
 }
-

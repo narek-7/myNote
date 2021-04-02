@@ -4,6 +4,7 @@ import {
   ViewChild,
   ElementRef,
   Renderer2,
+  Input,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Note } from './../../model/note';
@@ -31,6 +32,8 @@ export class NotesComponent implements OnInit {
   deletedObject = false;
   showAlert: boolean = false;
   query: string = '';
+  textSizeArray: Array<number> = [10, 12, 14, 16, 18, 20, 22, 24, 26];
+
 
   @ViewChild('text') text: ElementRef<any> = null;
   @ViewChild('title') title: ElementRef<any> = null;
@@ -45,13 +48,25 @@ export class NotesComponent implements OnInit {
   ngOnInit() {
     this.showAlert = false;
     this.canCreateNote = true;
+    this.currentIndex = -1;
     this.noteEmail = window.localStorage.getItem('Email');
     this.noteList = this.database.getNotes(this.noteEmail);
     this.tagList = this.database.getTags(this.noteEmail);
     this.updateTagsOfCurrentNote();
+    this.database.restoredNote.subscribe((note) => {
+      this.restoreNote(note);
+    });
+    let users = this.database.getAllItems('users');
     console.log('NoteList', this.noteList);
-    // let a = window.localStorage.getItem('TagsInNote')
-    // console.log('TagsInNote', a)
+    console.log('user', users);
+    }
+
+  restoreNote(note: Note) {
+    let nList = this.database.getNotes(this.noteEmail);
+    nList.push(note);
+    this.addTagsArrayAtNoteCreation(note.id);
+    this.database.saveNotes(this.noteEmail, nList);
+    console.log(note, this.noteEmail);
   }
 
   searching() {
@@ -132,25 +147,18 @@ export class NotesComponent implements OnInit {
     this.noteList = nList;
   }
 
-  cretaeNote(note?: Note): void {
-    if (!note) {
-      this.cancelFilter();
-      this.noteList = this.database.getNotes(this.noteEmail);
-      this.note.title = this.title.nativeElement.value;
-      this.note.text = this.text.nativeElement.value;
-      this.note.createdDate = new Date();
-      this.note.modifiedDate = new Date();
-      this.note.id = this.createId();
-      this.noteList.push(this.note);
-      this.addTagsArrayAtNoteCreation(this.note.id);
-      this.database.saveNotes(this.noteEmail, this.noteList);
-      this.note = new Note();
-    } else {
-      let noteList = this.database.getNotes(this.noteEmail);
-      noteList.push(note);
-      this.addTagsArrayAtNoteCreation(this.note.id);
-      this.database.saveNotes(this.noteEmail, this.noteList);
-    }
+  cretaeNote(): void {
+    this.cancelFilter();
+    this.noteList = this.database.getNotes(this.noteEmail);
+    this.note.title = this.title.nativeElement.value;
+    this.note.text = this.text.nativeElement.value;
+    this.note.createdDate = new Date();
+    this.note.modifiedDate = new Date();
+    this.note.id = this.createId();
+    this.noteList.push(this.note);
+    this.addTagsArrayAtNoteCreation(this.note.id);
+    this.database.saveNotes(this.noteEmail, this.noteList);
+    this.note = new Note();
   }
 
   createId() {
@@ -308,7 +316,7 @@ export class NotesComponent implements OnInit {
   }
 
   updateTagsOfCurrentNote(index?) {
-    if (!index) {
+    if (!(index+1)) {
       index = this.currentIndex;
     }
     if (index != -1) {
@@ -364,14 +372,14 @@ export class NotesComponent implements OnInit {
     }
   }
 
-  textStyle(s: string) {
+  textStyle(tStyle: string) {
     if (this.currentIndex != -1) {
       let map = this.database.getNoteStyle(this.noteEmail);
       let id = this.noteList[this.currentIndex].id;
       if (!map[id]) {
         map[id] = new Map();
       }
-      switch (s) {
+      switch (tStyle) {
         case 'bold':
           map[id].fontWeight
             ? (map[id].fontWeight = null)
@@ -391,6 +399,21 @@ export class NotesComponent implements OnInit {
       this.database.saveNoteStyle(this.noteEmail, map);
       this.applyStylesToNote(this.currentIndex);
       console.log(map);
+    }
+  }
+
+  textSize(tSize: number) {
+    if (this.currentIndex != -1) {
+      let map = this.database.getNoteStyle(this.noteEmail);
+      let id = this.noteList[this.currentIndex].id;
+      if (!map[id]) {
+        map[id] = new Map();
+      }
+      console.log(map, tSize);
+      this.r.setStyle(this.text.nativeElement, 'fontSize', tSize.toString);
+      // map[id].fontSize = tSize.toString;
+      // this.database.saveNoteStyle(this.noteEmail, map);
+      // this.applyStylesToNote(this.currentIndex);
     }
   }
 }

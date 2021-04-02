@@ -23,5 +23,4 @@ export class ModalComponent implements OnInit {
   delete(){
     console.log('delete')
   }
-
 }

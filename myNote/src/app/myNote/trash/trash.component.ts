@@ -25,13 +25,29 @@ export class TrashComponent implements OnInit {
     console.log('noteTrashList', this.noteTrashList);
   }
 
+  updateNoteTrashList() {
+    let map = new Map();
+    map = this.database.getNoteFromTrash(this.noteEmail);
+    this.noteTrashList = [];
+    for (let i in map) {
+      this.noteTrashList.push(map[i].note);
+    }
+    //  M.forEach((key, value) => {
+    //    this.noteTrashList.push(this.noteTrashList.push.key); //Ինչու՞ չի աշխատում սա
+    //  });
+  }
+
   deleteAllInTrash() {
     let map = new Map();
     this.noteTrashList = [];
     this.database.saveNoteInTrash(this.noteEmail, map);
   }
 
-  restoreNote() {}
+  restoreNote(idx) {
+    let n: Note = this.noteTrashList[idx];
+    this.database.restoredNote.emit(n);
+    this.deleteNoteInTash(idx);
+  }
 
   deleteNoteInTash(idx) {
     let actualId = this.noteTrashList[idx].id;
@@ -54,17 +70,5 @@ export class TrashComponent implements OnInit {
   cancelOverviewNote() {
     this.currentIndex = -1;
     this.actualNoteTagList = [];
-  }
-
-  updateNoteTrashList() {
-    let map = new Map();
-    map = this.database.getNoteFromTrash(this.noteEmail);
-    this.noteTrashList = [];
-    for (let i in map) {
-      this.noteTrashList.push(map[i].note);
-    }
-    //  M.forEach((key, value) => {
-    //    this.noteTrashList.push(this.noteTrashList.push.key); //Ինչու՞ չի աշխատում սա
-    //  });
   }
 }

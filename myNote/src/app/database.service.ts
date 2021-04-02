@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { User } from './model/user';
 import { Note } from './model/note';
 import { Tag } from './model/tag';
@@ -9,6 +9,7 @@ import { Tag } from './model/tag';
 export class DatabaseService {
   user: User;
   notes: Array<Note>;
+  restoredNote = new EventEmitter();
 
   constructor() {}
 

@@ -18,7 +18,7 @@ li {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(12, 42, 100, 0.9);
+  background-color: rgba(213, 219, 232, 0.9);
   background-image: url("/assets/images/b31.jfif");
   height: 100%; /* You must set a specified height */
   background-position: center bottom; /* Center the image */
@@ -38,8 +38,7 @@ li {
 }
 
 .firstSidebar a:hover {
-  /* color: #ffffff; */
-  font-style: italic;
+  font-weight: bolder;
 }
 
 .main {

@@ -32,13 +32,14 @@
         class="pointer"
         style="position: absolute; right: 15px; bottom: 44px"
       >
-        <img
+        <!-- <img
           [src]="'../assets/images/restore2.png'"
           width="17"
           height="17"
           [title]="'restore'"
+          (click)="restoreNote(currentIndex)"
           style="margin-right: 3rem"
-        />
+        /> -->
       </div>
       <div
         class="pointer"
@@ -77,7 +78,7 @@
 <div class="head"></div>
 
 <div class="allBody">
-  <div style="display: flex; flex-flow: column; align-items: center">
+  <div *ngIf = "currentIndex === -1" style="display: flex; flex-flow: column; align-items: center">
     <button
       *ngIf="noteTrashList.length"
       id="activeDeleteAll"
@@ -108,7 +109,7 @@
       <textarea #text class="form-control" disabled></textarea>
 
       <div class="deleteRestoreCancel">
-        <button class="btn btn-outline-primary" (click)="restoreNote()">
+        <button class="btn btn-outline-primary" (click)="restoreNote(currentIndex)">
           Restore Note
         </button>
         <button

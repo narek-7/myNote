@@ -4,7 +4,6 @@ import {
   ViewChild,
   ElementRef,
   Renderer2,
-  Input,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Note } from './../../model/note';
@@ -61,7 +60,7 @@ export class NotesComponent implements OnInit {
     //   }
     // });
     // let users = this.database.getAllItems('users');
-    // console.log('NoteList', this.noteList);
+    console.log('NoteList', this.noteList);
     // console.log('user', users);
   }
 

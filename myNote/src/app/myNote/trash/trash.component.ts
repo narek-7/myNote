@@ -46,11 +46,21 @@ export class TrashComponent implements OnInit {
 
   deleteNoteInTash(idx) {
     let actualId = this.noteTrashList[idx].id;
+    this.deleteNoteStyles(actualId);
     let map = this.database.getNoteFromTrash(this.noteEmail);
     delete map[actualId];
     this.database.saveNoteInTrash(this.noteEmail, map);
     this.updateNoteTrashList();
     this.cancelOverviewNote();
+  }
+
+  deleteNoteStyles(id) {
+    let map = this.database.getNoteStyle(this.noteEmail);
+    console.log(map[id]);
+    if (map[id]) {
+      delete map[id];
+      this.database.saveNoteStyle(this.noteEmail, map);
+    }
   }
 
   overviewNoteInTrash(idx) {

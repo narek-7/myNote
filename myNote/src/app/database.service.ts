@@ -9,7 +9,7 @@ import { Tag } from './model/tag';
 export class DatabaseService {
   user: User;
   notes: Array<Note>;
-  restoredNote = new EventEmitter();
+  // restoredNote = new EventEmitter();
 
   constructor() {}
 
@@ -93,6 +93,17 @@ export class DatabaseService {
   getNoteFromTrash(email: string) {
     let allTrashList = this.getAllItems('Trash');
     return allTrashList[email] ? allTrashList[email] : new Map<string, any>();
+  }
+
+  getRestoredNotes(email: string) {
+    let allRestNote = this.getAllItems('restoredNotes');
+    return allRestNote[email] ? allRestNote[email] : [];
+  }
+
+  saveRestoredNotes(email, arr) {
+    let allRestoredNotes = this.getAllItems('restoredNotes');
+    allRestoredNotes[email] = arr;
+    this.saveAllItems('restoredNotes', allRestoredNotes);
   }
 
   saveNoteStyle(email: string, map: Map<string, Map<string, any>>) {

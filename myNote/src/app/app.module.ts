@@ -12,6 +12,7 @@ import { ShortcutsComponent } from './myNote/shortcuts/shortcuts.component';
 import { TagsComponent } from './myNote/tags/tags.component';
 import { ModalComponent } from './myNote/modal/modal.component';
 import { TrashComponent } from './myNote/trash/trash.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { TrashComponent } from './myNote/trash/trash.component';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    CommonModule,
   ],
 
   providers: [],

@@ -21,7 +21,6 @@
           class="btn btn-secondary"
           data-dismiss="modal"
           [routerLink]="['/myNote/notes']"
-          (click) = 'onlyClosed()'
         >
           No
         </button>
@@ -32,7 +31,6 @@
           data-dismiss="modal"
           [routerLink]="['/myNote/notes']"
           [queryParams]="{ deletedObject: true }"
-          (click) = 'delete()'
         >
           Yes
         </button>

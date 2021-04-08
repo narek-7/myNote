@@ -52,22 +52,40 @@ export class NotesComponent implements OnInit {
     this.noteList = this.database.getNotes(this.noteEmail);
     this.tagList = this.database.getTags(this.noteEmail);
     this.updateTagsOfCurrentNote();
-    this.database.restoredNote.subscribe((note) => {
-      this.restoreNote(note);
-      this.database.restoredNote.unsubscribe;
-    });
-    let users = this.database.getAllItems('users');
-    console.log('NoteList', this.noteList);
-    console.log('user', users);
+    this.checkRestoredNotes();
+    // let sub = this.database.restoredNote.subscribe((note) => {
+    //   if (note) {
+    //     console.log(note);
+    //     //this.restoreNote(note);
+    //     sub.unsubscribe;
+    //   }
+    // });
+    // let users = this.database.getAllItems('users');
+    // console.log('NoteList', this.noteList);
+    // console.log('user', users);
   }
 
-  restoreNote(note: Note) {
-    let nList = this.database.getNotes(this.noteEmail);
-    nList.push(note);
-    this.addTagsArrayAtNoteCreation(note.id);
-    this.database.saveNotes(this.noteEmail, nList);
-    console.log(note, this.noteEmail);
+  checkRestoredNotes() {
+    let rList = this.database.getRestoredNotes(this.noteEmail);
+    if (rList.length) {
+      this.noteList = this.database.getNotes(this.noteEmail);
+      for (let i of rList) {
+        this.noteList.push(i);
+        this.addTagsArrayAtNoteCreation(i.id);
+      }
+      this.database.saveNotes(this.noteEmail, this.noteList);
+      this.database.saveRestoredNotes(this.noteEmail, new Array());
+    }
+    console.log('restoredNote', rList);
   }
+
+  // restoreNote(note: Note) {
+  //   let nList = this.database.getNotes(this.noteEmail);
+  //   nList.push(note);
+  //   this.addTagsArrayAtNoteCreation(note.id);
+  //   this.database.saveNotes(this.noteEmail, nList);
+  //   console.log(note, this.noteEmail);
+  // }
 
   searching() {
     this.cancelSave();
@@ -226,7 +244,7 @@ export class NotesComponent implements OnInit {
       let deletedNoteId = this.noteList[idx].id;
       this.throwNoteInTheTrash(deletedNoteId, idx);
       this.deleteNoteFromEveryTag(idx);
-      this.deleteTagsArrayInNote(idx);
+      this.deleteTagsArrayInNote(deletedNoteId);
       let nList = this.database.getNotes(this.noteEmail);
       let index = nList.findIndex((n: Note) => {
         return n.id === deletedNoteId;
@@ -268,10 +286,9 @@ export class NotesComponent implements OnInit {
     this.database.saveTagsInNote(this.noteEmail, map);
   }
 
-  deleteTagsArrayInNote(idx) {
-    let deletedNoteId = this.noteList[idx].id;
+  deleteTagsArrayInNote(id) {
     let map = this.database.getTagsInNote(this.noteEmail);
-    delete map[deletedNoteId];
+    delete map[id];
     this.database.saveTagsInNote(this.noteEmail, map);
   }
 

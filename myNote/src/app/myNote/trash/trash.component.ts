@@ -22,19 +22,7 @@ export class TrashComponent implements OnInit {
   ngOnInit() {
     this.noteEmail = window.localStorage.getItem('Email');
     this.updateNoteTrashList();
-    console.log('noteTrashList', this.noteTrashList);
-  }
-
-  updateNoteTrashList() {
-    let map = new Map();
-    map = this.database.getNoteFromTrash(this.noteEmail);
-    this.noteTrashList = [];
-    for (let i in map) {
-      this.noteTrashList.push(map[i].note);
-    }
-    //  M.forEach((key, value) => {
-    //    this.noteTrashList.push(this.noteTrashList.push.key); //Ինչու՞ չի աշխատում սա
-    //  });
+    //console.log('noteTrashList', this.noteTrashList);
   }
 
   deleteAllInTrash() {
@@ -43,9 +31,16 @@ export class TrashComponent implements OnInit {
     this.database.saveNoteInTrash(this.noteEmail, map);
   }
 
+  // restoreNote(idx) {
+  //   let n: Note = this.noteTrashList[idx];
+  //   this.database.restoredNote.emit(n);
+  //   this.deleteNoteInTash(idx);
+  // }
+
   restoreNote(idx) {
-    let n: Note = this.noteTrashList[idx];
-    this.database.restoredNote.emit(n);
+    let restArr: Note[] = this.database.getRestoredNotes(this.noteEmail);
+    restArr.push(this.noteTrashList[idx]);
+    this.database.saveRestoredNotes(this.noteEmail, restArr);
     this.deleteNoteInTash(idx);
   }
 
@@ -65,6 +60,18 @@ export class TrashComponent implements OnInit {
     this.title.nativeElement.value = this.noteTrashList[idx].title;
     this.text.nativeElement.value = this.noteTrashList[idx].text;
     this.actualNoteTagList = map[actualNoteId].tagList;
+  }
+
+  updateNoteTrashList() {
+    let map = new Map();
+    map = this.database.getNoteFromTrash(this.noteEmail);
+    this.noteTrashList = [];
+    for (let i in map) {
+      this.noteTrashList.push(map[i].note);
+    }
+    //  M.forEach((key, value) => {
+    //    this.noteTrashList.push(this.noteTrashList.push.key); //Ինչու՞ չի աշխատում սա
+    //  });
   }
 
   cancelOverviewNote() {

@@ -5,22 +5,11 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css'],
 })
-export class ModalComponent implements OnInit {
-
+export class ModalComponent {
   @Input() deletedObjectType: String = '';
   @Input() deletedObjectName: String = 'Unknown';
 
   deletedObject = false;
 
   constructor() {}
-
-  ngOnInit() {}
-
-  onlyClosed() {
-    console.log('close')
-  }
-
-  delete(){
-    console.log('delete')
-  }
 }

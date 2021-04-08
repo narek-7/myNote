@@ -250,7 +250,7 @@ export class NotesComponent implements OnInit {
       });
       nList.splice(index, 1);
       this.database.saveNotes(this.noteEmail, nList);
-      this.currentIndex = -1;
+      this.cancelSave();
       this.search.nativeElement.value = null;
       this.noteList = nList;
     }

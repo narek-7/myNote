@@ -31,7 +31,53 @@ export class NotesComponent implements OnInit {
   deletedObject = false;
   showAlert: boolean = false;
   query: string = '';
-  textSizeArray: Array<number> = [10, 12, 14, 16, 18, 20, 22, 24, 26];
+  textSizeArray: Array<string> = [
+    '10',
+    '14',
+    '18',
+    '22',
+    '26',
+    '30',
+    '34',
+    '38',
+  ];
+  textColorArray: Array<string> = [
+    'brown',
+    'red',
+    'orange',
+    'yellow',
+    'green',
+    'blue',
+    'purple',
+    'gray',
+    'black',
+  ];
+
+  textFontArray: Array<string> = [
+    'Calibri Light',
+    'Palatino Linotype',
+    'Book Antiqua',
+    'Times New Roman',
+    'Arial',
+    'Arial Black',
+    'Lucida Sans Unicode',
+    'Tahoma',
+    'Verdana',
+    'Georgia',
+    'Courier New'
+  ];
+
+  backgroundColorArray = [
+    'aliceblue',
+    'aqua',
+    'aquamarine',
+    'lemonchiffon',
+    'lightgreen',
+    'lightblue',
+    'bisque',
+    'azure',
+    'lightcyan',
+  ]
 
   @ViewChild('text') text: ElementRef<any> = null;
   @ViewChild('title') title: ElementRef<any> = null;
@@ -75,7 +121,6 @@ export class NotesComponent implements OnInit {
       this.database.saveNotes(this.noteEmail, this.noteList);
       this.database.saveRestoredNotes(this.noteEmail, new Array());
     }
-    console.log('restoredNote', rList);
   }
 
   // restoreNote(note: Note) {
@@ -231,6 +276,10 @@ export class NotesComponent implements OnInit {
     this.r.setStyle(this.text.nativeElement, 'fontWeight', null);
     this.r.setStyle(this.text.nativeElement, 'fontStyle', null);
     this.r.setStyle(this.text.nativeElement, 'textDecorationLine', null);
+    this.r.setStyle(this.text.nativeElement, 'fontSize', null);
+    this.r.setStyle(this.text.nativeElement, 'color', null);
+    this.r.setStyle(this.text.nativeElement, 'fontFamily', null);
+    this.r.setStyle(this.text.nativeElement, 'backgroundColor', null);
   }
 
   showModal() {
@@ -418,18 +467,59 @@ export class NotesComponent implements OnInit {
     }
   }
 
-  textSize(tSize: number) {
+  textSize(tSize: string) {
     if (this.currentIndex != -1) {
       let map = this.database.getNoteStyle(this.noteEmail);
       let id = this.noteList[this.currentIndex].id;
       if (!map[id]) {
         map[id] = new Map();
       }
-      console.log(map, tSize);
-      this.r.setStyle(this.text.nativeElement, 'fontSize', tSize.toString);
-      // map[id].fontSize = tSize.toString;
-      // this.database.saveNoteStyle(this.noteEmail, map);
-      // this.applyStylesToNote(this.currentIndex);
+      console.log(map);
+      map[id].fontSize = tSize + 'px';
+      this.database.saveNoteStyle(this.noteEmail, map);
+      this.applyStylesToNote(this.currentIndex);
+    }
+  }
+
+  textColor(tColor) {
+    if (this.currentIndex != -1) {
+      let map = this.database.getNoteStyle(this.noteEmail);
+      let id = this.noteList[this.currentIndex].id;
+      if (!map[id]) {
+        map[id] = new Map();
+      }
+      console.log(map);
+      map[id].color = tColor;
+      this.database.saveNoteStyle(this.noteEmail, map);
+      this.applyStylesToNote(this.currentIndex);
+    }
+  }
+
+  textFont(tFont) {
+    if (this.currentIndex != -1) {
+      let map = this.database.getNoteStyle(this.noteEmail);
+      let id = this.noteList[this.currentIndex].id;
+      if (!map[id]) {
+        map[id] = new Map();
+      }
+      console.log(map);
+      map[id].fontFamily = tFont;
+      this.database.saveNoteStyle(this.noteEmail, map);
+      this.applyStylesToNote(this.currentIndex);
+    }
+  }
+
+  backgroundColor(bColor){
+    if (this.currentIndex != -1) {
+      let map = this.database.getNoteStyle(this.noteEmail);
+      let id = this.noteList[this.currentIndex].id;
+      if (!map[id]) {
+        map[id] = new Map();
+      }
+      console.log(map);
+      map[id].backgroundColor = bColor;
+      this.database.saveNoteStyle(this.noteEmail, map);
+      this.applyStylesToNote(this.currentIndex);
     }
   }
 }

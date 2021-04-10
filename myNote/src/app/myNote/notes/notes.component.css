@@ -118,6 +118,14 @@ input {
   background-color: white;
 }
 
+.dropdown-menu{
+  z-index: 10040;
+}
+
+.dropdown-item{
+  z-index: 10040;
+}
+
 /* .dropbtn {
   background-color: rgb(205, 211, 221);
   color: black;

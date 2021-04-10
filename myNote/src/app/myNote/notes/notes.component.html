@@ -81,14 +81,16 @@
     >
       U
     </button>
-    <!-- <div>
+
+    <!-- Text size dropdaown menu -->
+    <div>
       <div
         style="margin-left: 40px; width: auto; padding: 5px"
         type="button"
         class="styleButton dropdown-toggle"
         data-toggle="dropdown"
       >
-        T size
+        Size
       </div>
       <div class="dropdown-menu">
         <div
@@ -99,26 +101,9 @@
           {{ item }}
         </div>
       </div>
-    </div> -->
-
-    <!-- <div>
-      <div
-        style="margin-left: 40px; width: auto; padding: 5px"
-        type="button"
-        class="styleButton dropdown-toggle"
-        data-toggle="dropdown"
-      >
-        T family
-      </div>
-      <div class="dropdown-menu">
-        <div
-          *ngFor="let item of textSizeArray; let idx = index"
-          class="dropdown-item"
-        >
-          {{ item }}
-        </div>
-      </div>
     </div>
+
+    <!-- Text color dropdaown menu -->
     <div>
       <div
         style="margin-left: 40px; width: auto; padding: 5px"
@@ -126,21 +111,65 @@
         class="styleButton dropdown-toggle"
         data-toggle="dropdown"
       >
-        T color
+        T-Color
       </div>
       <div class="dropdown-menu">
         <div
-          *ngFor="let item of textSizeArray; let idx = index"
+          *ngFor="let item of textColorArray; let idx = index"
           class="dropdown-item"
+          (click)="textColor(item)"
+          [style.color]="item"
         >
           {{ item }}
         </div>
       </div>
     </div>
-    </div>
-  </div>
 
-  <!-- modal window -->
+    <!-- Text font dropdaown menu -->
+    <div>
+      <div
+        style="margin-left: 40px; width: auto; padding: 5px"
+        type="button"
+        class="styleButton dropdown-toggle"
+        data-toggle="dropdown"
+      >
+        Font
+      </div>
+      <div class="dropdown-menu">
+        <div
+          *ngFor="let item of textFontArray; let idx = index"
+          class="dropdown-item"
+          (click)="textFont(item)"
+          [style.fontFamily]="item"
+        >
+          {{ item }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Background color dropdaown menu -->
+    <div>
+      <div
+        style="margin-left: 40px; width: auto; padding: 5px"
+        type="button"
+        class="styleButton dropdown-toggle"
+        data-toggle="dropdown"
+      >
+        B-Color
+      </div>
+      <div class="dropdown-menu">
+        <div
+          *ngFor="let item of backgroundColorArray; let idx = index"
+          class="dropdown-item"
+          (click)="backgroundColor(item)"
+          [style.backgroundColor]="item"
+        >
+          {{ item }}
+        </div>
+      </div>
+    </div>
+
+    <!-- modal window -->
   </div>
 </div>
 

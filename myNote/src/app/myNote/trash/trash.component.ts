@@ -26,9 +26,11 @@ export class TrashComponent implements OnInit {
   }
 
   deleteAllInTrash() {
-    let map = new Map();
+    for (let i of this.noteTrashList) {
+      this.deleteNoteStyles(i.id);
+    }
     this.noteTrashList = [];
-    this.database.saveNoteInTrash(this.noteEmail, map);
+    this.database.saveNoteInTrash(this.noteEmail, new Map());
   }
 
   // restoreNote(idx) {
@@ -61,7 +63,6 @@ export class TrashComponent implements OnInit {
 
   deleteNoteStyles(id) {
     let map = this.database.getNoteStyle(this.noteEmail);
-    console.log(map[id]);
     if (map[id]) {
       delete map[id];
       this.database.saveNoteStyle(this.noteEmail, map);

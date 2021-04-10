@@ -72,7 +72,7 @@ export class NotesComponent implements OnInit {
     'aqua',
     'aquamarine',
     'lemonchiffon',
-    'lightgreen',
+    'lavenderblush',
     'lightblue',
     'bisque',
     'azure',

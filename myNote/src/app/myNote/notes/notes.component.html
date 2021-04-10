@@ -97,6 +97,7 @@
           *ngFor="let item of textSizeArray; let idx = index"
           class="dropdown-item"
           (click)="textSize(item)"
+          [style.fontSize]=(item)
         >
           {{ item }}
         </div>

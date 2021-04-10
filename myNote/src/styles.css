@@ -132,7 +132,7 @@
 }
 
 .body {
-  margin: 3rem 0rem 5rem 3rem;
+  margin: 35px;
   display: block;
   height: auto;
   width: 600px;
@@ -140,7 +140,7 @@
   left: 500px;
   z-index: -1;
   background-color: rgba(255, 255, 255, 0.95);
-  padding: 35px;
+  padding: 15px 25px 30px 45px;
   border-radius: 5px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.2);
   /* background-image: url("/assets/images/note1.png");
@@ -187,7 +187,7 @@ h4 {
   font-family: Calibri Light, Helvetica, sans-serif;
   font-weight: normal;
   color: rgba(221, 4, 15, 0.809);
-  margin: 27px;
+  margin: 20px;
 }
 
 .pointer {

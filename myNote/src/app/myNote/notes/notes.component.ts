@@ -32,7 +32,6 @@ export class NotesComponent implements OnInit {
   showAlert: boolean = false;
   query: string = '';
   textSizeArray: Array<string> = [
-    '10',
     '14',
     '18',
     '22',
@@ -40,6 +39,9 @@ export class NotesComponent implements OnInit {
     '30',
     '34',
     '38',
+    '42',
+    '46',
+    '50'
   ];
   textColorArray: Array<string> = [
     'brown',

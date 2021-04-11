@@ -21,6 +21,13 @@
       (click)="modifyTag(idx)"
       [class.cellClickStyle]="currentIndex === idx"
     >
+    <div
+      style="display: inline; margin-right: 10px; cursor: pointer"
+      (click)="addCancelShortcut(item.id, idx)"
+    >
+      <img [src]="shortcut(item.id)" width="18" height="17" />
+    </div>
+
       <div class="titleCell">
         {{ item.name }}
         <small>{{ "(" + quantityOfNotes(item.id) + ")" }}</small>

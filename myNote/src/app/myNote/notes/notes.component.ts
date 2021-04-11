@@ -41,7 +41,7 @@ export class NotesComponent implements OnInit {
     '38',
     '42',
     '46',
-    '50'
+    '50',
   ];
   textColorArray: Array<string> = [
     'brown',
@@ -66,7 +66,7 @@ export class NotesComponent implements OnInit {
     'Tahoma',
     'Verdana',
     'Georgia',
-    'Courier New'
+    'Courier New',
   ];
 
   backgroundColorArray = [
@@ -79,7 +79,7 @@ export class NotesComponent implements OnInit {
     'bisque',
     'azure',
     'lightcyan',
-  ]
+  ];
 
   @ViewChild('text') text: ElementRef<any> = null;
   @ViewChild('title') title: ElementRef<any> = null;
@@ -439,6 +439,24 @@ export class NotesComponent implements OnInit {
     }
   }
 
+  shortcut(id) {
+    let map = this.database.getNoteShortcut(this.noteEmail);
+    if(map[id]){ return '../assets/images/star1.png'}
+    return '../assets/images/star4.png'
+
+  }
+
+  addCancelShortcut(id, idx) {
+    let map = this.database.getNoteShortcut(this.noteEmail);
+    if (!map[id]) {
+      map[id] = this.noteList[idx].title;
+    } else {
+      delete map[id];
+    }
+    this.database.saveNoteShortcut(this.noteEmail, map);
+    console.log(map)
+  }
+
   textStyle(tStyle: string) {
     if (this.currentIndex != -1) {
       let map = this.database.getNoteStyle(this.noteEmail);
@@ -511,7 +529,7 @@ export class NotesComponent implements OnInit {
     }
   }
 
-  backgroundColor(bColor){
+  backgroundColor(bColor) {
     if (this.currentIndex != -1) {
       let map = this.database.getNoteStyle(this.noteEmail);
       let id = this.noteList[this.currentIndex].id;

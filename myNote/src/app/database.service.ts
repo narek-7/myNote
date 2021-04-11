@@ -117,6 +117,29 @@ export class DatabaseService {
     return allNoteStyles[email] ? allNoteStyles[email] : new Map();
   }
 
+  saveNoteShortcut(email: string, map: Map<string, any>) {
+    let allShortcutNotes = this.getAllItems('shortcutNote');
+    allShortcutNotes[email] = map;
+    this.saveAllItems('shortcutNote', allShortcutNotes);
+  }
+
+  getNoteShortcut(email: string) {
+    let allShortcutNotes = this.getAllItems('shortcutNote');
+    return allShortcutNotes[email] ? allShortcutNotes[email] : new Map();
+  }
+
+  saveTagShortcut(email: string, map: Map<string, any>) {
+    let allShortcutTags = this.getAllItems('shortcutTag');
+    allShortcutTags[email] = map;
+    this.saveAllItems('shortcutTag', allShortcutTags);
+  }
+
+  getTagShortcut(email: string) {
+    let allShortcutTags = this.getAllItems('shortcutTag');
+    return allShortcutTags[email] ? allShortcutTags[email] : new Map();
+  }
+
+
   getAllItems(key): Map<string, any> {
     let usersStr = window.localStorage.getItem(key);
     if (usersStr) {

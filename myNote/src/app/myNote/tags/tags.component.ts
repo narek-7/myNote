@@ -158,4 +158,23 @@ export class TagsComponent implements OnInit {
     if (q) return q;
     return 0;
   }
+
+  addCancelShortcut(id, idx) {
+    let map = this.database.getTagShortcut(this.noteEmail);
+    if (!map[id]) {
+      map[id] = this.tagList[idx].name;
+    } else {
+      delete map[id];
+    }
+    this.database.saveTagShortcut(this.noteEmail, map);
+    console.log(map)
+  }
+
+  shortcut(id) {
+    let map = this.database.getTagShortcut(this.noteEmail);
+    if (map[id]) {
+      return '../assets/images/star1.png';
+    }
+    return '../assets/images/star4.png';
+  }
 }

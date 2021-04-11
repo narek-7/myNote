@@ -61,6 +61,7 @@
 }
 
 .titleCell {
+  display: inline;
   font-family: Calibri, Arial;
   position: relative;
   height: 85px;

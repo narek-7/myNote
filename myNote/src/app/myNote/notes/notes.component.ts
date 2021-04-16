@@ -277,11 +277,11 @@ export class NotesComponent implements OnInit {
   resetTextStyle() {
     this.r.setStyle(this.text.nativeElement, 'fontWeight', null);
     this.r.setStyle(this.text.nativeElement, 'fontStyle', null);
-    this.r.setStyle(this.text.nativeElement, 'textDecorationLine', null);
     this.r.setStyle(this.text.nativeElement, 'fontSize', null);
     this.r.setStyle(this.text.nativeElement, 'color', null);
     this.r.setStyle(this.text.nativeElement, 'fontFamily', null);
     this.r.setStyle(this.text.nativeElement, 'backgroundColor', null);
+    this.r.setStyle(this.text.nativeElement, 'textDecorationLine', null);
   }
 
   showModal() {
@@ -441,9 +441,10 @@ export class NotesComponent implements OnInit {
 
   shortcut(id) {
     let map = this.database.getNoteShortcut(this.noteEmail);
-    if(map[id]){ return '../assets/images/star1.png'}
-    return '../assets/images/star4.png'
-
+    if (map[id]) {
+      return '../assets/images/star1.png';
+    }
+    return '../assets/images/star4.png';
   }
 
   addCancelShortcut(id, idx) {
@@ -454,7 +455,7 @@ export class NotesComponent implements OnInit {
       delete map[id];
     }
     this.database.saveNoteShortcut(this.noteEmail, map);
-    console.log(map)
+    console.log(map);
   }
 
   textStyle(tStyle: string) {

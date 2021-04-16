@@ -1,5 +1,5 @@
 <div class="listHead">
-  <h2 style="font-family: Vladimir Script; display: inline">All Tags</h2>
+  <h2 style="font-family: Vladimir Script; display: inline; font-weight: bold;">All Tags</h2>
   <button
     id="smallAddItem"
     type="button"
@@ -14,13 +14,12 @@
 </div>
 
 <div class="secondSidebar">
-  <div>
-    <div
-      class="listCell"
-      *ngFor="let item of tagList; let idx = index"
-      (click)="modifyTag(idx)"
-      [class.cellClickStyle]="currentIndex === idx"
-    >
+  <div
+    class="listCell"
+    *ngFor="let item of tagList; let idx = index"
+    (click)="modifyTag(idx)"
+    [class.cellClickStyle]="currentIndex === idx"
+  >
     <div
       style="display: inline; margin-right: 10px; cursor: pointer"
       (click)="addCancelShortcut(item.id, idx)"
@@ -28,18 +27,17 @@
       <img [src]="shortcut(item.id)" width="18" height="17" />
     </div>
 
-      <div class="titleCell">
-        {{ item.name }}
-        <small>{{ "(" + quantityOfNotes(item.id) + ")" }}</small>
-      </div>
+    <div class="titleCell">
+      {{ item.name }}
+      <small>{{ "(" + quantityOfNotes(item.id) + ")" }}</small>
+    </div>
 
-      <div
-        class="pointer"
-        style="position: absolute; right: 15px; bottom: 44px"
-        (click)="deleteTag(idx)"
-      >
-        <img [src]="'../assets/images/delete3.png'" width="12" height="12" />
-      </div>
+    <div
+      class="pointer"
+      style="position: absolute; right: 15px; bottom: 44px"
+      (click)="deleteTag(idx)"
+    >
+      <img [src]="'../assets/images/delete3.png'" width="12" height="12" />
     </div>
   </div>
 </div>

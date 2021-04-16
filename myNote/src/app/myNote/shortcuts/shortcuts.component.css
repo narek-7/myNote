@@ -1,0 +1,19 @@
+.cellTag {
+  font-family: Vladimir Script;
+  display: block;
+  color: orange;
+  font-size: 32px;
+}
+
+.cellNote {
+  font-family: Vladimir Script;
+  display: block;
+  color: rgb(0, 102, 255);
+  font-size: 32px;
+}
+
+.infoInAlert {
+  font-family: Calibri Light, Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  color: rgb(187, 0, 0);
+}

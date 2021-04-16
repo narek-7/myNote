@@ -291,13 +291,14 @@ export class NotesComponent implements OnInit {
   hideModal(idx) {
     let param = this.route.snapshot.queryParamMap.get('deletedObject');
     if (param === 'true') {
-      let deletedNoteId = this.noteList[idx].id;
-      this.throwNoteInTheTrash(deletedNoteId, idx);
+      let delNoteId = this.noteList[idx].id;
+      this.deleteNoteShortcut(delNoteId);
+      this.throwNoteInTheTrash(delNoteId, idx);
       this.deleteNoteFromEveryTag(idx);
-      this.deleteTagsArrayInNote(deletedNoteId);
+      this.deleteTagsArrayInNote(delNoteId);
       let nList = this.database.getNotes(this.noteEmail);
       let index = nList.findIndex((n: Note) => {
-        return n.id === deletedNoteId;
+        return n.id === delNoteId;
       });
       nList.splice(index, 1);
       this.database.saveNotes(this.noteEmail, nList);
@@ -328,6 +329,15 @@ export class NotesComponent implements OnInit {
       this.hideModal(idx);
       $('#myModal').off('hide.bs.modal');
     });
+  }
+
+  deleteNoteShortcut(id) {
+    let map = this.database.getNoteShortcut(this.noteEmail);
+    if (map[id]) {
+      delete map[id];
+      this.database.saveNoteShortcut(this.noteEmail, map);
+    }
+    return;
   }
 
   addTagsArrayAtNoteCreation(noteId) {

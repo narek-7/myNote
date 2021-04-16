@@ -116,11 +116,21 @@ export class TagsComponent implements OnInit {
   }
 
   deleteTag(i) {
-    let deletedTagId = this.tagList[i].id;
+    let delTagId = this.tagList[i].id;
     this.tagList.splice(i, 1);
+    this.deleteTagShorcut(delTagId);
     this.database.saveTags(this.noteEmail, this.tagList);
-    this.deleteAllConnectionsTagAndNote(deletedTagId);
+    this.deleteAllConnectionsTagAndNote(delTagId);
     this.cancelSave();
+  }
+
+  deleteTagShorcut(id) {
+    let map = this.database.getTagShortcut(this.noteEmail);
+    if (map[id]) {
+      delete map[id];
+      this.database.saveTagShortcut(this.noteEmail, map);
+    }
+    return;
   }
 
   deleteAllConnectionsTagAndNote(deletedTagId) {
@@ -167,7 +177,7 @@ export class TagsComponent implements OnInit {
       delete map[id];
     }
     this.database.saveTagShortcut(this.noteEmail, map);
-    console.log(map)
+    console.log(map);
   }
 
   shortcut(id) {

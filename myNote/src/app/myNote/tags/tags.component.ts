@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Tag } from './../../model/tag';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DatabaseService } from './../../database.service';
 import { Note } from './../../model/note';
 
@@ -19,15 +19,45 @@ export class TagsComponent implements OnInit {
 
   @ViewChild('name') name: ElementRef<any> = null;
 
-  constructor(private router: Router, private database: DatabaseService) {}
+  constructor(
+    private router: Router,
+    private database: DatabaseService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.canCreateTag = true;
     this.noteEmail = window.localStorage.getItem('Email');
     this.tagList = this.database.getTags(this.noteEmail);
     console.log('TagList', this.tagList);
+    this.route.queryParams.subscribe((params: any) => {
+      this.canCreateTag = false;
+      this.showTags(params.idTag);
+    });
     // let a = window.localStorage.getItem('NotesInTag');
     // console.log('NotesInTag', a);
+  }
+
+  showTags(id) {
+    if (!id) {
+      this.canCreateTag = true;
+      return;
+    }
+    let idx = this.tagList.findIndex((value) => {
+      return value.id === id;
+    });
+    this.currentIndex = idx;
+    setTimeout(() => {
+      this.name.nativeElement.value = this.tagList[idx].name;
+    }, 10);
+  }
+
+  changeExistingTag() {
+    let val = this.name.nativeElement.value;
+    this.tagList[this.currentIndex].name = val;
+    this.database.saveTags(this.noteEmail, this.tagList);
+    this.changeTagsInEveryNote(this.currentIndex);
+    this.currentIndex = -1;
   }
 
   saveTag() {
@@ -42,6 +72,12 @@ export class TagsComponent implements OnInit {
     this.canCreateTag = true;
   }
 
+  addQuerryParam(item) {
+    this.router.navigate(['/myNote', 'tags'], {
+      queryParams: { idTag: item.id },
+    });
+  }
+
   createTag() {
     let val = this.name.nativeElement.value;
     this.tag.name = val;
@@ -51,14 +87,6 @@ export class TagsComponent implements OnInit {
     this.addNotesArrayAtTagCreation(this.tag.id);
     this.database.saveTags(this.noteEmail, this.tagList);
     this.tag = new Tag();
-  }
-
-  changeExistingTag() {
-    let val = this.name.nativeElement.value;
-    this.tagList[this.currentIndex].name = val;
-    this.database.saveTags(this.noteEmail, this.tagList);
-    this.changeTagsInEveryNote(this.currentIndex);
-    this.currentIndex = -1;
   }
 
   changeTagsInEveryNote(idx) {
@@ -99,8 +127,8 @@ export class TagsComponent implements OnInit {
 
   cancelSave() {
     this.currentIndex = -1;
-    this.canCreateTag = true;
     this.name.nativeElement.value = '';
+    this.canCreateTag = true;
   }
 
   modifyTag(i) {

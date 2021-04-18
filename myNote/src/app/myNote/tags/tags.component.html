@@ -17,7 +17,7 @@
   <div
     class="listCell"
     *ngFor="let item of tagList; let idx = index"
-    (click)="modifyTag(idx)"
+    (click)="addQuerryParam(item)"
     [class.cellClickStyle]="currentIndex === idx"
   >
     <div

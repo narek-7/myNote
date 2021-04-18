@@ -97,6 +97,7 @@ input {
 
 
 .styleButton{
+  border-radius: 5px;
   background-color: rgba(224, 227, 233, 0.774);
   font-family: 'Courier New', Courier, monospace;
   border: 1px solid rgb(184, 184, 184);

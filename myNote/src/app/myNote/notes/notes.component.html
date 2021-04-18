@@ -1,6 +1,14 @@
 <!-- The first cell of second sidebar -->
 <div class="listHead">
-  <h2 style="font-family: Vladimir Script; display: inline; font-weight: bold">All Notes</h2>
+  <h2
+    style="
+      display: inline-block;
+      font-family: Vladimir Script;
+      font-weight: bold;
+    "
+  >
+    All Notes
+  </h2>
   <button
     type="button"
     class="btn btn-outline-primary"
@@ -39,7 +47,7 @@
     *ngFor="let item of noteList; let idx = index"
     (mouseover)="mouseOverNote(idx)"
     (mouseout)="mouseOutNote()"
-    (click)="modifyNote(idx)"
+    (click)="addquerryParam(idx)"
     [class.cellClickStyle]="currentIndex === idx"
   >
     <!-- modifyTitleName(item.title)  -->
@@ -88,6 +96,30 @@
       style="text-decoration: underline"
     >
       U
+    </button>
+
+    <button
+      class="styleButton"
+      (click)="textStyle('left')"
+      style="font-size: 14px; text-align: left; font-weight: bold"
+    >
+      <-
+    </button>
+
+    <button
+      class="styleButton"
+      (click)="textStyle('center')"
+      style="font-size: 14px; font-weight: bold"
+    >
+      <->
+    </button>
+
+    <button
+      class="styleButton"
+      (click)="textStyle('right')"
+      style="font-size: 14px; text-align: right; font-weight: bold"
+    >
+      ->
     </button>
 
     <!-- Text size dropdaown menu -->
@@ -211,7 +243,6 @@
           #title
           type="text"
           placeholder="Title"
-          value="Untitled"
           class="form-control"
           style="width: 15rem; height: 3rem"
         />

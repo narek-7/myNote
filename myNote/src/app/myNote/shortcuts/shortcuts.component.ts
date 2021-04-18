@@ -1,3 +1,4 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { DatabaseService } from './../../database.service';
@@ -11,8 +12,6 @@ export class ShortcutsComponent implements OnInit {
   noteEmail: string;
   shortcutTag: Object = new Object();
   shortcutNote: Object = new Object();
-  currentNoteIndex: number = -1;
-  currentTagIndex: number = -1;
   shortcutTagArr = new Array();
   shortcutNoteArr = new Array();
   notesCurrentIndex = -1;
@@ -45,10 +44,18 @@ export class ShortcutsComponent implements OnInit {
 
   rederect() {
     if (this.notesCurrentIndex != -1) {
-      this.router.navigate(['/myNote/notes/']);
+      let idArr = Object.keys(this.shortcutNote);
+      let idx: string = idArr[this.notesCurrentIndex];
+      this.router.navigate(['/myNote/notes/'], {
+        queryParams: { idNote: idx },
+      });
     }
     if (this.tagsCurrentIndex != -1) {
-      this.router.navigate(['/myNote/tags/']);
+      let idArr = Object.keys(this.shortcutTag);
+      let idx = idArr[this.tagsCurrentIndex];
+      this.router.navigate(['/myNote/tags/'], {
+        queryParams: { idTag: idx },
+      });
     }
   }
 }

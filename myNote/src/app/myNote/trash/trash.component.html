@@ -1,6 +1,8 @@
 <!-- The first cell of second sidebar -->
 <div class="listHead">
-  <h2 style="font-family: Vladimir Script; display: inline; font-weight: bold;">Trash</h2>
+  <h2 style="font-family: Vladimir Script; display: inline; font-weight: bold">
+    Trash
+  </h2>
   <div style="display: flex; justify-content: space-between">
     <div
       style="
@@ -22,6 +24,7 @@
       class="listCell"
       *ngFor="let item of this.noteTrashList; let idx = index"
       (click)="overviewNoteInTrash(idx)"
+      [class.cellClickStyle]="currentIndex === idx"
     >
       <div class="titleCell">{{ item.title }}</div>
 
@@ -71,14 +74,19 @@
       width="120"
       height="200"
     /><br />
-    <h2 style="font-family: Vladimir Script">Your Trash Is Empty</h2>
+    <h2 style="font-family: Calibri Light; text-align: center">
+      Your Trash Is Empty Yet
+    </h2>
   </div>
 </div>
 
 <div class="head"></div>
 
 <div class="allBody">
-  <div *ngIf = "currentIndex === -1" style="display: flex; flex-flow: column; align-items: center">
+  <div
+    *ngIf="currentIndex === -1"
+    style="display: flex; flex-flow: column; align-items: center"
+  >
     <button
       *ngIf="noteTrashList.length"
       id="activeDeleteAll"
@@ -109,7 +117,10 @@
       <textarea #text class="form-control" disabled></textarea>
 
       <div class="deleteRestoreCancel">
-        <button class="btn btn-outline-primary" (click)="restoreNote(currentIndex)">
+        <button
+          class="btn btn-outline-primary"
+          (click)="restoreNote(currentIndex)"
+        >
           Restore Note
         </button>
         <button

@@ -70,15 +70,15 @@ export class NotesComponent implements OnInit {
   ];
 
   backgroundColorArray = [
-    'aliceblue',
-    'aqua',
-    'aquamarine',
-    'lemonchiffon',
+    'AliceBlue',
+    'MintCream',
+    'Honeydew',
+    'LightCyan',
     'lavenderblush',
-    'lightblue',
-    'bisque',
-    'azure',
-    'lightcyan',
+    'Seashell',
+    'Ivory',
+    'GhostWhite',
+    'Azure',
   ];
 
   @ViewChild('text') text: ElementRef<any> = null;
@@ -87,6 +87,7 @@ export class NotesComponent implements OnInit {
 
   constructor(
     private database: DatabaseService,
+    private router: Router,
     private route: ActivatedRoute,
     private r: Renderer2
   ) {}
@@ -100,6 +101,11 @@ export class NotesComponent implements OnInit {
     this.tagList = this.database.getTags(this.noteEmail);
     this.updateTagsOfCurrentNote();
     this.checkRestoredNotes();
+    this.route.queryParams.subscribe((params) => {
+      this.showNote(params.idNote);
+    });
+
+    console.log('NoteList', this.noteList);
     // let sub = this.database.restoredNote.subscribe((note) => {
     //   if (note) {
     //     console.log(note);
@@ -108,8 +114,44 @@ export class NotesComponent implements OnInit {
     //   }
     // });
     // let users = this.database.getAllItems('users');
-    console.log('NoteList', this.noteList);
     // console.log('user', users);
+  }
+
+  addquerryParam(idx) {
+    this.currentIndex = idx;
+    let id = this.noteList[idx].id;
+    this.router.navigate(['/myNote', 'notes'], { queryParams: { idNote: id } });
+  }
+
+  showNote(id) {
+    let idx = -1;
+    if (!id) {
+      this.canCreateNote = true;
+      this.currentIndex = -1;
+      return;
+    }
+    if (this.currentIndex === -1) {
+      idx = this.noteList.findIndex((value) => {
+        return value.id === id;
+      });
+      this.currentIndex = idx;
+    }
+    this.canCreateNote = false;
+    idx = this.currentIndex;
+    console.log(this.currentIndex);
+    console.log(this.noteList[idx].title);
+
+    // this.title.nativeElement.value = this.noteList[idx].title;
+    // this.text.nativeElement.value = this.noteList[idx].text;
+    // this.applyStylesToNote(idx);
+    // this.updateTagsOfCurrentNote();
+
+    setTimeout(() => {
+      this.title.nativeElement.value = this.noteList[idx].title;
+      this.text.nativeElement.value = this.noteList[idx].text;
+      this.applyStylesToNote(idx);
+      this.updateTagsOfCurrentNote();
+    }, 10);
   }
 
   checkRestoredNotes() {
@@ -207,6 +249,7 @@ export class NotesComponent implements OnInit {
     nList[index].modifiedDate = new Date();
     this.database.saveNotes(this.noteEmail, nList);
     this.cancelFilter();
+    this.updateShortcut();
     this.currentIndex = -1;
     this.noteList = nList;
   }
@@ -252,15 +295,6 @@ export class NotesComponent implements OnInit {
       this.canCreateNote = true;
     }
   }
-
-  modifyNote(i) {
-    this.currentIndex = i;
-    this.title.nativeElement.value = this.noteList[i].title;
-    this.text.nativeElement.value = this.noteList[i].text;
-    this.applyStylesToNote(i);
-    this.updateTagsOfCurrentNote();
-  }
-
   applyStylesToNote(index) {
     this.resetTextStyle();
     let id = this.noteList[index].id;
@@ -279,6 +313,7 @@ export class NotesComponent implements OnInit {
     this.r.setStyle(this.text.nativeElement, 'fontStyle', null);
     this.r.setStyle(this.text.nativeElement, 'fontSize', null);
     this.r.setStyle(this.text.nativeElement, 'color', null);
+    this.r.setStyle(this.text.nativeElement, 'fontAlign', null);
     this.r.setStyle(this.text.nativeElement, 'fontFamily', null);
     this.r.setStyle(this.text.nativeElement, 'backgroundColor', null);
     this.r.setStyle(this.text.nativeElement, 'textDecorationLine', null);
@@ -468,6 +503,18 @@ export class NotesComponent implements OnInit {
     console.log(map);
   }
 
+  updateShortcut() {
+    let nShortcut = this.database.getNoteShortcut(this.noteEmail);
+    let noteList = this.database.getNotes(this.noteEmail);
+    console.log(noteList);
+    noteList.map((s) => {
+      if (nShortcut[s.id]) {
+        nShortcut[s.id] = s.title;
+      }
+    });
+    this.database.saveNoteShortcut(this.noteEmail, nShortcut);
+  }
+
   textStyle(tStyle: string) {
     if (this.currentIndex != -1) {
       let map = this.database.getNoteStyle(this.noteEmail);
@@ -490,6 +537,15 @@ export class NotesComponent implements OnInit {
           map[id].textDecorationLine
             ? (map[id].textDecorationLine = null)
             : (map[id].textDecorationLine = 'underline');
+          break;
+        case 'left':
+          map[id].textAlign = 'left';
+          break;
+        case 'center':
+          map[id].textAlign = 'center';
+          break;
+        case 'right':
+          map[id].textAlign = 'right';
           break;
       }
       this.database.saveNoteStyle(this.noteEmail, map);

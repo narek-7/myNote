@@ -34,8 +34,11 @@ export class NotesComponent implements OnInit {
   textSizeArray: Array<string> = [
     '14',
     '18',
+    '20',
     '22',
+    '24',
     '26',
+    '28',
     '30',
     '34',
     '38',
@@ -138,8 +141,6 @@ export class NotesComponent implements OnInit {
     }
     this.canCreateNote = false;
     idx = this.currentIndex;
-    console.log(this.currentIndex);
-    console.log(this.noteList[idx].title);
 
     // this.title.nativeElement.value = this.noteList[idx].title;
     // this.text.nativeElement.value = this.noteList[idx].text;
@@ -216,6 +217,7 @@ export class NotesComponent implements OnInit {
   }
 
   cancelSave() {
+    this.router.navigate(['/myNote', 'notes'])
     this.canCreateNote = true;
     this.currentIndex = -1;
     this.showAlert = false;

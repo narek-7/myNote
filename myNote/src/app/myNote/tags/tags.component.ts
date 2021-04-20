@@ -26,7 +26,7 @@ export class TagsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.canCreateTag = true;
+    //this.router.navigate(['/myNote', 'tags'])
     this.noteEmail = window.localStorage.getItem('Email');
     this.tagList = this.database.getTags(this.noteEmail);
     console.log('TagList', this.tagList);
@@ -56,8 +56,19 @@ export class TagsComponent implements OnInit {
     let val = this.name.nativeElement.value;
     this.tagList[this.currentIndex].name = val;
     this.database.saveTags(this.noteEmail, this.tagList);
+    this.updateTag();
     this.changeTagsInEveryNote(this.currentIndex);
     this.currentIndex = -1;
+  }
+
+  updateTag() {
+    let tShortcut = this.database.getTagShortcut(this.noteEmail);
+    this.tagList.forEach((t) => {
+      if (tShortcut[t.id]) {
+        tShortcut[t.id] = t.name;
+      }
+    });
+    this.database.saveTagShortcut(this.noteEmail, tShortcut);
   }
 
   saveTag() {
@@ -70,6 +81,7 @@ export class TagsComponent implements OnInit {
       }
     }
     this.canCreateTag = true;
+    this.router.navigate(['/myNote', 'tags']);
   }
 
   addQuerryParam(item) {
@@ -129,12 +141,20 @@ export class TagsComponent implements OnInit {
     this.currentIndex = -1;
     this.name.nativeElement.value = '';
     this.canCreateTag = true;
+    this.router.navigate(['/myNote', 'tags']);
   }
 
   modifyTag(i) {
     this.currentIndex = i;
     this.canCreateTag = false;
     this.name.nativeElement.value = this.tagList[i].name;
+  }
+
+  modifyTitleName(title: string) {
+    if (title.length > 11) {
+      return title.slice(0, 11) + '...';
+    }
+    return title;
   }
 
   addNotesArrayAtTagCreation(tagId) {

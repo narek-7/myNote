@@ -1,5 +1,7 @@
 <div class="listHead">
-  <h2 style="font-family: Vladimir Script; display: inline; font-weight: bold;">All Tags</h2>
+  <h2 style="font-family: Vladimir Script; display: inline; font-weight: bold">
+    All Tags
+  </h2>
   <button
     id="smallAddItem"
     type="button"
@@ -28,7 +30,7 @@
     </div>
 
     <div class="titleCell">
-      {{ item.name }}
+      {{ modifyTitleName(item.name) }}
       <small>{{ "(" + quantityOfNotes(item.id) + ")" }}</small>
     </div>
 

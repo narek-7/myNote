@@ -9,10 +9,6 @@
   left: 200px;
   background-color: rgba(147, 161, 187, 0.124);
   overflow: scroll;
-  /* background-image: url("/assets/images/b20.jfif");
-  background-position: left bottom;
-  background-repeat: no-repeat;
-  background-size: cover; */
 }
 .secondSidebar a {
   padding: 0px 8px 6px 16px;
@@ -56,16 +52,17 @@
   direction: ltr;
   background-color: white;
   background-image: url("/assets/images/coffee1.jpg");
-  background-position: left bottom;
+  background-position: left top;
   background-repeat: no-repeat;
 }
 
 .titleCell {
+  overflow: scroll;
   display: inline;
   font-family: Calibri, Arial;
   position: relative;
   height: 85px;
-  width: 230px;
+  width: 200px;
   font-size: 21px;
   color: rgba(29, 0, 0, 0.878);
   overflow: auto;

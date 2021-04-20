@@ -43,7 +43,7 @@
     (click)="selectNote(idx)"
   >
     <div class="cellNote">Note</div>
-    <div class="titleCell">{{ item }}</div>
+    <div class="titleCell">{{ modifyTitleName(item) }}</div>
   </div>
 
   <div
@@ -53,7 +53,7 @@
     (click)="selectTag(idx)"
   >
     <div class="cellTag">Tag</div>
-    <div class="titleCell">{{ item }}</div>
+    <div class="titleCell">{{ modifyTitleName(item) }}</div>
   </div>
 </div>
 

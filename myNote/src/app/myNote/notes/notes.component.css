@@ -97,8 +97,8 @@ input {
 
 
 .styleButton{
-  border-radius: 5px;
-  background-color: rgba(224, 227, 233, 0.774);
+  border-radius: 1px;
+  background-color: rgba(230, 241, 255, 0.686);
   font-family: 'Courier New', Courier, monospace;
   border: 1px solid rgb(184, 184, 184);
   width: 40px;
@@ -127,44 +127,3 @@ input {
 .dropdown-item{
   z-index: 10040;
 }
-
-/* .dropbtn {
-  background-color: rgb(205, 211, 221);
-  color: black;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
-
-.dropdowns {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 50px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  opacity: 1;
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-.dropdowns:hover .dropdown-content {
-  display: block;
-}
-
-.dropdowns:hover .dropbtn {
-  background-color: white;
-} */

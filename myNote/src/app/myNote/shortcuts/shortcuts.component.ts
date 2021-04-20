@@ -42,6 +42,13 @@ export class ShortcutsComponent implements OnInit {
     this.tagsCurrentIndex = -1;
   }
 
+  modifyTitleName(title: string) {
+    if (title.length > 15) {
+      return title.slice(0, 15) + '...';
+    }
+    return title;
+  }
+
   rederect() {
     if (this.notesCurrentIndex != -1) {
       let idArr = Object.keys(this.shortcutNote);

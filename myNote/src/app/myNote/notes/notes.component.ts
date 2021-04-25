@@ -105,7 +105,13 @@ export class NotesComponent implements OnInit {
     this.updateTagsOfCurrentNote();
     this.checkRestoredNotes();
     this.route.queryParams.subscribe((params) => {
-      this.showNote(params.idNote);
+      return new Promise((resolve, reject) => {
+        this.showNote(params.idNote);
+        if (params.idNote) resolve(this.currentIndex);
+        else reject('No selected notes');
+      })
+        .then((index) => this.completeData(index))
+        .catch((error) => console.log('Error:', error));
     });
 
     console.log('NoteList', this.noteList);
@@ -141,18 +147,13 @@ export class NotesComponent implements OnInit {
     }
     this.canCreateNote = false;
     idx = this.currentIndex;
+  }
 
-    // this.title.nativeElement.value = this.noteList[idx].title;
-    // this.text.nativeElement.value = this.noteList[idx].text;
-    // this.applyStylesToNote(idx);
-    // this.updateTagsOfCurrentNote();
-
-    setTimeout(() => {
-      this.title.nativeElement.value = this.noteList[idx].title;
-      this.text.nativeElement.value = this.noteList[idx].text;
-      this.applyStylesToNote(idx);
-      this.updateTagsOfCurrentNote();
-    }, 10);
+  completeData(idx) {
+    this.title.nativeElement.value = this.noteList[idx].title;
+    this.text.nativeElement.value = this.noteList[idx].text;
+    this.applyStylesToNote(idx);
+    this.updateTagsOfCurrentNote();
   }
 
   checkRestoredNotes() {
@@ -217,7 +218,7 @@ export class NotesComponent implements OnInit {
   }
 
   cancelSave() {
-    this.router.navigate(['/myNote', 'notes'])
+    this.router.navigate(['/myNote', 'notes']);
     this.canCreateNote = true;
     this.currentIndex = -1;
     this.showAlert = false;

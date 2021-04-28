@@ -34,22 +34,22 @@ export class TagsComponent implements OnInit {
       this.canCreateTag = false;
       this.showTags(params.idTag);
     });
-    // let a = window.localStorage.getItem('NotesInTag');
-    // console.log('NotesInTag', a);
   }
 
-  showTags(id) {
+  async showTags(id) {
     if (!id) {
       this.canCreateTag = true;
       return;
     }
-    let idx = this.tagList.findIndex((value) => {
+    let idx = await this.tagList.findIndex((value) => {
       return value.id === id;
     });
     this.currentIndex = idx;
-    setTimeout(() => {
-      this.name.nativeElement.value = this.tagList[idx].name;
-    }, 10);
+    this.completeData(idx);
+  }
+
+  completeData(idx) {
+    this.name.nativeElement.value = this.tagList[idx].name;
   }
 
   changeExistingTag() {

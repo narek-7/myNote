@@ -18,9 +18,10 @@ const routes: Routes = [
       { path: 'shortcuts', component: ShortcutsComponent,  canActivate: [AuthGuard] },
       { path: 'tags', component: TagsComponent,  canActivate: [AuthGuard] },
       { path: 'trash', component: TrashComponent,  canActivate: [AuthGuard] },
+      { path: '**', redirectTo: '/myNote/notes' },
     ],
   },
-  // { path: '**', redirectTo: '/myNote/notes' },
+   { path: '**', redirectTo: '/myNote/notes' },
 ];
 
 @NgModule({

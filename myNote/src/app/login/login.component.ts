@@ -39,17 +39,17 @@ export class LoginComponent implements OnInit {
       ]),
     });
   }
-  submit() {
+  async submit() {
     try {
-      this.database.login(this.form.value.email, this.form.value.password);
+      await this.database.login(this.form.value.email, this.form.value.password);
       this.auth.login();
       this.router.navigate(['myNote', 'notes']);
     } catch (e) {
       this.incorrectData = true;
-      this.errorMassage = e.message;
+      this.errorMassage = 'email or password is incorrect';
       setTimeout(() => {
         this.incorrectData = false;
-      }, 5000);
+      }, 10000);
     }
   }
 }

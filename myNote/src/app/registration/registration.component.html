@@ -16,8 +16,8 @@
     <small>The password must contain 6 to 10 numbers!</small>
   </div>
   <br>
-  <small *ngIf = incorrectData>{{errorMassage}}. Click
-    <a (click) = ngOnInit() style="text-decoration: underline;"> here to try again!</a>
+  <small *ngIf = incorrectData>{{errorMassage}} Click
+    <a (click) = ngOnInit() style="text-decoration: underline;"> here to try it again!</a>
   </small>
 </div>
   <button type="button" class="btn btn-primary" type="submit" [disabled]="form.invalid">Registration</button>

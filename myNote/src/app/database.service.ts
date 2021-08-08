@@ -2,6 +2,11 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { User } from './model/user';
 import { Note } from './model/note';
 import { Tag } from './model/tag';
+import { HttpClient } from '@angular/common/http';
+
+const HOST = 'http://localhost:5000';
+const REGISTER = HOST + '/api/register';
+const LOGIN = HOST + '/api/login';
 
 @Injectable({
   providedIn: 'root',
@@ -9,34 +14,10 @@ import { Tag } from './model/tag';
 export class DatabaseService {
   user: User;
   notes: Array<Note>;
+
   // restoredNote = new EventEmitter();
 
-  constructor() {}
-
-  register(email: string, password: string) {
-    let users = this.getAllItems('users');
-    if (users[email]) {
-      throw new Error('User already exists');
-    }
-    let user = { email, password };
-    users[email] = user;
-    this.saveAllItems('users', users);
-    window.localStorage.setItem('Email', email);
-  }
-
-  login(email: string, password: string) {
-    let users = this.getAllItems('users');
-    let user = users[email];
-    if (!user) {
-      throw new Error('Wrong email');
-    }
-    if (user.password !== password) {
-      throw new Error('Wrong password');
-    }
-    this.user = user;
-    this.notes = this.getNotes(email);
-    window.localStorage.setItem('Email', email);
-  }
+  constructor(private http: HttpClient) {}
 
   getNotes(email: string) {
     let allNotes = this.getAllItems('notes');
@@ -134,11 +115,59 @@ export class DatabaseService {
     this.saveAllItems('shortcutTag', allShortcutTags);
   }
 
+  async register(email: string, password: string) {
+    const user: User = { email: email, password: password };
+    try {
+      let result = await this.http.post(REGISTER, user).toPromise();
+      console.log('everything ok');
+    } catch (e) {
+      if (e.status === 501) {
+        throw new Error('This email is already in use!');
+      } else {
+        throw new Error(e.name);
+      }
+    }
+  }
+
+  async login(email: string, password: string) {
+    const user: User = { email: email, password: password };
+    let result = await this.http.post(LOGIN, user).toPromise();
+    if (!result[0].email) {
+      throw new Error('wrong email or password');
+    }
+    this.user = user;
+    this.notes = this.getNotes(email);
+  }
+
   getTagShortcut(email: string) {
     let allShortcutTags = this.getAllItems('shortcutTag');
     return allShortcutTags[email] ? allShortcutTags[email] : new Map();
   }
 
+  /* register(email: string, password: string) {
+    let users = this.getAllItems('users');
+    if (users[email]) {
+      throw new Error('User already exists');
+    }
+    let user = { email, password };
+    users[email] = user;
+    this.saveAllItems('users', users);
+    window.localStorage.setItem('Email', email);
+  } */
+
+  /* login(email: string, password: string) {
+    let users = this.getAllItems('users');
+    let user = users[email];
+    if (!user) {
+      throw new Error('Wrong email');
+    }
+    if (user.password !== password) {
+      throw new Error('Wrong password');
+    }
+    this.user = user;
+    this.notes = this.getNotes(email);
+    window.localStorage.setItem('Email', email);
+  } */
 
   getAllItems(key): Map<string, any> {
     let usersStr = window.localStorage.getItem(key);

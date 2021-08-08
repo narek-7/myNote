@@ -10,14 +10,17 @@ import { AuthService } from './../auth.service';
   styleUrls: ['./registration.component.css'],
 })
 export class RegistrationComponent implements OnInit {
-
   @ViewChild('email') email: ElementRef<any> = null;
   @ViewChild('password') password: ElementRef<any> = null;
   incorrectData: boolean = false;
   errorMassage: string = '';
 
   form: FormGroup;
-  constructor(private router: Router, private database: DatabaseService, private auth: AuthService) {}
+  constructor(
+    private router: Router,
+    private database: DatabaseService,
+    private auth: AuthService
+  ) {}
 
   ngOnInit() {
     this.incorrectData = false;
@@ -32,19 +35,20 @@ export class RegistrationComponent implements OnInit {
       ]),
     });
   }
-  submit() {
+  async submit() {
     let email = this.form.value.email;
     let password = this.form.value.password;
     try {
-      this.database.register(email, password);
+      await this.database.register(email, password);
       this.auth.login();
       this.router.navigate(['myNote']);
     } catch (e) {
+      console.log(e);
       this.incorrectData = true;
       this.errorMassage = e.message;
       setTimeout(() => {
         this.incorrectData = false;
-      }, 5000);
+      }, 10000);
     }
   }
 }

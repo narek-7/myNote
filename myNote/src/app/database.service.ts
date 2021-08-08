@@ -121,10 +121,11 @@ export class DatabaseService {
       let result = await this.http.post(REGISTER, user).toPromise();
       console.log('everything ok');
     } catch (e) {
-      if (e.status === 501) {
-        throw new Error('This email is already in use!');
+      console.log(e);
+      if (e.status == '501') {
+        throw new Error(e.error);
       } else {
-        throw new Error(e.name);
+        throw new Error('Server is not responding!');
       }
     }
   }

@@ -33,7 +33,7 @@
   width: 290px;
   font-size: 24px;
   background-color: rgba(180, 191, 211, 0.111);
-  /* background-image: url("https://raw.githubusercontent.com/narek-7/myNote/master/myNote/src/assets/images/coffee1.jpg"); */
+  /* background-image: url("https://raw.githubusercontent.com/narek-7/myNote/master/src/assets/images/coffee1.jpg"); */
   background-repeat: no-repeat;
   background-position: right bottom;
 }
@@ -51,7 +51,7 @@
   height: 120px;
   direction: ltr;
   background-color: white;
-  background-image: url("https://raw.githubusercontent.com/narek-7/myNote/master/myNote/src/assets/images/coffee1.jpg");
+  background-image: url("https://raw.githubusercontent.com/narek-7/myNote/master/src/assets/images/coffee1.jpg");
   background-position: left top;
   background-repeat: no-repeat;
 }
@@ -70,14 +70,14 @@
 }
 
 .listCell:hover {
-  background-image: url("https://raw.githubusercontent.com/narek-7/myNote/master/myNote/src/assets/images/b24.jfif");
+  background-image: url("https://raw.githubusercontent.com/narek-7/myNote/master/src/assets/images/b24.jfif");
   background-position: left top;
   background-repeat: no-repeat;
 }
 
 .cellClickStyle {
   border-right: 1px solid rgb(151, 156, 165);
-  background-image: url("https://raw.githubusercontent.com/narek-7/myNote/master/myNote/src/assets/images/b24.jfif");
+  background-image: url("https://raw.githubusercontent.com/narek-7/myNote/master/src/assets/images/b24.jfif");
   background-position: left top;
   background-repeat: no-repeat;
 }
@@ -123,7 +123,7 @@
   left: 490px;
   background-color: rgba(255, 255, 255, 0.6);
   padding: 18px;
-  background-image: url("https://raw.githubusercontent.com/narek-7/myNote/master/myNote/src/assets/images/coffee1.jpg");
+  background-image: url("https://raw.githubusercontent.com/narek-7/myNote/master/src/assets/images/coffee1.jpg");
   background-repeat: no-repeat;
   background-position: left center;
   background-size: cover;
@@ -141,10 +141,6 @@
   padding: 15px 25px 30px 45px;
   border-radius: 5px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.2);
-  /* background-image: url("https://raw.githubusercontent.com/narek-7/myNote/master/myNote/src/assets/images/note1.png");
-  background-position: left;
-  background-repeat: no-repeat;
-  background-size: cover; */
 }
 
 .allBody {
@@ -156,7 +152,7 @@
   overflow: auto;
   padding: 1rem;
   opacity: 0.9;
-  background-image: url("https://raw.githubusercontent.com/narek-7/myNote/master/myNote/src/assets/images/coffee1.jpg");
+  background-image: url("https://raw.githubusercontent.com/narek-7/myNote/master/src/assets/images/coffee1.jpg");
   z-index: -1;
   width: calc(100% - 490px);
   height: calc(100% - 137px); /* You must set a specified height */

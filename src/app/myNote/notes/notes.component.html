@@ -1,0 +1,322 @@
+<!-- The first cell of second sidebar -->
+<div class="listHead">
+  <h2
+    style="
+      display: inline-block;
+      font-family: Vladimir Script;
+      font-weight: bold;
+    "
+  >
+    All Notes
+  </h2>
+  <button
+    type="button"
+    class="btn btn-outline-primary"
+    (click)="cancelSave(); newNote()"
+    id="smallAddItem"
+  >
+    + New Note
+  </button>
+  <div style="display: flex; justify-content: space-between">
+    <div
+      style="
+        display: inline;
+        font-size: 16px;
+        margin-top: 30px;
+        color: rgba(0, 96, 221, 0.9);
+      "
+    >
+      {{ noteList.length }} notes
+    </div>
+    <input
+      #search
+      type="search"
+      placeholder="search"
+      class="form-control"
+      [(ngModel)]="query"
+      style="margin-right: 10px; width: 7.1rem; height: 2.1rem"
+      (input)="searching()"
+    />
+  </div>
+</div>
+
+<div class="secondSidebar">
+  <!-- The cells of Notes -->
+  <div
+    class="listCell"
+    *ngFor="let item of noteList; let idx = index"
+    (mouseover)="mouseOverNote(idx)"
+    (mouseout)="mouseOutNote()"
+    (click)="addquerryParam(idx)"
+    [class.cellClickStyle]="currentIndex === idx"
+  >
+    <!-- modifyTitleName(item.title)  -->
+    <div
+      style="display: inline; margin-right: 10px; cursor: pointer"
+      (click)="addCancelShortcut(item.id, idx)"
+    >
+      <img [src]="shortcut(item.id)" width="18" height="17" />
+    </div>
+
+    <div class="titleCell" [innerHTML]="highlight(item.title)"></div>
+
+    <div style="font-size: 14px; position: absolute; bottom: 10px">
+      {{ item.createdDate | date }}
+    </div>
+    <div
+      class="pointer"
+      style="position: absolute; right: 15px; bottom: 44px"
+      (click)="deleteNote(idx)"
+    >
+      <img [src]="'https://raw.githubusercontent.com/narek-7/myNote/master/myNote/src/assets/images/delete3.png'" width="12" height="12" />
+    </div>
+  </div>
+</div>
+
+<div class="head">
+  <div *ngIf="currentIndex != -1" class="stylePanel">
+    <button
+      class="styleButton"
+      (click)="textStyle('bold')"
+      style="font-weight: bold"
+    >
+      B
+    </button>
+    <button
+      class="styleButton"
+      (click)="textStyle('italic')"
+      style="font-style: italic"
+    >
+      I
+    </button>
+    <button
+      class="styleButton"
+      (click)="textStyle('underline')"
+      style="text-decoration: underline"
+    >
+      U
+    </button>
+
+    <button
+      class="styleButton"
+      (click)="textStyle('left')"
+      style="font-size: 14px; text-align: left; font-weight: bold"
+    >
+      <-
+    </button>
+
+    <button
+      class="styleButton"
+      (click)="textStyle('center')"
+      style="font-size: 14px; font-weight: bold"
+    >
+      <->
+    </button>
+
+    <button
+      class="styleButton"
+      (click)="textStyle('right')"
+      style="font-size: 14px; text-align: right; font-weight: bold"
+    >
+      ->
+    </button>
+
+    <!-- Text size dropdaown menu -->
+    <div>
+      <div
+        style="margin-left: 40px; width: auto; padding: 5px"
+        type="button"
+        class="styleButton dropdown-toggle"
+        data-toggle="dropdown"
+      >
+        Size
+      </div>
+      <div class="dropdown-menu">
+        <div
+          *ngFor="let item of textSizeArray; let idx = index"
+          class="dropdown-item"
+          (click)="textSize(item)"
+          [style.fontSize]="item"
+        >
+          {{ item }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Text color dropdaown menu -->
+    <div>
+      <div
+        style="margin-left: 40px; width: auto; padding: 5px"
+        type="button"
+        class="styleButton dropdown-toggle"
+        data-toggle="dropdown"
+      >
+        T-Color
+      </div>
+      <div class="dropdown-menu">
+        <div
+          *ngFor="let item of textColorArray; let idx = index"
+          class="dropdown-item"
+          (click)="textColor(item)"
+          [style.color]="item"
+        >
+          {{ item }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Text font dropdaown menu -->
+    <div>
+      <div
+        style="margin-left: 40px; width: auto; padding: 5px"
+        type="button"
+        class="styleButton dropdown-toggle"
+        data-toggle="dropdown"
+      >
+        Font
+      </div>
+      <div class="dropdown-menu">
+        <div
+          *ngFor="let item of textFontArray; let idx = index"
+          class="dropdown-item"
+          (click)="textFont(item)"
+          [style.fontFamily]="item"
+        >
+          {{ item }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Background color dropdaown menu -->
+    <div>
+      <div
+        style="margin-left: 40px; width: auto; padding: 5px"
+        type="button"
+        class="styleButton dropdown-toggle"
+        data-toggle="dropdown"
+      >
+        B-Color
+      </div>
+      <div class="dropdown-menu">
+        <div
+          *ngFor="let item of backgroundColorArray; let idx = index"
+          class="dropdown-item"
+          (click)="backgroundColor(item)"
+          [style.backgroundColor]="item"
+        >
+          {{ item }}
+        </div>
+      </div>
+    </div>
+
+    <!-- modal window -->
+  </div>
+</div>
+
+<app-modal
+  [deletedObjectType]="delObjType"
+  [deletedObjectName]="delObjName"
+></app-modal>
+
+<div class="allBody">
+  <div>
+    <div class="body" [style.display]="canCreateNote ? 'none' : ''">
+      <div style="display: flex; justify-content: flex-end">
+        <h4 *ngIf="currentIndex != -1">Modify Existing Note</h4>
+        <h4 *ngIf="currentIndex === -1 && !previewNote">New Note</h4>
+        <h4 *ngIf="previewNote && currentIndex === -1">Preview Note</h4>
+      </div>
+      <div *ngIf="showAlert">
+        <div
+          class="alert alert-primary alert-dismissible fade show"
+          style="width: 95%; height: 51px; margin-bottom: 10px"
+        >
+          <span type="button" class="close" data-dismiss="alert">
+            &times;
+          </span>
+          Adding tag already exists in this note!
+        </div>
+      </div>
+      <div class="topOfNote">
+        <input
+          #title
+          type="text"
+          placeholder="Title"
+          class="form-control"
+          style="width: 15rem; height: 3rem"
+        />
+        <!-- Dropdown button to connect tags to note -->
+        <div class="dropdown" *ngIf="currentIndex != -1">
+          <button
+            type="button"
+            class="btn btn-outline-light dropdown-toggle"
+            data-toggle="dropdown"
+          >
+            Add tags To This Note
+          </button>
+          <div class="dropdown-menu">
+            <h2 class="dropdown-header">The Whole List Of Tags</h2>
+            <div
+              *ngFor="let item of tagList; let idx = index"
+              class="dropdown-item"
+              (click)="connectTagWithNote(idx)"
+            >
+              {{ item.name }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <textarea
+        #text
+        class="form-control"
+        placeholder="Start writing ..."
+      ></textarea>
+      <button
+        class="btn btn-outline-primary"
+        (click)="saveNote()"
+        style="border-radius: 25px; border: 2px solid"
+      >
+        Save Note
+      </button>
+      <button
+        class="btn btn-outline-secondary"
+        (click)="cancelSave()"
+        style="border-radius: 25px; border: 2px solid"
+      >
+        Close
+      </button>
+
+      <!-- Note tag list -->
+      <div>
+        <ul>
+          <li *ngFor="let item of currentNoteTagList; let idx = index">
+            {{ item.name }}
+            <div
+              class="pointer"
+              style="margin-left: 12px; display: inline"
+              (click)="deleteAllConnectionsTagAndNote(idx)"
+            >
+              <img
+                [src]="'https://raw.githubusercontent.com/narek-7/myNote/master/myNote/src/assets/images/delete3.png'"
+                width="10"
+                height="10"
+              />
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- The big button "Add Note" -->
+    <div *ngIf="canCreateNote">
+      <button
+        id="bigAddItem"
+        class="btn btn-outline-primary"
+        (click)="newNote()"
+      >
+        + New Note
+      </button>
+    </div>
+  </div>
+</div>

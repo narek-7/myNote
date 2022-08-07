@@ -1,0 +1,57 @@
+ul {
+  padding-left: 5px;
+  list-style: none;
+}
+
+li {
+  margin-left: 2px;
+}
+
+.firstSidebar {
+  font-family: Calibri, Arial;
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(213, 219, 232, 0.9);
+  background-image: url("https://raw.githubusercontent.com/narek-7/myNote/master/myNote/src/assets/images/b4.jpg");
+  height: 100%; /* You must set a specified height */
+  background-position: center bottom; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+  overflow-x: hidden;
+  padding-top: 16px;
+}
+
+.firstSidebar a {
+  padding: 14px 5px 2px 5px;
+  font-size: 18px;
+  /* color: rgb(148, 158, 179); */
+  color: rgba(255, 255, 255, 0.9);
+  display: block;
+  text-decoration: none;
+  text-decoration-color: #0000;
+  transition: 1s;
+}
+
+.firstSidebar a:hover {
+  color: rgb(138, 0, 0);
+  text-decoration: overline;
+  text-decoration-color: rgb(138, 0, 0);
+  text-decoration-style: solid;
+}
+
+.main {
+  margin-left: 180px; /* Same as the width of the sidenav */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .firstSidebar {
+    padding-top: 15px;
+  }
+  .firstSidebar a {
+    font-size: 18px;
+  }
+}

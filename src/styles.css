@@ -1,0 +1,214 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+
+.secondSidebar {
+  height: calc(100% - 122px);
+  width: 290px;
+  position: fixed;
+  top: 136px;
+  left: 200px;
+  background-color: rgba(147, 161, 187, 0.124);
+  overflow: scroll;
+}
+.secondSidebar a {
+  padding: 0px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 18px;
+  color: rgba(38, 55, 88, 0.9);
+  display: block;
+  border-bottom: 1px solid rgb(210, 217, 233);
+  height: 120px;
+}
+
+.listHead {
+  top: 0px;
+  left: 200px;
+  display: block;
+  border-bottom: 1px solid rgba(184, 190, 202, 0.692);
+  position: fixed;
+  padding: 20px 8px 6px 17px;
+  margin-bottom: 0px;
+  color: rgba(221, 4, 15, 0.809);
+  height: 136px;
+  width: 290px;
+  font-size: 24px;
+  background-color: rgba(180, 191, 211, 0.111);
+  /* background-image: url("https://raw.githubusercontent.com/narek-7/myNote/master/myNote/src/assets/images/coffee1.jpg"); */
+  background-repeat: no-repeat;
+  background-position: right bottom;
+}
+
+.listCell {
+  overflow: clip;
+  position: relative;
+  padding: 6px 8px 6px 16px;
+  height: 500px;
+  text-decoration: none;
+  font-size: 22px;
+  color: rgba(106, 106, 106, 0.905);
+  display: block;
+  border-bottom: 1px solid rgb(151, 156, 165);
+  height: 120px;
+  direction: ltr;
+  background-color: white;
+  background-image: url("https://raw.githubusercontent.com/narek-7/myNote/master/myNote/src/assets/images/coffee1.jpg");
+  background-position: left top;
+  background-repeat: no-repeat;
+}
+
+.titleCell {
+  overflow: scroll;
+  display: inline;
+  font-family: Calibri, Arial;
+  position: relative;
+  height: 85px;
+  width: 200px;
+  font-size: 21px;
+  color: rgba(29, 0, 0, 0.878);
+  overflow: auto;
+  padding: 2px;
+}
+
+.listCell:hover {
+  background-image: url("https://raw.githubusercontent.com/narek-7/myNote/master/myNote/src/assets/images/b24.jfif");
+  background-position: left top;
+  background-repeat: no-repeat;
+}
+
+.cellClickStyle {
+  border-right: 1px solid rgb(151, 156, 165);
+  background-image: url("https://raw.githubusercontent.com/narek-7/myNote/master/myNote/src/assets/images/b24.jfif");
+  background-position: left top;
+  background-repeat: no-repeat;
+}
+
+.main {
+  margin-left: 180px; /* Same as the width of the sidenav */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .secondSidebar {
+    padding-top: 15px;
+  }
+  .secondSidebar a {
+    font-size: 18px;
+  }
+}
+
+.scrolling-area {
+  overflow: auto;
+  direction: rtl;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(178, 186, 202, 0.3);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(178, 186, 202, 0.5);
+}
+
+.head {
+  display: block;
+  height: 136px;
+  border-bottom: 1px solid rgb(151, 156, 165);
+  width: calc(100% - 490px);
+  position: fixed;
+  opacity: .9;
+  z-index: 1;
+  top: 0;
+  left: 490px;
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 18px;
+  background-image: url("https://raw.githubusercontent.com/narek-7/myNote/master/myNote/src/assets/images/coffee1.jpg");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: cover;
+}
+
+.body {
+  margin: 35px;
+  display: block;
+  height: auto;
+  width: 600px;
+  top: 136px;
+  left: 500px;
+  z-index: -1;
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 15px 25px 30px 45px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.2);
+  /* background-image: url("https://raw.githubusercontent.com/narek-7/myNote/master/myNote/src/assets/images/note1.png");
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: cover; */
+}
+
+.allBody {
+  display: block;
+  top: 200px;
+  position: fixed;
+  top: 136px;
+  left: 490px;
+  overflow: auto;
+  padding: 1rem;
+  opacity: 0.9;
+  background-image: url("https://raw.githubusercontent.com/narek-7/myNote/master/myNote/src/assets/images/coffee1.jpg");
+  z-index: -1;
+  width: calc(100% - 490px);
+  height: calc(100% - 137px); /* You must set a specified height */
+  background-position: left; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+}
+
+input {
+  text-overflow: ellipsis;
+  width: 15rem;
+  height: 40px;
+  margin-top: 20px;
+  border: 1px dotted rgb(151, 156, 165);
+  border-radius: 5px;
+  padding-left: 10px;
+  color: rgb(65, 65, 65);
+}
+
+input:active {
+  border: 1px dotted rgb(90, 117, 168);
+}
+
+h4 {
+  display: absolute;
+  font-family: Calibri Light, Helvetica, sans-serif;
+  font-weight: normal;
+  color: rgba(221, 4, 15, 0.809);
+  margin: 20px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+button {
+  position: relative;
+  margin-left: 30px;
+  border: 2px solid;
+  width: 120px;
+  font-size: 20px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+#bigAddItem {
+  font-size: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 200px;
+  position: absolute;
+  left: 15%;
+  top: 35%;
+  border: 2px solid;
+  border-width: 1px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 8px 0 rgba(0, 0, 0, 0.2);
+}

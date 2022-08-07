@@ -1,0 +1,88 @@
+<div class="listHead">
+  <h2 style="font-family: Vladimir Script; display: inline; font-weight: bold">
+    All Shortcuts
+  </h2>
+
+  <img
+    [src]="'https://raw.githubusercontent.com/narek-7/myNote/master/myNote/src/assets/images/star.png'"
+    width="35"
+    height="35"
+    style="margin-left: 35px"
+  />
+
+  <div style="font-size: 16px; margin-top: 30px; color: rgba(0, 96, 221, 0.9)">
+    {{ shortcutNoteArr.length + shortcutTagArr.length }}
+    shortcuts
+  </div>
+</div>
+
+<div class="secondSidebar">
+  <div
+    *ngIf="!shortcutTagArr.length && !shortcutNoteArr.length"
+    style="
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: space-evenly;
+      height: 70%;
+    "
+  >
+  <img
+      [src]="'https://raw.githubusercontent.com/narek-7/myNote/master/myNote/src/assets/images/not-found.png'"
+      width="120"
+      height="120"
+    />
+    <h2 style="font-family: Calibri Light; text-align: center;">
+      Your Shortcut List Is Empty Yet
+    </h2>
+  </div>
+  <div
+    class="listCell"
+    *ngFor="let item of shortcutNoteArr; let idx = index"
+    [class.cellClickStyle]="notesCurrentIndex === idx"
+    (click)="selectNote(idx)"
+  >
+    <div class="cellNote">Note</div>
+    <div class="titleCell">{{ modifyTitleName(item) }}</div>
+  </div>
+
+  <div
+    class="listCell"
+    *ngFor="let item of shortcutTagArr; let idx = index"
+    [class.cellClickStyle]="tagsCurrentIndex === idx"
+    (click)="selectTag(idx)"
+  >
+    <div class="cellTag">Tag</div>
+    <div class="titleCell">{{ modifyTitleName(item) }}</div>
+  </div>
+</div>
+
+<div class="head"></div>
+
+<div class="allBody">
+  <div class="body" *ngIf="tagsCurrentIndex != -1 || notesCurrentIndex != -1">
+    <div class="infoInAlert" style="margin: 15px 0">
+      Do you want to be redirected to the selected
+      <span *ngIf="notesCurrentIndex != -1">note?</span>
+      <span *ngIf="tagsCurrentIndex != -1">tag?</span>
+    </div>
+    <div
+      style="display: flex; justify-content: space-evenly; margin-right: 20px"
+    >
+      <button
+        style="margin: 15px"
+        class="btn btn-outline-primary"
+        (click)="rederect()"
+      >
+        Yes
+      </button>
+      <button
+        style="margin: 15px"
+        class="btn btn-outline-secondary"
+        (click)="cancelRederect()"
+      >
+        No
+      </button>
+    </div>
+  </div>
+</div>

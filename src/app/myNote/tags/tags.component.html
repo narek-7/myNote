@@ -1,0 +1,91 @@
+<div class="listHead">
+  <h2 style="font-family: Vladimir Script; display: inline; font-weight: bold">
+    All Tags
+  </h2>
+  <button
+    id="smallAddItem"
+    type="button"
+    class="btn btn-outline-primary"
+    (click)="createNewTag()"
+  >
+    + New Tag
+  </button>
+  <div style="font-size: 16px; margin-top: 30px; color: rgba(0, 96, 221, 0.9)">
+    {{ tagList.length }} tags
+  </div>
+</div>
+
+<div class="secondSidebar">
+  <div
+    class="listCell"
+    *ngFor="let item of tagList; let idx = index"
+    (click)="addQuerryParam(item)"
+    [class.cellClickStyle]="currentIndex === idx"
+  >
+    <div
+      style="display: inline; margin-right: 10px; cursor: pointer"
+      (click)="addCancelShortcut(item.id, idx)"
+    >
+      <img [src]="shortcut(item.id)" width="18" height="17" />
+    </div>
+
+    <div class="titleCell">
+      {{ modifyTitleName(item.name) }}
+      <small>{{ "(" + quantityOfNotes(item.id) + ")" }}</small>
+    </div>
+
+    <div
+      class="pointer"
+      style="position: absolute; right: 15px; bottom: 44px"
+      (click)="deleteTag(idx)"
+    >
+      <img [src]="'https://raw.githubusercontent.com/narek-7/myNote/master/myNote/src/assets/images/delete3.png'" width="12" height="12" />
+    </div>
+  </div>
+</div>
+
+<div class="head"></div>
+
+<div class="allBody">
+  <div class="body" [style.display]="canCreateTag ? 'none' : ''">
+    <div style="display: flex; justify-content: flex-end">
+      <h4 *ngIf="currentIndex != -1">Modify Existing Tag</h4>
+      <h4 *ngIf="currentIndex === -1">New Tag</h4>
+    </div>
+
+    <div class="tag">
+      <input
+        #name
+        type="text"
+        placeholder="Tag Name"
+        class="form-control"
+        style="width: 18rem; height: 3rem; display: inline"
+      />
+      <button
+        class="btn btn-outline-primary"
+        (click)="saveTag()"
+        style="border-radius: 25px"
+      >
+        Save Tag
+      </button>
+
+      <button
+        class="btn btn-outline-secondary"
+        (click)="cancelSave()"
+        style="border-radius: 25px"
+      >
+        Don't Save
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="canCreateTag">
+    <button
+      id="bigAddItem"
+      class="btn btn-outline-primary"
+      (click)="createNewTag()"
+    >
+      + New Tag
+    </button>
+  </div>
+</div>

@@ -15,7 +15,7 @@ li {
   top: 0;
   left: 0;
   background-color: rgba(213, 219, 232, 0.9);
-  background-image: url("https://raw.githubusercontent.com/narek-7/myNote/master/myNote/src/assets/images/b4.jpg");
+  background-image: url("https://raw.githubusercontent.com/narek-7/myNote/master/src/assets/images/b4.jpg");
   height: 100%; /* You must set a specified height */
   background-position: center bottom; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */

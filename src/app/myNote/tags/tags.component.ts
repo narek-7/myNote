@@ -230,8 +230,8 @@ export class TagsComponent implements OnInit {
   shortcut(id) {
     let map = this.database.getTagShortcut(this.noteEmail);
     if (map[id]) {
-      return 'https://raw.githubusercontent.com/narek-7/myNote/master/myNote/src/assets/images/star1.png';
+      return 'https://raw.githubusercontent.com/narek-7/myNote/master/src/assets/images/star1.png';
     }
-    return 'https://raw.githubusercontent.com/narek-7/myNote/master/myNote/src/assets/images/star4.png';
+    return 'https://raw.githubusercontent.com/narek-7/myNote/master/src/assets/images/star4.png';
   }
 }
